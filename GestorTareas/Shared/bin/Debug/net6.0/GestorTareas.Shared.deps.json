@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "GestorTareas.Shared/1.0.0": {
+        "runtime": {
+          "GestorTareas.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GestorTareas.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
