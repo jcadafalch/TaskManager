@@ -11,6 +11,6 @@ namespace GestorTareas.Dominio
         [Required]
         public string Title { get; set; }
 
-        public List<TareaEtiqueta> TareaEtiquetas { get; set; }
+        public ICollection<Tarea> Tareas { get; set; }
     }
 }

@@ -14,6 +14,6 @@ namespace GestorTareas.Dominio
         public DateTime? CompletedAt { get; set; }
         public bool IsCompleted => CompletedAt != null;
 
-        public List<TareaEtiqueta> TareaEtiquetas { get; set; }
+        public ICollection<Etiqueta> Etiquetas { get; set; }
     }
 }
