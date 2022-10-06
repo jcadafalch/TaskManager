@@ -197,15 +197,15 @@
       "mscorlib.dll": "sha256-MnMyZHtcymf0sLxXeFBbQZVsdNdxT0GXJaa9t3ZdSek=",
       "netstandard.dll": "sha256-+SGdnDhVMiZ9hq0EsYwJ+mcK0odf3bAtXnSKLorGDCs=",
       "System.Private.CoreLib.dll": "sha256-mqfalNg3wC8XHlyA+j5ioNcnc0kt4prNudKdyJoaYaU=",
-      "GestorTareas.Shared.dll": "sha256-Ltbg6zvtKl4Tz0odH3YtcU\/CHzPTeLfI\/82Jg2+PgUI=",
-      "GestorTareas.Client.dll": "sha256-W9AieklyRK7UomiA8Y9RlacfRnx7ifGBCUp5mE\/6\/Co="
+      "GestorTareas.Shared.dll": "sha256-ERZx2fouHHcnhQils+ptgjMIDRQkkQx9Y+RLOsbUhzc=",
+      "GestorTareas.Client.dll": "sha256-DdEC7nHiybih9UBiaxTC1yFKwUKUg3131VIso1nX0oE="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "GestorTareas.Shared.pdb": "sha256-usTuvGUIHRDcnVPU35z27Ronb3o4Jq0AB\/dUYYTfFpI=",
-      "GestorTareas.Client.pdb": "sha256-JEWKutLf9ghFMlerjXOG3Q2A1yASLX8ufjmGjFLz+08="
+      "GestorTareas.Shared.pdb": "sha256-w00KhxfV3ovcHv1i4X9Q2FZUEB4+umnTeRafB3E1IBI=",
+      "GestorTareas.Client.pdb": "sha256-i3vKtVALDhe3obqtcTVdczlYP36yoAID48QRSKvydMw="
     },
     "runtime": {
       "dotnet.6.0.9.rnz6vdon31.js": "sha256-Azk5sbYFVo84h8NpIst9roIPGLH2y8ewQ9SY\/sUHvgs=",

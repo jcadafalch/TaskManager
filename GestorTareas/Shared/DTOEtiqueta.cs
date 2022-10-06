@@ -7,7 +7,7 @@ public record EtiquetaDTO(
     DateTime CreatedAt,
 
     /* Mejor pedir el tipo IEnumerable (interfaz/abstracto) que List (implementación) */
-    List<TareaEtiquetaDTO> TareaEtiquetas
+    IEnumerable<TareaEtiquetaDTO> TareaEtiquetas
 );
 
 public record CrearEtiquetaRequestDTO(string Name);
