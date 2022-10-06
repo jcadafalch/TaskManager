@@ -22,7 +22,7 @@ public class GestorTareasController : ControllerBase
     public async Task<ActionResult> ListTareasAsync()
     {
         var tareas = await _dbContext.Tareas
-            .Select(t => new TareaDTO(t.Id, t.Title, t.Content, t.CreatedAt, t.IsCompleted, (HashSet<EtiquetaDTO>)t.Etiquetas))
+            .Select(t => new TareaDTO(t.Id, t.Title, t.Content, t.CreatedAt, t.IsCompleted, (List<TareaEtiquetaDTO>)t.TareaEtiquetas))
             .ToListAsync();
         if (!tareas.Any())
             return BadRequest("No existen tareas");
