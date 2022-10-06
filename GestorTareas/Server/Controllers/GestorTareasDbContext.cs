@@ -8,13 +8,18 @@ namespace GestorTareas.Server.Controllers
         public GestorTareasDbContext(DbContextOptions<GestorTareasDbContext> options) : base(options)
         {
         }
-        public DbSet<Tarea> Tareas { get; set; } = default;
-        public DbSet<Etiqueta> Etiquetas { get; set; } = default;
+        public DbSet<Tarea> Tareas { get; set; }
+        public DbSet<Etiqueta> Etiquetas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
                 @"Server=.\SQLEXPRESS;Database=gestorTareas;Trusted_Connection=True");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
         }
 
        

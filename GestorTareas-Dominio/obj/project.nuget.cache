@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v173zJ6sbdSWoUPIsdM7O1sRF+IbTjrxbn8kEiQH8DiDbrHITPm1OXjzfpJqSL96ZLjY5+86ByHHtXEPTsTfeg==",
+  "dgSpecHash": "b9LCRP2E0PekaF87P2MyPbPEAJwg6TciXdt/Tz5NClHLBEV4fDUdV3fWONnNhwhIuFACHg90bho2ZqWzYaVlnA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
+  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

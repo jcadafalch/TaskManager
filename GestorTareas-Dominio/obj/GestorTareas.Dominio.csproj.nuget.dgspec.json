@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj": {}
+    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj": {
+    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
         "projectName": "GestorTareas.Dominio",
-        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
+        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\GestorTareas.Dominio.csproj",
         "packagesPath": "C:\\Users\\j.cadafalch\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas-Dominio\\obj\\",
+        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas-Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\j.cadafalch\\AppData\\Roaming\\NuGet\\NuGet.Config",

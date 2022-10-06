@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj": {}
+    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj": {
+    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
+        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
         "projectName": "GestorTareas.Client",
-        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
+        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
         "packagesPath": "C:\\Users\\j.cadafalch\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\obj\\",
+        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\j.cadafalch\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj": {
-                "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj"
+              "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj": {
+                "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj"
               }
             }
           }
@@ -56,6 +56,10 @@
             "MudBlazor": {
               "target": "Package",
               "version": "[6.0.16, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -83,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj": {
+    "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
         "projectName": "GestorTareas.Shared",
-        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
+        "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
         "packagesPath": "C:\\Users\\j.cadafalch\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\j.cadafalch\\AppData\\Roaming\\NuGet\\NuGet.Config",

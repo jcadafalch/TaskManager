@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OX5tNf6iSTTWe6vjOX3fmZkwEMbFl5u0H6voX66nqWkm9/XDkLFDMHRLNIsfXZCuB+NF6M9Jv9qi589Do6qJmA==",
+  "dgSpecHash": "mpDJY8sZCkVgyoKcoN3aH04dq5t22WRbqDFjbNtkwik4CO0M4yFcZBJRDiJJP/BLrb8zq17rXOiFYynsQTGW+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
+  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.9\\microsoft.aspnetcore.authorization.6.0.9.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.9\\microsoft.aspnetcore.components.6.0.9.nupkg.sha512",
@@ -31,6 +31,7 @@
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\mudblazor\\6.0.16\\mudblazor.6.0.16.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.io.pipelines\\6.0.3\\system.io.pipelines.6.0.3.nupkg.sha512",
+    "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.net.http.json\\6.0.0\\system.net.http.json.6.0.0.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512"

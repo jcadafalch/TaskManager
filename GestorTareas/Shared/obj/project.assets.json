@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
       "projectName": "GestorTareas.Shared",
-      "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
+      "projectPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
       "packagesPath": "C:\\Users\\j.cadafalch\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\obj\\",
+      "outputPath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\j.cadafalch\\AppData\\Roaming\\NuGet\\NuGet.Config",
