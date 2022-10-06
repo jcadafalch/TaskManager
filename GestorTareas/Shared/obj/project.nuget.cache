@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WCbHEfU3w9v6RolaC/8SErE4dZTiQosWjCWeRXq6sLCQiZzHHeqR9g6YBfWtn1/l2MbDjEHz5H+c4dA5mZUWgA==",
+  "dgSpecHash": "z7gMJwGVg0ktliwDS++ioO6elBzGV5tGEnNlzHI3YoKCzSM+E0ItML7y11N3AjMfgUs6ao/QpZ/WOq0chy62bw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
+  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Shared\\GestorTareas.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

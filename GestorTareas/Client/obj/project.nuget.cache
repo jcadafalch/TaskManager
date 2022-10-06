@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OX5tNf6iSTTWe6vjOX3fmZkwEMbFl5u0H6voX66nqWkm9/XDkLFDMHRLNIsfXZCuB+NF6M9Jv9qi589Do6qJmA==",
+  "dgSpecHash": "jC7GFutBJVnYUxyfM+U5OvTcgcjK8dC7BoUSj2whcCEnFH1oQpGQCfbKUaLjK0Q2h2x0TsMVWyLz2UjwRXm5hg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
+  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\GestorTareas.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.9\\microsoft.aspnetcore.authorization.6.0.9.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.9\\microsoft.aspnetcore.components.6.0.9.nupkg.sha512",

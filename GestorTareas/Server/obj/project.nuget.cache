@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E/b7FLRDE9ieNHEsN7+laarkkdtaK5ZmNGi7xoVSYZUnNjRUmGex1TmD+5FT60u+lwEBmpAGHsghWCkpYCULxw==",
+  "dgSpecHash": "5lCINEy8WEP3iVeRPnC0xSBYKS76uj+65gYSk0zzXeMOIDcHZcB0pDhz6i6kxwR+CVIC/ANteGH68cAEHK9koA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\LearningCSharp.NET\\GestorTareas\\GestorTareas\\Server\\GestorTareas.Server.csproj",
+  "projectFilePath": "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Server\\GestorTareas.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\j.cadafalch\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.9\\microsoft.aspnetcore.authorization.6.0.9.nupkg.sha512",
