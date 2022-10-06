@@ -1,7 +1,15 @@
 ﻿
 namespace GestorTareas.Shared;
 
-public record TareaDTO(Guid Id, string Title, string? Content, DateTime CreatedAt, bool IsCompleted, List<TareaEtiquetaDTO> TareaEtiquetas);
+public record TareaDTO(
+    Guid Id,
+    string Title,
+    string? Content,
+    DateTime CreatedAt,
+    bool IsCompleted,
+
+    /* Mejor pedir el tipo IEnumerable (interfaz/abstracto) que List (implementación) */
+    List<TareaEtiquetaDTO> TareaEtiquetas);
 
 public record CreateTareaRequestDTO(string Title, string Content);
 
