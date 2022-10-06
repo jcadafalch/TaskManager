@@ -19,13 +19,47 @@ public class GestorTareasController : ControllerBase
 
     // Tareas
     [HttpGet("listtarea")]
-    public async Task<ActionResult> ListTareasAsync()
+    public async Task<ActionResult> ListTareasAsync(
+        CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
+    )
     {
+        // Cargamos todas las tareas de la base de datos
         var tareas = await _dbContext.Tareas
-            .Select(t => new TareaDTO(t.Id, t.Title, t.Content, t.CreatedAt, t.IsCompleted, (HashSet<EtiquetaDTO>)t.Etiquetas))
-            .ToListAsync();
+
+            // Indicamos que queremos cargar también las etiquetas relacionadas de cada Tarea
+            // Esto añade un JOIN a la consulta SQL. Más o menos:
+            //  SELECT
+            //      *
+            //  FROM
+            //      [dbo].[Tareas] AS [T]
+            //          LEFT JOIN [dbo].[Etiquetas] AS [E] ON [E].[TareaId] = [T].[Id];
+            .Include(t => t.Etiquetas)
+
+            // Como no tenemos que aplicar ningún filtro ni operación sobre
+            // el resultado, podemos obtener la lista directamente
+            .ToListAsync(cancellationToken);
+
+        // Si no hay tareas, en vez de mostrar un código 400 (Bad Request),
+        // se debería mostrar un código 204 (No Content) ya que la petición
+        // es correcta (no hay fallo por parte del usuario)
         if (!tareas.Any())
-            return BadRequest("No existen tareas");
+            return NoContent();
+
+        var tareaDtos = tareas
+            .Select(t => new TareaDTO(
+                t.Id,
+                t.Title,
+                t.Content,
+                t.CreatedAt,
+                t.IsCompleted,
+
+                // Seleccionamos cada etiqueta de la tarea y creamos un DTO
+                // NOTA: hay que convertir el resultado del `Select()` a una lista
+                //       usando el método `ToList()` porque el DTO requiere el tipo `List`.
+                //       Normalmente, se utilizan los tipos genéricos (`ICollection`, `IDictionary` o,
+                //       el más común y abstracto, `IEnumerable`, como tipo de dato de parámetro.
+                t.Etiquetas.Select(e => new TareaEtiquetaDTO(t.Id, e.Id)).ToList())
+            );
 
         return Ok(tareas);
     }

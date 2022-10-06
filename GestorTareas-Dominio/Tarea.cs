@@ -6,9 +6,6 @@ namespace GestorTareas.Dominio
 {
     public class Tarea
     {
-        public Tarea() => this.Etiquetas = new HashSet<Etiqueta>();
-        
-
         public Guid Id { get; set; } = new Guid();
         [Required]
         public string Title { get; set; } = default(string);
