@@ -13,7 +13,7 @@ public record TareaDTO(
 
 public record CreateTareaRequestDTO(string Title, string Content);
 
-public record UpdateTareaRequest(Guid Id, string? NewContent, bool IsCompleted);
+public record UpdateTareaRequest(Guid Id, string? NewContent);
 
 public record DeleteTareaRequestDTO(Guid Id);
 

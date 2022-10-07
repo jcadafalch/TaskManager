@@ -18,6 +18,7 @@ public class GestorTareasController : ControllerBase
     }
 
     // Tareas
+    //FUNCIONA
     [HttpGet("listtarea")]
     public async Task<ActionResult> ListTareasAsync(
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
@@ -64,6 +65,7 @@ public class GestorTareasController : ControllerBase
         return Ok(tareas);
     }
 
+    // FUNCIONA
     /* CreateTareaRequestDTO request, CancellationToken token = default*/
     [HttpPost("createtarea")]
     public async Task<ActionResult> CreateTareaAsync(string Title, string Content, CancellationToken token = default)
@@ -89,10 +91,12 @@ public class GestorTareasController : ControllerBase
         return Ok(tarea);
     }
 
+    // FUNCIONA
+    /* DeleteTareaRequestDTO request, CancellationToken token = default */
     [HttpDelete("deletetarea")]
-    public async Task<ActionResult> DeleteTareaAsync(DeleteTareaRequestDTO request, CancellationToken token = default)
-    {     
-        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == request.Id, token);
+    public async Task<ActionResult> DeleteTareaAsync(Guid Id, CancellationToken token = default)
+    {
+        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == /*request.*/Id, token);
         if (tarea is null)
             return NotFound();
 
@@ -101,32 +105,38 @@ public class GestorTareasController : ControllerBase
         return Ok(tarea);
     }
 
-    [HttpPut(("updatecontent"))]
-    public async Task<ActionResult> UpdateContent(UpdateTareaRequest request, CancellationToken token)
+    // FUNCIONA
+    // UpdateTareaRequest request
+    [HttpPut(("updatetarea"))]
+    public async Task<ActionResult> UpdateTareaAsync(Guid Id, string NewContent, CancellationToken token)
     {
-        if (string.IsNullOrEmpty(request.NewContent))
+        if (string.IsNullOrEmpty(/*request.*/NewContent))
             return BadRequest("Nuevo contenido vacio o nulo");
 
-        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == request.Id, token);
+        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == /*request.*/Id, token);
         if (tarea is null)
             return NotFound();
 
-        tarea.Content = request.NewContent;
+        tarea.Content = /*request.*/NewContent;
         _dbContext.Tareas.Update(tarea);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
         return Ok(tarea);
     }
 
+    // FUNCIONA
+    // CompleteTareaRequestDTO request
     [HttpPost("completetarea")]
-    public async Task<ActionResult> CompleteTareaAsync(CompleteTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CompleteTareaAsync(Guid Id, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, DateTime.Now, token);
+        return await SetCompletedStatusAsync(/*request.*/Id, DateTime.Now, token);
     }
 
+    // FUNCIONA
+    // SetPendingTareaRequestDTO request
     [HttpPost("setpendingtarea")]
-    public async Task<ActionResult> SetPendingTareaAsync(SetPendingTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> SetPendingTareaAsync(Guid Id, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, null, token);
+        return await SetCompletedStatusAsync(/*request.*/Id, null, token);
     }
 
     private async Task<ActionResult> SetCompletedStatusAsync(Guid id, DateTime? dateTime, CancellationToken token = default)
@@ -142,4 +152,80 @@ public class GestorTareasController : ControllerBase
     }
 
     //* Etiquetas
+    // FUNCTIONA
+    [HttpGet("listetiqueta")]
+    public async Task<ActionResult> ListEtiquetasAsync(
+        CancellationToken cancellationToken = default
+    )
+    {
+
+        var etiquetas = await _dbContext.Etiquetas
+             .Include(t => t.Tareas)
+            .ToListAsync(cancellationToken);
+
+        if (!etiquetas.Any())
+            return NoContent();
+
+        var etiquetasDtos = etiquetas
+            .Select(t => new EtiquetaDTO(
+                t.Id,
+                t.Name,
+                t.Tareas.Select(e => new TareaEtiquetaDTO(t.Id, e.Id)).ToList())
+            );
+
+        return Ok(etiquetas);
+    }
+
+    //FUNCIONA
+    /* CrearEtiquetaRequestDTO request, CancellationToken token = default*/
+    [HttpPost("createetiqueta")]
+    public async Task<ActionResult> CreateEtiquetaAsync(string Name, CancellationToken token = default)
+    {
+        if (string.IsNullOrEmpty(/*request.*/Name))
+            return BadRequest("Titulo vacio o nulo");
+
+        var buscaEtiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Name == /*request.*/Name, token);
+        if (buscaEtiqueta != null)
+            return BadRequest("Ya existe una etiqueta con ese nombre");
+
+        var etiqueta = new Etiqueta()
+        {
+            Name = /*request.*/Name
+        };
+
+        await _dbContext.Etiquetas.AddAsync(etiqueta, token).ConfigureAwait(false);
+        await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+        return Ok(etiqueta);
+    }
+
+    // DeleteEtiquetaRequestDTO request
+    [HttpDelete("deleteetiqueta")]
+    public async Task<ActionResult> DeleteEtiquetaAsync(Guid Id, CancellationToken token = default)
+    {
+        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == /*request.*/Id, token);
+
+        if (etiqueta is null)
+            return NoContent();
+
+        _dbContext.Remove(etiqueta);
+        await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+        return Ok(etiqueta);
+    }
+
+    //UpdateEtiquetaRequestDTO request
+    [HttpPut("updateetiqueta")]
+    public async Task<ActionResult> UpdateEtiqueta(Guid Id, string NewName, CancellationToken token = default)
+    {
+        if (string.IsNullOrEmpty(/*request.*/NewName))
+            return BadRequest("Nuevo nombre vacio o nulo");
+
+        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == /*request.*/Id, token);
+        if (etiqueta is null)
+            return NotFound();
+
+        etiqueta.Name = /*request.*/NewName;
+        _dbContext.Etiquetas.Update(etiqueta);
+        await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+        return Ok(etiqueta);
+    }
 }

@@ -9,7 +9,7 @@ namespace GestorTareas.Dominio
         public Guid Id { get; set; } = new Guid();
 
         [Required]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public ICollection<Tarea> Tareas { get; set; }
     }

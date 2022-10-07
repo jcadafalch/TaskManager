@@ -92,9 +92,7 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.csproj.CoreCompileInputs.cache
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.dll
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\refint\GestorTareas.Server.dll
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.pdb
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\GestorTareas.Client.staticwebassets.runtime.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\appsettings.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\BlazorDebugProxy\BrowserDebugHost.dll
@@ -103,7 +101,6 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\BlazorDebugProxy\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\BlazorDebugProxy\Microsoft.CodeAnalysis.dll
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\BlazorDebugProxy\Newtonsoft.Json.dll
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\GestorTareas.Client.staticwebassets.runtime.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\GestorTareas.Server.staticwebassets.runtime.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\GestorTareas.Server.exe
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\bin\Debug\net6.0\GestorTareas.Server.deps.json
@@ -170,5 +167,8 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\scopedcss\bundle\GestorTareas.Server.styles.css
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.csproj.CopyComplete
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.dll
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\refint\GestorTareas.Server.dll
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.pdb
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\GestorTareas.Server.genruntimeconfig.cache
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Server\obj\Debug\net6.0\ref\GestorTareas.Server.dll

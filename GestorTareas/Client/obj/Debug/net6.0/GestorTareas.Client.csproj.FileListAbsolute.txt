@@ -825,10 +825,15 @@ C:\Users\j.cadafalch\Documents\GitHub\LearningCSharp.NET\GestorTareas\GestorTare
 C:\Users\j.cadafalch\Documents\GitHub\LearningCSharp.NET\GestorTareas\GestorTareas\Client\obj\Debug\net6.0\refint\GestorTareas.Client.dll
 C:\Users\j.cadafalch\Documents\GitHub\LearningCSharp.NET\GestorTareas\GestorTareas\Client\obj\Debug\net6.0\GestorTareas.Client.pdb
 C:\Users\j.cadafalch\Documents\GitHub\LearningCSharp.NET\GestorTareas\GestorTareas\Client\obj\Debug\net6.0\ref\GestorTareas.Client.dll
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.6.0.9.rnz6vdon31.js
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.timezones.blat
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\dotnet.wasm
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.dll
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.pdb
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.dll
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.pdb
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\icudt.dat
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\icudt_CJK.dat
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\icudt_EFIGS.dat
@@ -1074,6 +1079,7 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Dynamic.Runtime.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Runtime.Serialization.Xml.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Xml.Serialization.dll.gz
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.pdb.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Data.Common.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.IO.Pipes.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Globalization.dll.gz
@@ -1151,6 +1157,7 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.Security.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Runtime.Serialization.Json.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Security.Cryptography.Primitives.dll.gz
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Memory.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.DispatchProxy.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.Primitives.dll.gz
@@ -1170,6 +1177,7 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.NetworkInformation.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.Metadata.dll.gz
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.pdb.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.ValueTuple.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Net.Ping.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Xml.XmlSerializer.dll.gz
@@ -1205,6 +1213,7 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Diagnostics.TextWriterTraceListener.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Text.Encoding.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.ServiceModel.Web.dll.gz
+C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Security.Cryptography.Encoding.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Reflection.Emit.Lightweight.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.Transactions.Local.dll.gz
@@ -1221,15 +1230,6 @@ C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.IO.UnmanagedMemoryStream.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\System.ComponentModel.TypeConverter.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\MudBlazor.dll.gz
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\blazor.boot.json
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.dll
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.pdb
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.dll
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.pdb
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.pdb.gz
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.dll.gz
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Client.pdb.gz
-C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\wwwroot\_framework\GestorTareas.Shared.dll.gz
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\GestorTareas.Client.staticwebassets.runtime.json
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\GestorTareas.Client.dll
 C:\Users\j.cadafalch\Documents\GitHub\GestorTareas\GestorTareas\Client\bin\Debug\net6.0\GestorTareas.Client.pdb
