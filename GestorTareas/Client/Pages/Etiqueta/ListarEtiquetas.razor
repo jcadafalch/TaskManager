@@ -3,3 +3,21 @@
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Listar Etiqueta
 </MudText>
+@if(etiquetas is null){
+    <!--Cargando..-->
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}else{
+    @if(etiquetas.Any()){
+        @foreach (var etiqueta in etiquetas)
+        {
+            <EtiquetaComponent Etiqueta="etiqueta"/>
+        }
+
+    }else{
+        <MudText Typo="Typo.body1">
+            No se han encontrado etiquetas
+        </MudText>
+    }
+}

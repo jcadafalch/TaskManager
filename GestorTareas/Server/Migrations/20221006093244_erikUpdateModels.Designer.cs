@@ -4,6 +4,7 @@ using GestorTareas.Server.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorTareas.Server.Migrations
 {
     [DbContext(typeof(GestorTareasDbContext))]
-    partial class GestorTareasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221006093244_erikUpdateModels")]
+    partial class erikUpdateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace GestorTareas.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -82,15 +84,13 @@ namespace GestorTareas.Server.Migrations
                         .WithMany()
                         .HasForeignKey("EtiquetasId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_EtiquetaTarea_Etiquetas_EtiquetasId");
+                        .IsRequired();
 
                     b.HasOne("GestorTareas.Dominio.Tarea", null)
                         .WithMany()
                         .HasForeignKey("TareasId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_EtiquetaTarea_Tareas_TareasId");
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -23,9 +23,5 @@
     <ProjectReference Include="..\Shared\GestorTareas.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
-
 
 </Project>
