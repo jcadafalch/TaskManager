@@ -397,6 +397,19 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# bin & obj folders
-GestorTareas/*/bin
-GestorTareas/*/obj
+#Gestor Tareas
+**/bin
+**/obj
+bin
+obj
+GestorTareas/Client/bin/
+GestorTareas/Client/obj/
+GestorTareas-Dominio/obj/
+GestorTareas-Dominio/bin/
+GestorTareas/Shared/obj/
+GestorTareas/Shared/bin/
+GestorTareas/Server/obj/
+GestorTareas/Server/bin/
+*.dll
+*.pdb
+GestorTareas/Server/appsettings.Development.json
