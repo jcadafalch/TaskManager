@@ -412,3 +412,4 @@ GestorTareas/Server/obj/
 GestorTareas/Server/bin/
 *.dll
 *.pdb
+GestorTareas/Server/appsettings.Development.json
