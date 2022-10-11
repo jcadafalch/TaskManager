@@ -12,10 +12,12 @@
     @if(etiquetas.Any()){
         @foreach (var etiqueta in etiquetas)
         {
-            
+            <EtiquetaComponent Etiqueta="etiqueta"/>
         }
 
     }else{
-        <!-- No se han encontrado etiquetas -->
+        <MudText Typo="Typo.body1">
+            No se han encontrado etiquetas
+        </MudText>
     }
 }

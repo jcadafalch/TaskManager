@@ -1,0 +1,17 @@
+﻿<MudCard Outlined="true" Style="@($"background-color:{Colors.Red.Lighten4};")">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">@Tarea.Title</MudText>
+            <MudText Typo="Typo.subtitle1">@Tarea.CreatedAt</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">@StringStatus</MudButton>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText>@Tarea.Content</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Editar</MudButton>
+    </MudCardActions>
+</MudCard>

@@ -20,3 +20,7 @@ public record DeleteTareaRequestDTO(Guid Id);
 public record CompleteTareaRequestDTO(Guid Id);
 
 public record SetPendingTareaRequestDTO(Guid Id);
+
+public record AddEtiquetaRequestDTO(Guid IdTarea, Guid IdEtiqueta);
+
+public record RemoveEtiquetaRequestDTO(Guid IdTarea, Guid IdEtiqueta);

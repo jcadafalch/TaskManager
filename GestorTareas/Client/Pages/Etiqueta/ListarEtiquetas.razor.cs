@@ -11,7 +11,7 @@ namespace GestorTareas.Client.Pages.Etiqueta
 
         private async Task CargarEtiquetasAsync()
         {
-            etiquetas = await Http.GetFromJsonAsync<EtiquetaDTO[]>("api/gestortareas");
+            etiquetas = await Http.GetFromJsonAsync<EtiquetaDTO[]>("api/gestortareas/listetiqueta");
             await InvokeAsync(StateHasChanged);
         }
 

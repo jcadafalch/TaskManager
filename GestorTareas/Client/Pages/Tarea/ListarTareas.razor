@@ -1,5 +1,29 @@
 ﻿@page "/listar-tareas"
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
-    Listar Tareas
+    Listado Tareas
 </MudText>
+
+@if (tareas is null)
+{
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}
+else
+{
+    @if (tareas.Any())
+    {
+
+        @foreach (var tarea in tareas)
+        {
+            <TareaComponent Tarea="tarea" />
+        }
+    }
+    else
+    {
+        <MudText Typo="Typo.body1">
+            No se han encontrado tareas
+        </MudText>
+    }
+}
