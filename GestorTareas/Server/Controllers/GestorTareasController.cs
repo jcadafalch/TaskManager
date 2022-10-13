@@ -123,16 +123,16 @@ public class GestorTareasController : ControllerBase
 
     // FUNCIONA
     [HttpPost("completetarea")]
-    public async Task<ActionResult> CompleteTareaAsync(CompleteTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CompleteTareaAsync(Guid id, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, DateTime.Now, token);
+        return await SetCompletedStatusAsync(id, DateTime.Now, token);
     }
 
     // FUNCIONA
     [HttpPost("setpendingtarea")]
-    public async Task<ActionResult> SetPendingTareaAsync(SetPendingTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> SetPendingTareaAsync(Guid id, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, null, token);
+        return await SetCompletedStatusAsync(id, null, token);
     }
 
     private async Task<ActionResult> SetCompletedStatusAsync(Guid id, DateTime? dateTime, CancellationToken token = default)

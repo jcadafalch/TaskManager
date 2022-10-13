@@ -17,7 +17,7 @@ else
 
         @foreach (var tarea in tareas)
         {
-            <TareaComponent Tarea="tarea" />
+            <TareaComponent Tarea="tarea" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
         }
     }
     else
