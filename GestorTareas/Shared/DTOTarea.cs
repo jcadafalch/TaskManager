@@ -15,8 +15,6 @@ public record CreateTareaRequestDTO(string Title, string Content);
 
 public record UpdateTareaRequest(Guid Id, string? NewContent);
 
-public record DeleteTareaRequestDTO(Guid Id);
-
 public record CompleteTareaRequestDTO(Guid Id);
 
 public record SetPendingTareaRequestDTO(Guid Id);

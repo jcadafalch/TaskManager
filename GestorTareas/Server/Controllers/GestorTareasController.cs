@@ -93,9 +93,9 @@ public class GestorTareasController : ControllerBase
 
     // FUNCIONA
     [HttpDelete("deletetarea")]
-    public async Task<ActionResult> DeleteTareaAsync(DeleteTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> DeleteTareaAsync(Guid Id, CancellationToken token = default)
     {
-        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == request.Id, token);
+        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == Id, token);
         if (tarea is null)
             return NotFound();
 

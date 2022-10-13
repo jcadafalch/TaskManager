@@ -3,3 +3,39 @@
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Eliminar Tarea
 </MudText>
+
+<MudSelect @bind-Value="Tarea" Label="Selecciona la tarea a eliminar" Variant="Variant.Text">
+    @foreach (var tarea in Tareas)
+    {
+        <MudSelectItem Value="@tarea.Title">@tarea.Title</MudSelectItem>
+    }
+</MudSelect>
+
+
+@if (!(Tarea is null))
+{
+    <MudCard Outlined="true" Style="@($"background-color:{Colors.Red.Lighten4};")">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6"><!--@Tarea.Title--> Title</MudText>
+                <MudText Typo="Typo.subtitle1"><!--@Tarea.CreatedAt--> Created At</MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary">
+                    <MudText Style="@($"color: { Colors.Green.Darken1}; ")">Completada</MudText>
+                    <!--@if(Tarea.IsCompleted){
+                        <MudText Style="@($"color: { Colors.Green.Darken1}; ")">Completada</MudText>
+                    }else{
+                        <MudText Style="@($"color: { Colors.Red.Darken1}; ")">Pendiente</MudText>
+                    }-->
+                </MudButton>
+            </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText><!--@Tarea.Content--> Content</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton @onclick="DeleteTask" Variant="Variant.Filled" Color="Color.Error">Delete Records</MudButton>
+        </MudCardActions>
+    </MudCard>
+}
