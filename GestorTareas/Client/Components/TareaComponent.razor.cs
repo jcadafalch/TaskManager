@@ -8,28 +8,30 @@ public partial class TareaComponent
     [Parameter]
     public TareaDTO Tarea { get; set; } = default;
 
-    public string backgorund { get; set; }
+    [Parameter]
+    public EventCallback<bool> OnStatusChanged { get; set; }
 
-    private string StringStatus()
+
+    public string? backgorund { get; set; }
+
+    private string StringStatus(ChangeEventArgs e)
     {
         if (Tarea.IsCompleted)
         {
-            return "Descompletar Tarea";
             backgorund = "@($\"background-color:{Colors.Red.Lighten4};";
-            CheckBoxChanged();
+            _ = CheckBoxChanged(e);
+            return "Descompletar Tarea";
         }
         else
         {
-            return "Completar Tarea";
             backgorund = "@($\"background-color:{Colors.Green.Lighten4};";
-            CheckBoxChanged();
+            _ = CheckBoxChanged(e);
+            return "Completar Tarea";
         }
     }
 
-    //[Parameter]
-    public EventCallback<bool> OnStatusChanged { get; set; }
-
-    protected async Task CheckBoxChanged()
+    
+    protected async Task CheckBoxChanged(ChangeEventArgs e)
     {
         bool isCompleted = !Tarea.IsCompleted;
         await OnStatusChanged.InvokeAsync(isCompleted);
