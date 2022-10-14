@@ -15,7 +15,7 @@
                     <MudTextField Label="Contenido de la tarea" @bind-Value="model.Content" For="@(() => model.Content)" />
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await CreateNewTareaAsync())">Crear Tarea</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await CreateNewTareaAsync())" Href="/">Crear Tarea</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudItem>
