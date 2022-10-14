@@ -11,8 +11,6 @@ public partial class EliminarTarea
     private HttpClient Http;
     private TareaDTO[]? Tareas { get; set; }
     private TareaDTO? Tarea { get; set; }
-
-    private bool visible = false;
     
     private async Task CargarTareasAsync()
     {
