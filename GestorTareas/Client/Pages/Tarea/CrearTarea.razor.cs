@@ -1,4 +1,5 @@
 ﻿using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Json;
@@ -7,7 +8,7 @@ namespace GestorTareas.Client.Pages.Tarea;
 
 public partial class CrearTarea
 {
-    HttpClient Http;
+    [Inject] protected HttpClient Http { get; set; } = default!;
     CreateTarea model = new CreateTarea();
     //bool success;
 
