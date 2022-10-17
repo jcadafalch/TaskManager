@@ -1,6 +1,7 @@
 ﻿using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using MudBlazor;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Json;
 
@@ -9,8 +10,9 @@ namespace GestorTareas.Client.Pages.Tarea;
 public partial class CrearTarea
 {
     [Inject] protected HttpClient Http { get; set; } = default!;
+    [Inject] protected NavigationManager NavigationManager { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
     CreateTarea model = new CreateTarea();
-    //bool success;
 
     public class CreateTarea
     {
@@ -29,8 +31,16 @@ public partial class CrearTarea
     protected async Task CreateNewTareaAsync()
     {
         var tareadto = new CreateTareaRequestDTO(model.Title, model.Content);
-        await Http.PostAsJsonAsync("/api/gestortareas/createtarea", tareadto);
-        StateHasChanged();
+        var response = await Http.PostAsJsonAsync("/api/gestortareas/createtarea", tareadto);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Ha habido un error", Severity.Error);
+            return;
+        }
+
+        await InvokeAsync(StateHasChanged);
+        NavigationManager.NavigateTo("/");
 
     }
 }
