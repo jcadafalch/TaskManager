@@ -14,11 +14,13 @@ else
 {
     @if (tareas.Any())
     {
+        <div class="d-flex flex-grow-1 gap-4">
 
         @foreach (var tarea in tareas)
         {
-            <TareaComponent Tarea="tarea" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
+            <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
         }
+        </div>
     }
     else
     {

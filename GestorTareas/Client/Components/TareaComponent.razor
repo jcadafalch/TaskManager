@@ -1,17 +1,17 @@
-﻿<MudCard Outlined="true" Style="@($"background-color:{Colors.Red.Lighten4};")">
+﻿<MudCard Outlined="true" Style="@($"background-color:{Colors.Blue.Lighten4};")">
     <MudCardHeader>
         <CardHeaderContent>
             <MudText Typo="Typo.h6">@Tarea.Title</MudText>
             <MudText Typo="Typo.subtitle1">@Tarea.CreatedAt</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudButton Variant="Variant.Text" Color="Color.Primary">@StringStatus</MudButton>
+            <MudCheckBox T="bool" Checked="@TareaStatus" Color="Color.Primary" CheckedChanged="CheckBoxChanged" Label="@(TareaStatus ? "Descompletar" : "Completar")"/>
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
         <MudText>@Tarea.Content</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Text" Color="Color.Primary">Editar</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@ModifyTarea">Editar</MudButton>
     </MudCardActions>
 </MudCard>

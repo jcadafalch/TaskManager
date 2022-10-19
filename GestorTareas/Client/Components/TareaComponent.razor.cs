@@ -1,40 +1,48 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Components.Dialogs;
+using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace GestorTareas.Client.Components;
 
 public partial class TareaComponent
 {
+    [Inject] IDialogService Dialog { get; set; } = default!;
+
     [Parameter]
-    public TareaDTO Tarea { get; set; } = default;
+    public TareaDTO Tarea { get; set; } = default!;
+
+    [Parameter]
+    public bool TareaStatus { get; set; } = default;
+
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }
 
 
-    public string? backgorund { get; set; }
-
-    private string StringStatus(ChangeEventArgs e)
+    protected async Task CheckBoxChanged(bool e)
     {
-        if (Tarea.IsCompleted)
-        {
-            backgorund = "@($\"background-color:{Colors.Red.Lighten4};";
-            _ = CheckBoxChanged(e);
-            return "Descompletar Tarea";
-        }
-        else
-        {
-            backgorund = "@($\"background-color:{Colors.Green.Lighten4};";
-            _ = CheckBoxChanged(e);
-            return "Completar Tarea";
-        }
+        Console.WriteLine(TareaStatus);
+        TareaStatus = e;
+        Console.WriteLine(TareaStatus);
+        await InvokeAsync(StateHasChanged);
+        await OnStatusChanged.InvokeAsync(TareaStatus);
     }
 
-    
-    protected async Task CheckBoxChanged(ChangeEventArgs e)
+    protected void ModifyTarea()
     {
-        bool isCompleted = !Tarea.IsCompleted;
-        await OnStatusChanged.InvokeAsync(isCompleted);
+        var parameters = new DialogParameters
+        {
+            { "Contenido", Tarea.Content },
+            { "Tarea", Tarea }
+        };
+
+        var options = new DialogOptions()
+        {
+            DisableBackdropClick = true
+        };
+
+        Dialog.Show<ModificarTareaDialog>("Editar", parameters);
     }
 }
 
