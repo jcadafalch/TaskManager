@@ -172,7 +172,7 @@ public class GestorTareasController : ControllerBase
 
     //FUNCIONA
     [HttpPost("createetiqueta")]
-    public async Task<ActionResult> CreateEtiquetaAsync(CrearEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CreateEtiquetaAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
     {
         if (string.IsNullOrEmpty(request.Name))
             return BadRequest("Titulo vacio o nulo");

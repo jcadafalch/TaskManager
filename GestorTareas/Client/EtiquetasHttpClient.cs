@@ -17,7 +17,7 @@ public class EtiquetasHttpClient
         return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/gestortareas/listetiqueta");
     }
 
-    public async Task<HttpResponseMessage> GetCreateEtiquetaAsync(CrearEtiquetaRequestDTO request)
+    public async Task<HttpResponseMessage> GetCreateEtiquetaAsync(CreateEtiquetaRequestDTO request)
     {
         return await _httpClient.PostAsJsonAsync("/api/gestortareas/createetiqueta", request);
     }

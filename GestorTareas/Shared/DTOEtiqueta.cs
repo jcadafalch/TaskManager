@@ -9,7 +9,7 @@ public record EtiquetaDTO(
     IEnumerable<TareaEtiquetaDTO> TareaEtiquetas
 );
 
-public record CrearEtiquetaRequestDTO(string Name);
+public record CreateEtiquetaRequestDTO(string Name);
 
 public record UpdateEtiquetaRequestDTO(Guid Id, string NewName);
 
