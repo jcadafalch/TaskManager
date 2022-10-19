@@ -3,15 +3,14 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Pages.Tarea;
 
 public partial class CrearTarea
 {
-    [Inject] protected HttpClient Http { get; set; } = default!;
+    [Inject] protected TareasHttpClient Http { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; }
-    [Inject] ISnackbar Snackbar { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; }
     CreateTarea model = new CreateTarea();
 
     public class CreateTarea
@@ -31,7 +30,7 @@ public partial class CrearTarea
     protected async Task CreateNewTareaAsync()
     {
         var tareadto = new CreateTareaRequestDTO(model.Title, model.Content);
-        var response = await Http.PostAsJsonAsync("/api/gestortareas/createtarea", tareadto);
+        var response = await Http.GetCreateTareaAsync(tareadto);
 
         if (!response.IsSuccessStatusCode)
         {

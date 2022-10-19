@@ -13,12 +13,8 @@ public record TareaDTO(
 
 public record CreateTareaRequestDTO(string Title, string Content);
 
-public record UpdateTareaRequest(Guid Id, string? NewContent);
+public record UpdateTareaRequestDTO(Guid Id, string? NewContent);
 
-public record CompleteTareaRequestDTO(Guid Id);
+public record IdRequestDTO(Guid Id);
 
-public record SetPendingTareaRequestDTO(Guid Id);
-
-public record AddEtiquetaRequestDTO(Guid IdTarea, Guid IdEtiqueta);
-
-public record RemoveEtiquetaRequestDTO(Guid IdTarea, Guid IdEtiqueta);
+public record ManageEtiquetaTareaRequestDTO(Guid IdTarea, Guid IdEtiqueta);
