@@ -1,20 +1,21 @@
-﻿using GestorTareas.Client.Components;
+﻿using GestorTareas.Client.Components.Dialogs;
 using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Pages.Tarea;
 
 public partial class EliminarTarea
 {
-    private IDialogService _dialogService;
-    private HttpClient Http;
+    [Inject] protected TareasHttpClient Http { get; set; } = default!;
+    [Inject] protected NavigationManager NavigationManager { get; set; }
+    [Inject] protected IDialogService _dialogService { get; set; } = default!;
     private TareaDTO[]? Tareas { get; set; }
-    private TareaDTO? Tarea { get; set; }
+    private TareaDTO Tarea { get; set; }
     
     private async Task CargarTareasAsync()
     {
-        Tareas = await Http.GetFromJsonAsync<TareaDTO[]>("api/gestortareas/listtarea");
+        Tareas = await Http.GetListTareaAsync();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -26,12 +27,12 @@ public partial class EliminarTarea
         }
     }
 
-    private async Task DeleteTask()
+    private async Task ConfirmAction()
     {
         var parameters = new DialogParameters();
         parameters.Add("ContentText", "Estas seguro que qieres eliminar la tarea? \nEste proceso no se podrá deshacer");
         parameters.Add("ButtonText", "Eliminar");
-        parameters.Add("ColorButton", Color.Error);
+        parameters.Add("Color", Color.Error);
 
         var options = new DialogOptions()
         {
@@ -51,6 +52,16 @@ public partial class EliminarTarea
         {
             return;
         }
-        var delete = await Http.PostAsJsonAsync("api/gestortareas/deletetarea", Tarea.Id);
+        IdRequestDTO idrequest = new IdRequestDTO(Tarea.Id);
+        var response = await Http.GetDeleteTareaAsync(idrequest);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            //! Afegir algun popup avisant que alguna cosa ha pasat
+            return;
+        }
+        
+        await InvokeAsync(StateHasChanged);
+        NavigationManager.NavigateTo("/");
     }
 }
