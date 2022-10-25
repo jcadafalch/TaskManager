@@ -1,5 +1,5 @@
 ﻿<!--<div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">-->
-<MudCard Elevation="3" >
+<MudCard Elevation="3">
     <MudCardHeader Class="pt-2">
         <CardHeaderContent>
             <MudText Typo="Typo.h6">@Tarea.Title</MudText>
@@ -17,10 +17,12 @@
                         <MudMenuItem>Quitar Etiqueta</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
-            }else{
+            }
+            else
+            {
                 <MudCheckBox T="bool" Checked="@TareaStatus" Color="@(TareaStatus ? Color.Success : Color.Secondary)" CheckedChanged="CheckBoxChanged" Disabled="Action is null ? false : true" />
             }
-            
+
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent Class="mt-n8">
@@ -37,7 +39,7 @@
 
             @if (Action == "Delete")
             {
-                <MudButton OnClick="OnButtonClicked" Variant="Variant.Filled" Color="Color.Error">Delete Tarea</MudButton>
+                <MudButton OnClick="ConfirmActionDeleteAsync" Variant="Variant.Filled" Color="Color.Error">Delete Tarea</MudButton>
             }
         </MudCardActions>
     }
@@ -48,9 +50,9 @@
 {
     <MudChip>@state</MudChip>
 
-    <MudMessageBox @ref="mbox" Title="Aviso" CancelText="Cancel">
+    <MudMessageBox @ref="mbox" Title="¡Cuidado!" CancelText="Cancelar">
         <MessageContent>
-            Esta acción <b><i>no</i></b> se puede deshacer!
+            Esta acción <b><i>NO</i></b> se puede deshacer!
         </MessageContent>
         <YesButton>
             <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>

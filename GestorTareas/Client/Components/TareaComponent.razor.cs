@@ -10,6 +10,7 @@ public partial class TareaComponent
 {
     [Inject] protected TareasHttpClient Http { get; set; } = default!;
     [Inject] IDialogService DialogService { get; set; }
+    [Inject] ISnackbar Snackbar { get; set; }
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 
     [Parameter]
@@ -21,7 +22,7 @@ public partial class TareaComponent
     [Parameter]
     public string? Action { get; set; }
 
-    //public string? Action = "All";
+    //public string? Action = "Modify";
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }
@@ -29,7 +30,7 @@ public partial class TareaComponent
     MudMessageBox? mbox { get; set; }
     string state = "Message box hasn't been opened yet";
 
-    
+
     protected async Task CheckBoxChanged(bool e)
     {
         TareaStatus = e;
@@ -38,7 +39,7 @@ public partial class TareaComponent
     }
 
     #region Modify
-    protected void ModifyTarea()
+    protected async Task ModifyTarea()
     {
         var parameters = new DialogParameters
         {
@@ -51,68 +52,49 @@ public partial class TareaComponent
             DisableBackdropClick = true
         };
 
-        DialogService.Show<ModificarTareaDialog>("Editar", parameters);
+        var dialog = DialogService.Show<ModificarTareaDialog>("Editar", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            await InvokeAsync(StateHasChanged);
+            NavigationManager.NavigateTo("/");
+         
+        }
     }
 
     #endregion
 
     #region Delte
-    //private async Task ConfirmAction()
-    //{
-
-    //    var parameters = new DialogParameters();
-    //    parameters.Add("ContentText", "Estas seguro que qieres eliminar la tarea? \nEste proceso no se podrá deshacer");
-    //    parameters.Add("ButtonText", "Eliminar");
-    //    parameters.Add("Color", Color.Error);
-
-    //    var options = new DialogOptions()
-    //    {
-    //        CloseButton = true,
-    //        MaxWidth = MaxWidth.ExtraSmall,
-    //        DisableBackdropClick = true
-    //    };
-
-    //    var dialogResult = Dialog.Show<MudDialogComponent>("Eliminar Tarea", parameters, options);
-    //    var result = await dialogResult.Result;
-    //    if (!result.Cancelled && bool.TryParse(result.Data.ToString(), out bool resultbool)) DeleteTarea();
-    //}
-
-    private async void OnButtonClicked()
+    private async void ConfirmActionDeleteAsync()
     {
-        bool? result = await DialogService.ShowMessageBox(
-            "Warning",
-            "Deleting can not be undone!",
-            yesText: "Delete!", cancelText: "Cancel");
-        state = result == null ? "Cancelled" : "Deleted!";
+        bool? result = await mbox.Show();
+        state = result == null ? "Cancelled" : "Deleted";
+
+        if (result is not null)
+            await DeleteTareaAsync();
+
         StateHasChanged();
-
-        /*Console.WriteLine("Boto eliminar");
-
-         bool? result = await mbox.Show();
-         state = result == null ? "Cancelled" : "Deleted!";
-
-         Console.WriteLine("State = " + state);
-         StateHasChanged();*/
     }
 
-    //private async Task DeleteTareaAsync()
-    //{
-    //    if (Tarea is null)
-    //    {
-    //        return;
-    //    }
-    //    IdRequestDTO idrequest = new IdRequestDTO(Tarea.Id);
-    //    var response = await Http.GetDeleteTareaAsync(idrequest);
+    private async Task DeleteTareaAsync()
+    {
+        if (Tarea is null)
+        {
+            return;
+        }
 
-    //    if (!response.IsSuccessStatusCode)
-    //    {
-    //        Snackbar.Add("Ha habido un error en intentar eliminar la tarea", Severity.Error);
-    //        return;
-    //    }
+        IdRequestDTO idrequest = new IdRequestDTO(Tarea.Id);
+        var response = await Http.GetDeleteTareaAsync(idrequest);
 
-    //    await InvokeAsync(StateHasChanged);
-    //    NavigationManager.NavigateTo("/");
-    //}
+        if (!response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Ha habido un error en intentar eliminar la tarea", Severity.Error);
+            return;
+        }
+
+        await InvokeAsync(StateHasChanged);
+        NavigationManager.NavigateTo("/");
+    }
 
     #endregion
 }
