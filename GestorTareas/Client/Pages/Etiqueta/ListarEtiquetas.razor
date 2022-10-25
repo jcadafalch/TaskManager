@@ -10,11 +10,14 @@
     </MudText>
 }else{
     @if(etiquetas.Any()){
-        @foreach (var etiqueta in etiquetas)
-        {
-            <EtiquetaComponent Etiqueta="etiqueta"/>
-        }
 
+        <div class="m-6">
+            @foreach (var etiqueta in etiquetas)
+            {
+                <EtiquetaComponent Etiqueta="etiqueta" />
+            }
+        </div>
+        
     }else{
         <MudText Typo="Typo.body1">
             No se han encontrado etiquetas

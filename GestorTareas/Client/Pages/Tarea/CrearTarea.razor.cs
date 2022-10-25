@@ -1,4 +1,5 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;

@@ -1,6 +1,6 @@
 ﻿@page "/listar-tareas"
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
     Listado Tareas
 </MudText>
 
@@ -14,13 +14,14 @@ else
 {
     @if (tareas.Any())
     {
-        <div class="d-flex flex-grow-1 gap-4">
-
-        @foreach (var tarea in tareas)
-        {
-            <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
-        }
-        </div>
+        <MudGrid Spacing="5" Justify="Justify.Center">
+            @foreach (var tarea in tareas)
+            {
+                <MudItem >
+                    <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
+                </MudItem>
+            }
+        </MudGrid>
     }
     else
     {
