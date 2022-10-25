@@ -24,12 +24,12 @@ public class TareasHttpClient
 
     public async Task<HttpResponseMessage> GetUpdateTareaAsync(UpdateTareaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/updatetarea", request);
+        return await _httpClient.PutAsJsonAsync("/api/gestortareas/updatetarea", request);
     }
 
     public async Task<HttpResponseMessage> GetDeleteTareaAsync(IdRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("api/gestortareas/deletetarea", request.Id);
+        return await _httpClient.DeleteAsync("/api/gestortareas/deletetarea/" + request.Id);
     }
 
     public async Task<HttpResponseMessage> GetCompleteTareaAsync(IdRequestDTO request)

@@ -27,9 +27,6 @@ public partial class TareaComponent
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }
 
-    MudMessageBox? mbox { get; set; }
-    string state = "Message box hasn't been opened yet";
-
 
     protected async Task CheckBoxChanged(bool e)
     {
@@ -44,7 +41,8 @@ public partial class TareaComponent
         var parameters = new DialogParameters
         {
             { "Contenido", Tarea.Content },
-            { "Tarea", Tarea }
+            { "Tarea", Tarea },
+            {"Action", "Modify" }
         };
 
         var options = new DialogOptions()
@@ -52,48 +50,43 @@ public partial class TareaComponent
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ModificarTareaDialog>("Editar", parameters, options);
+        var dialog = DialogService.Show<TareaDialog>("Editar", parameters, options);
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
             await InvokeAsync(StateHasChanged);
             NavigationManager.NavigateTo("/");
-         
+
         }
     }
 
     #endregion
 
     #region Delte
-    private async void ConfirmActionDeleteAsync()
-    {
-        bool? result = await mbox.Show();
-        state = result == null ? "Cancelled" : "Deleted";
-
-        if (result is not null)
-            await DeleteTareaAsync();
-
-        StateHasChanged();
-    }
 
     private async Task DeleteTareaAsync()
     {
-        if (Tarea is null)
+        var parameters = new DialogParameters
+       {
+            {"Contenido", "" },
+           {"Tarea", Tarea },
+           {"Action", "Delete" }
+       };
+
+        var options = new DialogOptions()
         {
-            return;
-        }
+            DisableBackdropClick = true
+        };
 
-        IdRequestDTO idrequest = new IdRequestDTO(Tarea.Id);
-        var response = await Http.GetDeleteTareaAsync(idrequest);
+        var dialog = DialogService.Show<TareaDialog>("¡AVISO!", parameters, options);
+        var result = await dialog.Result;
 
-        if (!response.IsSuccessStatusCode)
+        if (!result.Cancelled)
         {
-            Snackbar.Add("Ha habido un error en intentar eliminar la tarea", Severity.Error);
-            return;
+            await InvokeAsync(StateHasChanged);
+            NavigationManager.NavigateTo("/");
         }
-
-        await InvokeAsync(StateHasChanged);
-        NavigationManager.NavigateTo("/");
+        
     }
 
     #endregion

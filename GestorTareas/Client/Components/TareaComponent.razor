@@ -39,26 +39,11 @@
 
             @if (Action == "Delete")
             {
-                <MudButton OnClick="ConfirmActionDeleteAsync" Variant="Variant.Filled" Color="Color.Error">Delete Tarea</MudButton>
+                <MudButton OnClick="DeleteTareaAsync" Variant="Variant.Filled" Color="Color.Error">Delete Tarea</MudButton>
             }
         </MudCardActions>
     }
 
 </MudCard>
-
-@if (Action == "Delete")
-{
-    <MudChip>@state</MudChip>
-
-    <MudMessageBox @ref="mbox" Title="¡Cuidado!" CancelText="Cancelar">
-        <MessageContent>
-            Esta acción <b><i>NO</i></b> se puede deshacer!
-        </MessageContent>
-        <YesButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
-        </YesButton>
-    </MudMessageBox>
-}
-
 
 <!--</div>-->

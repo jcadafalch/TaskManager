@@ -1,6 +1,8 @@
 using GestorTareas.Client;
+using GestorTareas.Client.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor;
 using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -19,6 +21,7 @@ builder.Services.AddMudServices(config =>
 {
     config.ResizeOptions = new ResizeOptions {  };
     config.SnackbarConfiguration = new MudBlazor.SnackbarConfiguration {  };
+    config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
 });
 
 await builder.Build().RunAsync();
