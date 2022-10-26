@@ -193,10 +193,11 @@ public class GestorTareasController : ControllerBase
     }
 
     //FUNCIONA
-    [HttpDelete("deleteetiqueta")]
-    public async Task<ActionResult> DeleteEtiquetaAsync(DeleteEtiquetaRequestDTO request, CancellationToken token = default)
+    [HttpDelete]
+    [Route("/api/gestortareas/deleteetiqueta/{id}")]
+    public async Task<ActionResult> DeleteEtiquetaAsync(Guid Id, CancellationToken token = default)
     {
-        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == request.Id, token);
+        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == Id, token);
 
         if (etiqueta is null)
             return NoContent();

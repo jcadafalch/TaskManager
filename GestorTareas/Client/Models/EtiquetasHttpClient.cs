@@ -1,7 +1,7 @@
 ﻿using GestorTareas.Shared;
 using System.Net.Http.Json;
 
-namespace GestorTareas.Client;
+namespace GestorTareas.Client.Models;
 
 public class EtiquetasHttpClient
 {
@@ -24,12 +24,12 @@ public class EtiquetasHttpClient
 
     public async Task<HttpResponseMessage> GetUpdateEtiquetaAsync(UpdateEtiquetaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/updateetiqueta", request);
+        return await _httpClient.PutAsJsonAsync("/api/gestortareas/updateetiqueta", request);
     }
 
     public async Task<HttpResponseMessage> GetDeleteEtiquetaAsync(DeleteEtiquetaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/deleteetiqueta", request);
+        return await _httpClient.DeleteAsync("/api/gestortareas/deleteetiqueta/" + request.Id);
     }
 
 }

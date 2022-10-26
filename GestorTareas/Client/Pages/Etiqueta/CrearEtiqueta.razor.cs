@@ -1,4 +1,5 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GestorTareas.Client.Pages.Etiqueta;
 
-public partial class CrearTarea
+public partial class CrearEtiqueta
 {
     [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; }

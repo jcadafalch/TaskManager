@@ -1,0 +1,73 @@
+﻿using GestorTareas.Client.Components.Dialogs;
+using GestorTareas.Client.Models;
+using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
+
+namespace GestorTareas.Client.Components.Etiqueta;
+
+public partial class EtiquetaComponent
+{
+    [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
+    [Inject] IDialogService DialogService { get; set; }
+    [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+
+    [Parameter]
+    public EtiquetaDTO Etiqueta { get; set; } = default!;
+
+    [Parameter]
+    public string? Action { get; set; }
+
+    #region Modify
+    protected async Task ModifyEtiquetaAsync()
+    {
+        var parameters = new DialogParameters
+        {
+            {"Contenido", Etiqueta.Name },
+            {"Etiqueta", Etiqueta },
+            {"Action", "Modify" }
+        };
+
+        var options = new DialogOptions()
+        {
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<EtiquetaDialog>("Editar", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            await InvokeAsync(StateHasChanged);
+            NavigationManager.NavigateTo("/");
+        }
+    }
+    #endregion
+
+    #region Delete
+    protected async Task DeleteEtiquetaAsync()
+    {
+        var parameters = new DialogParameters
+        {
+            {"Contenido", "" },
+            {"Etiqueta", Etiqueta},
+            {"Action", "Delete" }
+        };
+
+        var options = new DialogOptions()
+        {
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<EtiquetaDialog>("¡AVISO!", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            await InvokeAsync(StateHasChanged);
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    #endregion
+}
