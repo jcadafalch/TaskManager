@@ -4,7 +4,7 @@ using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace GestorTareas.Client.Components;
+namespace GestorTareas.Client.Components.Tarea;
 
 public partial class TareaComponent
 {

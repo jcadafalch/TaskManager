@@ -2,7 +2,7 @@
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 
-namespace GestorTareas.Client.Components;
+namespace GestorTareas.Client.Components.Tarea;
 
 public partial class SelectorTareaComponent
 {
