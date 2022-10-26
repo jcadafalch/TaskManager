@@ -1,4 +1,5 @@
 ﻿@page "/listar-etiquetas"
+@using GestorTareas.Client.Components.Etiqueta
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Listar Etiqueta
@@ -10,11 +11,14 @@
     </MudText>
 }else{
     @if(etiquetas.Any()){
-        @foreach (var etiqueta in etiquetas)
-        {
-            <EtiquetaComponent Etiqueta="etiqueta"/>
-        }
 
+        <div class="m-6">
+            @foreach (var etiqueta in etiquetas)
+            {
+                <EtiquetaDesignComponent Etiqueta="etiqueta" />
+            }
+        </div>
+        
     }else{
         <MudText Typo="Typo.body1">
             No se han encontrado etiquetas

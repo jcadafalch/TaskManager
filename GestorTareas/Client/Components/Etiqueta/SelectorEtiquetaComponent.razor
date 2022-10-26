@@ -1,0 +1,18 @@
+﻿@using GestorTareas.Shared
+
+<MudSelect T="EtiquetaDTO"
+    SelectedValuesChanged="OnValuesSelected"
+    Label="@LabelContent"
+    AdornmentIcon="@Icons.Material.Filled.Search"
+    AnchorOrigin="Origin.BottomCenter"
+    ToStringFunc="EtiquetaToString"
+    Disabled="@(Etiquetas is null)">
+    
+    @if(Etiquetas is not null){
+        @foreach (var etiqueta in Etiquetas)
+        {
+            <MudSelectItem Value="@etiqueta" />
+        }
+    }
+
+</MudSelect>

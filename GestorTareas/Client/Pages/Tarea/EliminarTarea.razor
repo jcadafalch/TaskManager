@@ -1,5 +1,20 @@
 ﻿@page "/eliminar-tarea"
+@using GestorTareas.Client.Components.Tarea
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Eliminar Tarea
 </MudText>
+
+
+    <SelectorTareaComponent Tareas="Tareas" LabelContent="Selecciona la tarea que quieres eliminar" OnTareaSelected=@(GetTareaSelected) />
+
+
+
+
+
+@if (!(Tarea is null))
+{
+    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        <TareaComponent Tarea="Tarea" TareaStatus="Tarea.IsCompleted" Action="Delete" />
+    </div>
+}

@@ -1,0 +1,20 @@
+﻿<MudCard Elevation="3">
+    <MudCardContent>
+        <MudText>@Etiqueta.Name</MudText>
+    </MudCardContent>
+    @if (Action == "Delete" || Action == "Modify")
+    {
+        <MudCardActions>
+            @if (Action == "Modify")
+            {
+                <MudButton Variant="Variant.Text" Color="Color.Warning" OnClick="@ModifyEtiquetaAsync">Editar</MudButton>
+            }
+
+            @if (Action == "Delete")
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@DeleteEtiquetaAsync">Eliminar</MudButton>
+            }
+        </MudCardActions>
+    }
+
+</MudCard>

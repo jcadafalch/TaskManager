@@ -1,16 +1,20 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Pages.Tarea;
 
 public partial class ListarTareas
 {
-    HttpClient Http;
+    [Inject] protected TareasHttpClient Http { get; set; } = default!;
+    [Inject] protected ISnackbar Snackbar { get; set; }
     private TareaDTO[]? tareas = default;
-    public bool? value { get; set; } = false;
+
     private async Task CargarTareasAsync()
     {
-        tareas = await Http.GetFromJsonAsync<TareaDTO[]>("api/gestortareas/listtarea");
+        tareas = await Http.GetListTareaAsync();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -22,15 +26,19 @@ public partial class ListarTareas
         }
     }
 
-    protected async Task UpdateTareasCompleted(bool IsCompleted, Guid id)
+    protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
-        if (IsCompleted)
+        var idRequest = new IdRequestDTO(id);
+        HttpResponseMessage response = isCompleted ? await Http.GetCompleteTareaAsync(idRequest) : await Http.GetSetPendingTareaAsync(idRequest);
+
+        if (!response.IsSuccessStatusCode)
         {
-            var complete = await Http.PostAsJsonAsync("api/gestortareas/completetarea", id);
+            SnackbarError();
+            return;
         }
-        else
-        {
-            var pending = await Http.PostAsJsonAsync("apu/gestortareas/setpendingtarea", id);
-        }
+
+        await CargarTareasAsync();
     }
+
+    protected void SnackbarError() => Snackbar.Add("Error en completar la tarea", Severity.Error);
 }

@@ -1,11 +1,12 @@
 ﻿using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Pages.Etiqueta
 {
     public partial class ListarEtiquetas
     {
-        HttpClient Http;
+        [Inject] protected HttpClient Http { get; set; } = default!;
 
         private EtiquetaDTO[]? etiquetas;
 

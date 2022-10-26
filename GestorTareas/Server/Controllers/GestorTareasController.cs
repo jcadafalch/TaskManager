@@ -2,7 +2,6 @@
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace GestorTareas.Server.Controllers;
 
@@ -19,7 +18,7 @@ public class GestorTareasController : ControllerBase
 
     // Tareas
     //FUNCIONA
-    [HttpGet("listtarea")]
+    [HttpGet("list")]
     public async Task<ActionResult> ListTareasAsync(
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
     )
@@ -92,10 +91,11 @@ public class GestorTareasController : ControllerBase
     }
 
     // FUNCIONA
-    [HttpDelete("deletetarea")]
-    public async Task<ActionResult> DeleteTareaAsync(DeleteTareaRequestDTO request, CancellationToken token = default)
+    [HttpDelete]
+    [Route("/api/gestortareas/deletetarea/{id}")]
+    public async Task<ActionResult> DeleteTareaAsync(Guid Id, CancellationToken token = default)
     {
-        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == request.Id, token);
+        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == /*request.*/Id, token);
         if (tarea is null)
             return NotFound();
 
@@ -105,8 +105,8 @@ public class GestorTareasController : ControllerBase
     }
 
     // FUNCIONA
-    [HttpPut(("updatetarea"))]
-    public async Task<ActionResult> UpdateTareaAsync(UpdateTareaRequest request, CancellationToken token = default)
+    [HttpPut("updatetarea")]
+    public async Task<ActionResult> UpdateTareaAsync(UpdateTareaRequestDTO request, CancellationToken token = default)
     {
         if (string.IsNullOrEmpty(request.NewContent))
             return BadRequest("Nuevo contenido vacio o nulo");
@@ -123,16 +123,16 @@ public class GestorTareasController : ControllerBase
 
     // FUNCIONA
     [HttpPost("completetarea")]
-    public async Task<ActionResult> CompleteTareaAsync(Guid id, CancellationToken token = default)
+    public async Task<ActionResult> CompleteTarea(IdRequestDTO request, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(id, DateTime.Now, token);
+        return await SetCompletedStatusAsync(request.Id, DateTime.Now, token);
     }
 
     // FUNCIONA
     [HttpPost("setpendingtarea")]
-    public async Task<ActionResult> SetPendingTareaAsync(Guid id, CancellationToken token = default)
+    public async Task<ActionResult> SetPendingTareaAsync(IdRequestDTO request, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(id, null, token);
+        return await SetCompletedStatusAsync(request.Id, null, token);
     }
 
     private async Task<ActionResult> SetCompletedStatusAsync(Guid id, DateTime? dateTime, CancellationToken token = default)
@@ -173,7 +173,7 @@ public class GestorTareasController : ControllerBase
 
     //FUNCIONA
     [HttpPost("createetiqueta")]
-    public async Task<ActionResult> CreateEtiquetaAsync(CrearEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CreateEtiquetaAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
     {
         if (string.IsNullOrEmpty(request.Name))
             return BadRequest("Titulo vacio o nulo");
@@ -193,10 +193,11 @@ public class GestorTareasController : ControllerBase
     }
 
     //FUNCIONA
-    [HttpDelete("deleteetiqueta")]
-    public async Task<ActionResult> DeleteEtiquetaAsync(DeleteEtiquetaRequestDTO request, CancellationToken token = default)
+    [HttpDelete]
+    [Route("/api/gestortareas/deleteetiqueta/{id}")]
+    public async Task<ActionResult> DeleteEtiquetaAsync(Guid Id, CancellationToken token = default)
     {
-        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == request.Id, token);
+        var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == Id, token);
 
         if (etiqueta is null)
             return NoContent();
@@ -229,7 +230,7 @@ public class GestorTareasController : ControllerBase
     //FUNCIONA
     // AddEtiquetaRequestDTO request
     [HttpPut("addetiquetatotarea")]
-    public async Task<ActionResult> AddEtiquetaToTareaAsync(AddEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> AddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
         //return await AddRemoveEtiquetaToTareaAsync(IdTarea, IdEtiqueta, true, token);
         return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, true, token);
@@ -238,7 +239,7 @@ public class GestorTareasController : ControllerBase
     // NO FUNCIONA
     //RemoveEtiquetaRequestDTO request
     [HttpDelete("removetiquettarea")]
-    public async Task<ActionResult> RemoveEtiquetaToTareaAsync(RemoveEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
         //return await AddRemoveEtiquetaToTareaAsync(IdTarea, IdEtiqueta, false, token);
         return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, false, token);

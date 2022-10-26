@@ -1,5 +1,15 @@
 ﻿@page "/modificar-etiqueta"
+@using GestorTareas.Client.Components.Etiqueta
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Modificar Etiqueta
 </MudText>
+
+<SelectorEtiquetaComponent Etiquetas="Etiquetas" LabelContent="Selecciona la etiqueta que quieres modificar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
+
+@if (!(Etiqueta is null))
+{
+    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        <EtiquetaComponent Etiqueta="Etiqueta" Action="Modify" />
+    </div>
+}

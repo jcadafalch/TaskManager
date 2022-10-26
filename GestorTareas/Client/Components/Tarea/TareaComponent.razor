@@ -1,0 +1,49 @@
+﻿<!--<div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">-->
+<MudCard Elevation="3">
+    <MudCardHeader Class="pt-2">
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">@Tarea.Title</MudText>
+            <MudText Typo="Typo.caption">@Tarea.CreatedAt</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            @if (Action == "All")
+            {
+                <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+                    <ChildContent>
+                        <MudMenuItem>Completar / Descompletar</MudMenuItem>
+                        <MudMenuItem>Modificar</MudMenuItem>
+                        <MudMenuItem>Eliminar</MudMenuItem>
+                        <MudMenuItem>Añadir Etiqueta</MudMenuItem>
+                        <MudMenuItem>Quitar Etiqueta</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            }
+            else
+            {
+                <MudCheckBox T="bool" Checked="@TareaStatus" Color="@(TareaStatus ? Color.Success : Color.Secondary)" CheckedChanged="CheckBoxChanged" Disabled="Action is null ? false : true" />
+            }
+
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent Class="mt-n8">
+        <MudDivider Light Class="mb-1" />
+        <MudText>@Tarea.Content</MudText>
+    </MudCardContent>
+    @if (Action == "Delete" || Action == "Modify")
+    {
+        <MudCardActions>
+            @if (Action == "Modify")
+            {
+                <MudButton Variant="Variant.Text" Color="Color.Warning" OnClick="@ModifyTarea">Editar</MudButton>
+            }
+
+            @if (Action == "Delete")
+            {
+                <MudButton OnClick="DeleteTareaAsync" Variant="Variant.Filled" Color="Color.Error">Delete Tarea</MudButton>
+            }
+        </MudCardActions>
+    }
+
+</MudCard>
+
+<!--</div>-->

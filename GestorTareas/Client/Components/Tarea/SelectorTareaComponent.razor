@@ -1,0 +1,23 @@
+﻿@using GestorTareas.Shared
+
+<MudSelect T="TareaDTO"
+           SelectedValuesChanged="OnValuesSelected"
+           Label="@LabelContent"
+           AdornmentIcon="@Icons.Material.Filled.Search"
+           AnchorOrigin="Origin.BottomCenter"
+           ToStringFunc="TareaToString"
+           Disabled="@(Tareas is null)">
+
+    @if (Tareas is not null)
+    {
+        @foreach (var tarea in Tareas)
+        {
+            <MudSelectItem Value="@tarea" />
+        }
+    }
+
+</MudSelect>
+
+@code{
+
+}

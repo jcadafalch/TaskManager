@@ -1,6 +1,7 @@
 ﻿@page "/listar-tareas"
+@using GestorTareas.Client.Components.Tarea
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
     Listado Tareas
 </MudText>
 
@@ -14,11 +15,14 @@ else
 {
     @if (tareas.Any())
     {
-
-        @foreach (var tarea in tareas)
-        {
-            <TareaComponent Tarea="tarea" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
-        }
+        <MudGrid Spacing="5" Justify="Justify.Center">
+            @foreach (var tarea in tareas)
+            {
+                <MudItem >
+                    <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
+                </MudItem>
+            }
+        </MudGrid>
     }
     else
     {
