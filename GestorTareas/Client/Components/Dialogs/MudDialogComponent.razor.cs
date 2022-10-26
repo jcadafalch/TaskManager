@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace GestorTareas.Client.Components;
+namespace GestorTareas.Client.Components.Dialogs;
 
 public partial class MudDialogComponent
 {

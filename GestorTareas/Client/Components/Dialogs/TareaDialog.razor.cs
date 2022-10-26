@@ -5,7 +5,7 @@ using MudBlazor;
 
 namespace GestorTareas.Client.Components.Dialogs;
 
-public partial class ModificarTareaDialog
+public partial class TareaDialog
 {
     [Inject] protected TareasHttpClient Http { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
