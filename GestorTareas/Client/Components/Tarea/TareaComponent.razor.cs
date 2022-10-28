@@ -1,5 +1,4 @@
 ﻿using GestorTareas.Client.Components.Dialogs;
-using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -23,7 +22,6 @@ public partial class TareaComponent
 
     [Parameter]
     public string? Action { get; set; }
-    //public string? Action = "Modify";
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }

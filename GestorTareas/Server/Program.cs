@@ -1,7 +1,5 @@
 using GestorTareas.Server.Controllers;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Net.Http.Headers;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
