@@ -1,20 +1,26 @@
-﻿<!--<div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">-->
+﻿@using GestorTareas.Client.Components.Etiqueta
+
 <MudCard Elevation="3">
     <MudCardHeader Class="pt-2">
         <CardHeaderContent>
             <MudText Typo="Typo.h6">@Tarea.Title</MudText>
             <MudText Typo="Typo.caption">@Tarea.CreatedAt</MudText>
+            @if (Action == "All")
+            {
+                <br />
+                <MudChip Variant="Variant.Text" Size="Size.Small" Color="@(TareaStatus ? Color.Success : Color.Error)">@(TareaStatus ? "Completada" : "Pendiente")</MudChip>
+            }
         </CardHeaderContent>
         <CardHeaderActions>
             @if (Action == "All")
             {
                 <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
                     <ChildContent>
-                        <MudMenuItem>Completar / Descompletar</MudMenuItem>
-                        <MudMenuItem>Modificar</MudMenuItem>
-                        <MudMenuItem>Eliminar</MudMenuItem>
-                        <MudMenuItem>Añadir Etiqueta</MudMenuItem>
-                        <MudMenuItem>Quitar Etiqueta</MudMenuItem>
+                        <MudMenuItem OnClick="@ChangeStatus">Completar / Descompletar</MudMenuItem>
+                        <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
+                        <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
+                        <MudMenuItem OnClick="@AddEtiquetaToTarea">Añadir Etiqueta</MudMenuItem>
+                        <MudMenuItem OnClick="@RemoveEtiquetaToTarea">Quitar Etiqueta</MudMenuItem>
                     </ChildContent>
                 </MudMenu>
             }
@@ -28,6 +34,17 @@
     <MudCardContent Class="mt-n8">
         <MudDivider Light Class="mb-1" />
         <MudText>@Tarea.Content</MudText>
+        @if (Action == "All")
+        {
+            <MudDivider Light Class="mb-3" />
+            @if (Tarea.Etiquetas is not null && Tarea.Etiquetas.Any())
+            {
+                @foreach (var etiqueta in Tarea.Etiquetas)
+                {
+                    <EtiquetaDesignComponent Etiqueta="etiqueta" />
+                }
+            }
+        }
     </MudCardContent>
     @if (Action == "Delete" || Action == "Modify")
     {
@@ -45,5 +62,3 @@
     }
 
 </MudCard>
-
-<!--</div>-->

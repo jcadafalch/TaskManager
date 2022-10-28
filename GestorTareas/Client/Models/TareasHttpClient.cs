@@ -43,11 +43,11 @@ public class TareasHttpClient
 
     public async Task<HttpResponseMessage> GetAddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/addetiquetatotarea", request);
+        return await _httpClient.PutAsJsonAsync("/api/gestortareas/addetiquetatotarea", request);
     }
 
     public async Task<HttpResponseMessage> GetRemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/removetiquettarea", request);
+        return await _httpClient.PutAsJsonAsync("/api/gestortareas/removetiquettarea/", request);
     }
 }

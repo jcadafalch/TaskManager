@@ -13,6 +13,7 @@ public partial class TareaDialog
     [Parameter] public TareaDTO Tarea { get; set; }
     [Parameter] public string Contenido { get; set;}
     [Parameter] public string Action { get; set; }
+    public string Titulo { get; set; }
 
     protected async Task Submit()
     {
@@ -42,6 +43,20 @@ public partial class TareaDialog
             }
 
             Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
+        }
+
+        if(Action == "Create")
+        {
+            var tareadto = new CreateTareaRequestDTO(Titulo, Contenido);
+            var response = await Http.GetCreateTareaAsync(tareadto);
+
+            if(!response.IsSuccessStatusCode)
+            {
+                Snackbar.Add("Ha habido un error en crear la tarea", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
         }
         
         MudDialog.Close(DialogResult.Ok(true));

@@ -59,7 +59,7 @@ public class GestorTareasController : ControllerBase
                 //       usando el método `ToList()` porque el DTO requiere el tipo `List`.
                 //       Normalmente, se utilizan los tipos genéricos (`ICollection`, `IDictionary` o,
                 //       el más común y abstracto, `IEnumerable`, como tipo de dato de parámetro.
-                t.Etiquetas.Select(e => new TareaEtiquetaDTO(t.Id, e.Id)).ToList())
+                t.Etiquetas.Select(e => new EtiquetaDTO(e.Id, e.Name)).ToList())
             );
 
         return Ok(tareas);
@@ -162,11 +162,10 @@ public class GestorTareasController : ControllerBase
             return NoContent();
 
         var etiquetasDtos = etiquetas
-            .Select(t => new EtiquetaDTO(
-                t.Id,
-                t.Name,
-                t.Tareas.Select(e => new TareaEtiquetaDTO(t.Id, e.Id)).ToList())
-            );
+            .Select(e => new EtiquetaDTO(
+                e.Id,
+                e.Name
+            ));
 
         return Ok(etiquetas);
     }
@@ -238,7 +237,7 @@ public class GestorTareasController : ControllerBase
 
     // NO FUNCIONA
     //RemoveEtiquetaRequestDTO request
-    [HttpDelete("removetiquettarea")]
+    [HttpPut("removetiquettarea")]
     public async Task<ActionResult> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
         //return await AddRemoveEtiquetaToTareaAsync(IdTarea, IdEtiqueta, false, token);
@@ -248,7 +247,7 @@ public class GestorTareasController : ControllerBase
 
     private async Task<ActionResult> AddRemoveEtiquetaToTareaAsync(Guid IdTarea, Guid EtiquetaId, bool Add, CancellationToken token)
     {
-        var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == IdTarea, token);
+        var tarea = await _dbContext.Tareas.Include(t=> t.Etiquetas).FirstOrDefaultAsync(t => t.Id == IdTarea, token);
         if (tarea is null)
             return NotFound();
 
@@ -260,19 +259,17 @@ public class GestorTareasController : ControllerBase
         {
             tarea.AddEtiqueta(etiqueta);
             _dbContext.Tareas.Update(tarea);
-            _dbContext.Etiquetas.Update(etiqueta);
 
         }
         else
         {
-            _dbContext.Entry(tarea).Collection("Etiquetas").Load();
             tarea.RemoveEtiqueta(etiqueta);
-            Console.WriteLine("Eliminem etiqueta");
+            _dbContext.Tareas.Update(tarea);
 
         }
-        
-        
-        await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+
+
+        await _dbContext.SaveChangesAsync(token);
         return Ok(tarea);
     }
 }
