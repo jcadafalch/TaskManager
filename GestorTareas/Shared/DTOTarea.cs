@@ -9,7 +9,7 @@ public record TareaDTO(
     bool IsCompleted,
 
     /* Mejor pedir el tipo IEnumerable (interfaz/abstracto) que List (implementación) */
-    IEnumerable<TareaEtiquetaDTO> TareaEtiquetas);
+    IEnumerable<EtiquetaDTO> Etiquetas);
 
 public record CreateTareaRequestDTO(string Title, string Content);
 

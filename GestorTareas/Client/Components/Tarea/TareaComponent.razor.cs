@@ -8,29 +8,40 @@ namespace GestorTareas.Client.Components.Tarea;
 
 public partial class TareaComponent
 {
-    [Inject] protected TareasHttpClient Http { get; set; } = default!;
     [Inject] IDialogService DialogService { get; set; }
-    [Inject] ISnackbar Snackbar { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 
     [Parameter]
     public TareaDTO Tarea { get; set; } = default!;
 
     [Parameter]
+    public EtiquetaDTO[] Etiquetas { get; set; }
+
+    [Parameter]
     public bool TareaStatus { get; set; } = default;
 
     [Parameter]
     public string? Action { get; set; }
-
     //public string? Action = "Modify";
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }
 
+    [Parameter]
+    public EventCallback<bool> OnTareaChanged { get; set; }
+
 
     protected async Task CheckBoxChanged(bool e)
     {
         TareaStatus = e;
+        await InvokeAsync(StateHasChanged);
+        await OnStatusChanged.InvokeAsync(TareaStatus);
+    }
+
+    protected async Task ChangeStatus()
+    {
+        TareaStatus = !TareaStatus;
         await InvokeAsync(StateHasChanged);
         await OnStatusChanged.InvokeAsync(TareaStatus);
     }
@@ -54,6 +65,12 @@ public partial class TareaComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
+            if (Action == "All")
+            {
+                await UpdatePage();
+                return;
+            }
+
             await InvokeAsync(StateHasChanged);
             NavigationManager.NavigateTo("/");
 
@@ -83,12 +100,79 @@ public partial class TareaComponent
 
         if (!result.Cancelled)
         {
+            if (Action == "All")
+            {
+                await UpdatePage();
+                return;
+            }
             await InvokeAsync(StateHasChanged);
             NavigationManager.NavigateTo("/");
         }
-        
+
     }
 
     #endregion
+
+    #region Etiquetas
+
+    private async Task AddEtiquetaToTarea()
+    {
+        var parameters = new DialogParameters
+        {
+            {"LabelContent", "Selecciona la etiqueta que quieres añadir" },
+            {"Action", "Add" },
+            {"Tarea", Tarea }
+        };
+
+        var options = new DialogOptions() { DisableBackdropClick = true };
+
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+
+            await UpdatePage();
+            return;
+
+        }
+    }
+
+    private async Task RemoveEtiquetaToTarea()
+    {
+        if(Tarea.Etiquetas.Count() <= 0)
+        {
+            Snackbar.Add("Esta tarea no tiene etiquetas", Severity.Error);
+            return;
+        }
+
+        var parameters = new DialogParameters
+        {
+            {"LabelContent", "Selecciona la etiqueta que quieres retirar" },
+            {"Action", "Remove" },
+            {"Tarea", Tarea }
+        };
+
+        var options = new DialogOptions() { DisableBackdropClick = true };
+
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Retirar etiqueta a tarea", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            await UpdatePage();
+            return;
+        }
+
+    }
+
+    #endregion
+
+    // Updates the current page
+    private async Task UpdatePage()
+    {
+        await InvokeAsync(StateHasChanged);
+        await OnTareaChanged.InvokeAsync(true);
+    }
 }
 
