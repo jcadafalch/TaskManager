@@ -2,8 +2,6 @@
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Linq;
-using static System.Net.WebRequestMethods;
 
 namespace GestorTareas.Client.Components.Dialogs;
 

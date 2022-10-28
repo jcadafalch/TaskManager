@@ -16,8 +16,8 @@ public class GestorTareasController : ControllerBase
         _dbContext = dbContext;
     }
 
-    // Tareas
-    //FUNCIONA
+    #region Tareas
+
     [HttpGet("list")]
     public async Task<ActionResult> ListTareasAsync(
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
@@ -65,7 +65,6 @@ public class GestorTareasController : ControllerBase
         return Ok(tareas);
     }
 
-    // FUNCIONA
     [HttpPost("createtarea")]
     public async Task<ActionResult> CreateTareaAsync(CreateTareaRequestDTO request, CancellationToken token = default)
     {
@@ -90,7 +89,6 @@ public class GestorTareasController : ControllerBase
         return Ok(tarea);
     }
 
-    // FUNCIONA
     [HttpDelete]
     [Route("/api/gestortareas/deletetarea/{id}")]
     public async Task<ActionResult> DeleteTareaAsync(Guid Id, CancellationToken token = default)
@@ -104,7 +102,6 @@ public class GestorTareasController : ControllerBase
         return Ok(tarea);
     }
 
-    // FUNCIONA
     [HttpPut("updatetarea")]
     public async Task<ActionResult> UpdateTareaAsync(UpdateTareaRequestDTO request, CancellationToken token = default)
     {
@@ -121,14 +118,12 @@ public class GestorTareasController : ControllerBase
         return Ok(tarea);
     }
 
-    // FUNCIONA
     [HttpPost("completetarea")]
     public async Task<ActionResult> CompleteTarea(IdRequestDTO request, CancellationToken token = default)
     {
         return await SetCompletedStatusAsync(request.Id, DateTime.Now, token);
     }
 
-    // FUNCIONA
     [HttpPost("setpendingtarea")]
     public async Task<ActionResult> SetPendingTareaAsync(IdRequestDTO request, CancellationToken token = default)
     {
@@ -146,9 +141,9 @@ public class GestorTareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token);
         return Ok(tarea);
     }
+    #endregion
 
-    //* Etiquetas
-    // FUNCTIONA
+    #region Etiquetas
     [HttpGet("listetiqueta")]
     public async Task<ActionResult> ListEtiquetasAsync(
         CancellationToken cancellationToken = default
@@ -170,7 +165,6 @@ public class GestorTareasController : ControllerBase
         return Ok(etiquetas);
     }
 
-    //FUNCIONA
     [HttpPost("createetiqueta")]
     public async Task<ActionResult> CreateEtiquetaAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
     {
@@ -191,7 +185,6 @@ public class GestorTareasController : ControllerBase
         return Ok(etiqueta);
     }
 
-    //FUNCIONA
     [HttpDelete]
     [Route("/api/gestortareas/deleteetiqueta/{id}")]
     public async Task<ActionResult> DeleteEtiquetaAsync(Guid Id, CancellationToken token = default)
@@ -206,8 +199,6 @@ public class GestorTareasController : ControllerBase
         return Ok(etiqueta);
     }
 
-    //FUNCIONA
-    //UpdateEtiquetaRequestDTO request
     [HttpPut("updateetiqueta")]
     public async Task<ActionResult> UpdateEtiqueta(UpdateEtiquetaRequestDTO request, CancellationToken token = default)
     {
@@ -223,26 +214,19 @@ public class GestorTareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
         return Ok(etiqueta);
     }
+    #endregion
 
-    // Add & Remove Etiquetas
-
-    //FUNCIONA
-    // AddEtiquetaRequestDTO request
+    #region Add & Remove Etiquetas
     [HttpPut("addetiquetatotarea")]
     public async Task<ActionResult> AddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
-        //return await AddRemoveEtiquetaToTareaAsync(IdTarea, IdEtiqueta, true, token);
         return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, true, token);
     }
 
-    // NO FUNCIONA
-    //RemoveEtiquetaRequestDTO request
     [HttpPut("removetiquettarea")]
     public async Task<ActionResult> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
-        //return await AddRemoveEtiquetaToTareaAsync(IdTarea, IdEtiqueta, false, token);
         return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, false, token);
-
     }
 
     private async Task<ActionResult> AddRemoveEtiquetaToTareaAsync(Guid IdTarea, Guid EtiquetaId, bool Add, CancellationToken token)
@@ -268,8 +252,8 @@ public class GestorTareasController : ControllerBase
 
         }
 
-
         await _dbContext.SaveChangesAsync(token);
         return Ok(tarea);
     }
+    #endregion
 }

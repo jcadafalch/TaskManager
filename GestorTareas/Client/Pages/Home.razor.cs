@@ -74,8 +74,6 @@ public partial  class Home
         if (!result.Cancelled)
         {
             await CargarTareasAsync();
-            //await InvokeAsync(StateHasChanged);
-            //NavigationManager.NavigateTo("/", true);
             return;
         }
         

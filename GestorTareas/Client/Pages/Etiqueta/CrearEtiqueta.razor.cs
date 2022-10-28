@@ -36,7 +36,6 @@ public partial class CrearEtiqueta
             return;
         }
 
-        //await InvokeAsync(StateHasChanged);
         NavigationManager.NavigateTo("/");
     }
 }
