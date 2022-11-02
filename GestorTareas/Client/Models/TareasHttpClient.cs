@@ -14,17 +14,17 @@ public class TareasHttpClient
 
     public async Task<TareaDTO[]> GetListTareaAsync()
     {
-        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/gestortareas/list");
+        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/dbcontrollertareas/list");
     }
 
     public async Task<HttpResponseMessage> GetCreateTareaAsync(CreateTareaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/createtarea", request);
+        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/createtarea", request);
     }
 
     public async Task<HttpResponseMessage> GetUpdateTareaAsync(UpdateTareaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/gestortareas/updatetarea", request);
+        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/updatetarea", request);
     }
 
     public async Task<HttpResponseMessage> GetDeleteTareaAsync(IdRequestDTO request)
@@ -34,11 +34,11 @@ public class TareasHttpClient
 
     public async Task<HttpResponseMessage> GetCompleteTareaAsync(IdRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/completetarea", request);
+        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/completetarea", request);
     }
     public async Task<HttpResponseMessage> GetSetPendingTareaAsync(IdRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/gestortareas/setpendingtarea", request);
+        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/setpendingtarea", request);
     }
 
     public async Task<HttpResponseMessage> GetAddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
