@@ -8,10 +8,10 @@ public partial class SelectorEtiquetaComponent
 {
     [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
 
-    [Parameter] 
+    [Parameter]
     public EtiquetaDTO[]? Etiquetas { get; set; } = default!;
 
-    [Parameter] 
+    [Parameter]
     public string LabelContent { get; set; } = default!;
 
     [Parameter]
@@ -37,7 +37,7 @@ public partial class SelectorEtiquetaComponent
         if (items.Count() > 1 && !items.Any())
             return;
 
-        await OnEtiquetaSelected.InvokeAsync(items.First()); 
+        await OnEtiquetaSelected.InvokeAsync(items.First());
     }
 
     private Func<EtiquetaDTO, string> EtiquetaToString => e => e.Name;

@@ -1,18 +1,22 @@
 ﻿@using GestorTareas.Shared
 
-<MudSelect T="EtiquetaDTO"
-    SelectedValuesChanged="OnValuesSelected"
-    Label="@LabelContent"
-    AdornmentIcon="@Icons.Material.Filled.Search"
-    AnchorOrigin="Origin.BottomCenter"
-    ToStringFunc="EtiquetaToString"
-    Disabled="@(Etiquetas is null)">
-    
-    @if(Etiquetas is not null){
-        @foreach (var etiqueta in Etiquetas)
-        {
-            <MudSelectItem Value="@etiqueta" />
-        }
-    }
+<div class="d-flex  gap-4">
+    <MudIconButton Icon="@Icons.Filled.Cached" Color="Color.Primary" Size="Size.Medium" OnClick="CargarEtiquetasAsync" Disabled="@(Etiquetas is not null)" />
+    <MudSelect T="EtiquetaDTO"
+               SelectedValuesChanged="OnValuesSelected"
+               Label="@LabelContent"
+               AdornmentIcon="@Icons.Material.Filled.Search"
+               AnchorOrigin="Origin.BottomCenter"
+               ToStringFunc="EtiquetaToString"
+               Disabled="@(Etiquetas is null)">
 
-</MudSelect>
+        @if (Etiquetas is not null)
+        {
+            @foreach (var etiqueta in Etiquetas)
+            {
+                <MudSelectItem Value="@etiqueta" />
+            }
+        }
+
+    </MudSelect>
+</div>
