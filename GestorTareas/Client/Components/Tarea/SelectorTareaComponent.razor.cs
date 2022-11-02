@@ -25,7 +25,6 @@ public partial class SelectorTareaComponent
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //* Si es comenta el if i es deixa només la funcio, no para de cridar a la api --> No es efficient
         if (firstRender)
         {
             await CargarTareasAsync();

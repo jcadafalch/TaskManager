@@ -1,23 +1,23 @@
 ﻿@using GestorTareas.Shared
+<div class="d-flex  gap-4">
+    <MudIconButton Icon="@Icons.Filled.Cached" Color="Color.Primary" Size="Size.Medium" OnClick="CargarTareasAsync" Disabled="@(Tareas is not null)" />
+    <MudSelect T="TareaDTO"
+               SelectedValuesChanged="OnValuesSelected"
+               Label="@LabelContent"
+               AdornmentIcon="@Icons.Material.Filled.Search"
+               AnchorOrigin="Origin.BottomCenter"
+               ToStringFunc="TareaToString"
+               Disabled="@(Tareas is null)">
 
-<MudSelect T="TareaDTO"
-           SelectedValuesChanged="OnValuesSelected"
-           Label="@LabelContent"
-           AdornmentIcon="@Icons.Material.Filled.Search"
-           AnchorOrigin="Origin.BottomCenter"
-           ToStringFunc="TareaToString"
-           Disabled="@(Tareas is null)">
 
-    @if (Tareas is not null)
-    {
-        @foreach (var tarea in Tareas)
+        @if (Tareas is not null)
         {
-            <MudSelectItem Value="@tarea" />
+            @foreach (var tarea in Tareas)
+            {
+                <MudSelectItem Value="@tarea" />
+            }
         }
-    }
 
-</MudSelect>
+    </MudSelect>
 
-@code{
-
-}
+</div>
