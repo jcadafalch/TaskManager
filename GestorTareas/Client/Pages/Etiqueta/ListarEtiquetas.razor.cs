@@ -1,4 +1,5 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
@@ -6,13 +7,13 @@ namespace GestorTareas.Client.Pages.Etiqueta
 {
     public partial class ListarEtiquetas
     {
-        [Inject] protected HttpClient Http { get; set; } = default!;
+        [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
 
         private EtiquetaDTO[]? etiquetas;
 
         private async Task CargarEtiquetasAsync()
         {
-            etiquetas = await Http.GetFromJsonAsync<EtiquetaDTO[]>("api/gestortareas/listetiqueta");
+            etiquetas = await Http.GetListEtiquetaAsync();
             await InvokeAsync(StateHasChanged);
         }
 
