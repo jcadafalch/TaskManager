@@ -1,6 +1,9 @@
 ﻿using GestorTareas.Dominio;
 using Microsoft.EntityFrameworkCore;
 
+/// <summary>
+/// Conexión a la base de datos
+/// </summary>
 namespace GestorTareas.Server.Controllers
 {
     public class GestorTareasDbContext : DbContext
