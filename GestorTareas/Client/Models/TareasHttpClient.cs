@@ -29,7 +29,7 @@ public class TareasHttpClient
 
     public async Task<HttpResponseMessage> GetDeleteTareaAsync(IdRequestDTO request)
     {
-        return await _httpClient.DeleteAsync("/api/gestortareas/deletetarea/" + request.Id);
+        return await _httpClient.DeleteAsync($"/api/gestortareas/deletetarea/{request.Id}");
     }
 
     public async Task<HttpResponseMessage> GetCompleteTareaAsync(IdRequestDTO request)
@@ -43,11 +43,11 @@ public class TareasHttpClient
 
     public async Task<HttpResponseMessage> GetAddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/gestortareas/addetiquetatotarea", request);
+        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/addetiquetatotarea", request);
     }
 
     public async Task<HttpResponseMessage> GetRemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/gestortareas/removetiquettarea/", request);
+        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/removetiquettarea/", request);
     }
 }

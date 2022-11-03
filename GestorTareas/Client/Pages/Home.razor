@@ -11,9 +11,9 @@
     </MudText>
 }else{
     @if(tareas.Any()){
-        <MudGrid Spacing="5" Justify="Justify.Center">
+        <MudGrid Spacing="3" Justify="Justify.Center">
             @foreach(var tarea in tareas){
-                <MudItem>
+                <MudItem xs="12" md="4" xl="3">
                     <TareaComponent Action="All" Etiquetas="etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))"/>
                 </MudItem>
             }
