@@ -16,7 +16,7 @@
             {
                 <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
                     <ChildContent>
-                        <MudMenuItem OnClick="@ChangeStatus">Completar / Descompletar</MudMenuItem>
+                        <MudMenuItem OnClick="@ChangeStatus">@(TareaStatus ? "Marcar como pendiente" : "Completar")</MudMenuItem>
                         <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
                         <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
                         <MudMenuItem OnClick="@AddEtiquetaToTarea">Añadir Etiqueta</MudMenuItem>
