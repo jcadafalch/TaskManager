@@ -28,12 +28,7 @@ public partial class EtiquetaComponent
             {"Action", "Modify" }
         };
 
-        var options = new DialogOptions()
-        {
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<EtiquetaDialog>("Editar", parameters, options);
+        var dialog = DialogService.Show<EtiquetaDialog>("Editar", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)
@@ -54,12 +49,7 @@ public partial class EtiquetaComponent
             {"Action", "Delete" }
         };
 
-        var options = new DialogOptions()
-        {
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<EtiquetaDialog>("¡AVISO!", parameters, options);
+        var dialog = DialogService.Show<EtiquetaDialog>("¡AVISO!", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)

@@ -54,12 +54,7 @@ public partial class TareaComponent
             {"Action", "Modify" }
         };
 
-        var options = new DialogOptions()
-        {
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<TareaDialog>("Editar", parameters, options);
+        var dialog = DialogService.Show<TareaDialog>("Editar", parameters);
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
@@ -88,12 +83,7 @@ public partial class TareaComponent
            {"Action", "Delete" }
        };
 
-        var options = new DialogOptions()
-        {
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<TareaDialog>("¡AVISO!", parameters, options);
+        var dialog = DialogService.Show<TareaDialog>("¡AVISO!", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)
@@ -122,9 +112,7 @@ public partial class TareaComponent
             {"Tarea", Tarea }
         };
 
-        var options = new DialogOptions() { DisableBackdropClick = true };
-
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters, options);
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)
@@ -151,9 +139,7 @@ public partial class TareaComponent
             {"Tarea", Tarea }
         };
 
-        var options = new DialogOptions() { DisableBackdropClick = true };
-
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Retirar etiqueta a tarea", parameters, options);
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Retirar etiqueta a tarea", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)

@@ -4,7 +4,7 @@
     <AppBar OnSidebarToggled="ToggleSideBar" OnThemeToggled="ToggleTheme" />
 
     <NavMenu SideBarOpen="_sidebarOpen" />
-    
+
     <MudMainContent Class="pt-16 px-16">
         <MudContainer Class="mt-6">
             @Body
@@ -13,7 +13,10 @@
 </MudLayout>
 
 <MudThemeProvider Theme="_currentTheme" />
-<MudDialogProvider />
+<!--MaxWidth="MaxWidth.Medium"-->
+<MudDialogProvider FullWidth="true"
+                   DisableBackdropClick="true"
+                   Position="DialogPosition.Center" />
 <MudSnackbarProvider />
 
 @code {
