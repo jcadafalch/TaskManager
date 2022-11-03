@@ -35,7 +35,7 @@ public partial class CrearEtiqueta
             Snackbar.Add("Ha habido un error", Severity.Error);
             return;
         }
-
+        Snackbar.Add("La etiqueta " + Model.Name + " se ha creado correctamente", Severity.Success);
         NavigationManager.NavigateTo("/");
     }
 }

@@ -39,6 +39,7 @@ public partial class CrearTarea
             return;
         }
 
+        Snackbar.Add("La tarea " + model.Title + " se ha creado correctamente", Severity.Success);
         await InvokeAsync(StateHasChanged);
         NavigationManager.NavigateTo("/");
 
