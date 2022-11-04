@@ -14,7 +14,7 @@
         <div class="m-6">
             @foreach (var etiqueta in etiquetas)
             {
-                <EtiquetaDesignComponent Etiqueta="etiqueta" />
+                <MudChip Color="Color.Surface" Size="Size.Large">@etiqueta.Name</MudChip>
             }
         </div>
         

@@ -37,11 +37,12 @@
         @if (Action == "All")
         {
             <MudDivider Light Class="mb-3" />
+            <MudChip Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Style="font-size: 20px;" Text="+"/>
             @if (Tarea.Etiquetas is not null && Tarea.Etiquetas.Any())
             {
                 @foreach (var etiqueta in Tarea.Etiquetas)
                 {
-                    <EtiquetaDesignComponent Etiqueta="etiqueta" />
+                    <MudChip Color="Color.Surface" OnClose="RemoveEtiqueta" Size="Size.Small">@etiqueta.Name</MudChip>
                 }
             }
         }

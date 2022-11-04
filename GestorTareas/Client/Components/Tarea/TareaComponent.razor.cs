@@ -150,6 +150,12 @@ public partial class TareaComponent
 
     }
 
+    // función para eliminar etiqueta de la tarea 
+    private async Task RemoveEtiqueta(MudChip chip)
+    {
+       
+    }
+
     #endregion
 
     // Updates the current page
