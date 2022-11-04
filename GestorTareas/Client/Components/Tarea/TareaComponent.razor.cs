@@ -110,11 +110,17 @@ public partial class TareaComponent
         var parameters = new DialogParameters
         {
             {"LabelContent", "Selecciona la etiqueta que quieres añadir" },
-            {"Action", "Add" },
             {"Tarea", Tarea }
         };
 
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters);
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            DisableBackdropClick = false,
+
+        };
+
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters, options);
         var result = await dialog.Result;
 
         if (!result.Cancelled)
@@ -125,37 +131,8 @@ public partial class TareaComponent
 
         }
     }
-
-    private async Task RemoveEtiquetaToTarea()
+    private async Task RemoveEtiquetaToTarea(MudChip chip)
     {
-        if(Tarea.Etiquetas.Count() <= 0)
-        {
-            Snackbar.Add("Esta tarea no tiene etiquetas", Severity.Error);
-            return;
-        }
-
-        var parameters = new DialogParameters
-        {
-            {"LabelContent", "Selecciona la etiqueta que quieres retirar" },
-            {"Action", "Remove" },
-            {"Tarea", Tarea }
-        };
-
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Retirar etiqueta a tarea", parameters);
-        var result = await dialog.Result;
-
-        if (!result.Cancelled)
-        {
-            await UpdatePage();
-            return;
-        }
-
-    }
-
-    // función para eliminar etiqueta de la tarea 
-    private async Task RemoveEtiqueta(MudChip chip)
-    {
-       Console.WriteLine(chip.Tag);
         EtiquetaDTO etiqueta = (EtiquetaDTO)chip.Tag;
         var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, etiqueta.Id);
         var response = await HttpTareas.GetRemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
@@ -166,7 +143,7 @@ public partial class TareaComponent
             return;
         }
 
-       await UpdatePage();
+        await UpdatePage();
         return;
     }
 

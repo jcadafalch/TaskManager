@@ -1,34 +1,15 @@
 ﻿@using GestorTareas.Shared
 @using GestorTareas.Client.Components.Etiqueta
 
-<MudDialog >
+<MudDialog>
     <DialogContent>
-        <MudSelect T="EtiquetaDTO"
-            SelectedValuesChanged="OnValueSelected"
-            Label="@LabelContent"
-            AdornmentIcon="@Icons.Material.Filled.Search"
-            AnchorOrigin="Origin.BottomCenter"
-            ToStringFunc="EtiquetaToString"
-            Disabled="@(Etiquetas is null)">
-            @if(Etiquetas is not null){
-                @foreach(var etiqueta in Etiquetas){
-                    <MudSelectItem Value="@etiqueta" />
-                }
+        @if (Etiquetas is not null)
+        {
+            @foreach (var etiqueta in Etiquetas)
+            {
+                <MudChip Color="Color.Primary" Disabled="@Array.Exists(TareaEtiquetas, e => e.Id == etiqueta.Id)" OnClose="Submit" CloseIcon="@Icons.Filled.Add" Size="Size.Small" Tag="@etiqueta">@etiqueta.Name</MudChip>
             }
-        </MudSelect>
-
-        @if(Etiqueta is not null){
-            <EtiquetaDesignComponent Etiqueta="Etiqueta" />
         }
     </DialogContent>
-    <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        @if(Action == "Add"){
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Primary">Añadir Etiqueta</MudButton>
-        }
 
-        @if(Action == "Remove"){
-        <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove">Retirar Etiqueta</MudButton>
-        }
-    </DialogActions>
 </MudDialog>

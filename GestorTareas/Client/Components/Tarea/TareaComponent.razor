@@ -17,12 +17,10 @@
                 <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
                     <ChildContent>
                         <MudMenuItem OnClick="@ChangeStatus">@(TareaStatus ? "Marcar como pendiente" : "Completar")</MudMenuItem>
-                        <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
-                        <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
-                        <MudMenuItem OnClick="@AddEtiquetaToTarea">Añadir Etiqueta</MudMenuItem>
-                        <MudMenuItem OnClick="@RemoveEtiquetaToTarea">Quitar Etiqueta</MudMenuItem>
-                    </ChildContent>
-                </MudMenu>
+                            <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
+                            <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
+                        </ChildContent>
+                    </MudMenu>
             }
             else
             {
@@ -37,12 +35,12 @@
         @if (Action == "All")
         {
             <MudDivider Light Class="mb-3" />
-            <MudChip Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Icon="@Icons.Filled.Add"/>
+            <MudChip Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Icon="@Icons.Filled.Add" />
             @if (Tarea.Etiquetas is not null && Tarea.Etiquetas.Any())
             {
                 @foreach (var etiqueta in Tarea.Etiquetas)
                 {
-                    <MudChip Color="Color.Surface" OnClose="RemoveEtiqueta" Size="Size.Small" Tag="@etiqueta">@etiqueta.Name</MudChip>
+                    <MudChip Color="Color.Surface" OnClose="RemoveEtiquetaToTarea" Size="Size.Small" Tag="@etiqueta">@etiqueta.Name</MudChip>
                 }
             }
         }
