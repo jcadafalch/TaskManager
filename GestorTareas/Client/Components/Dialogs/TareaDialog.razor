@@ -1,14 +1,14 @@
 ﻿<MudDialog>
     <DialogContent>
-        @if(Action == "Modify")
+        @if(Modify)
         {
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
         }
-        @if(Action == "Delete")
+        @if(Delete)
         {
             <MudText>Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
         }
-        @if(Action == "Create")
+        @if(Create)
         {
             <MudTextField @bind-Value="@Titulo" Label="Titulo" Variant="Variant.Filled" />
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
@@ -16,15 +16,15 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        @if(Action == "Modify")
+        @if(Modify)
         {
             <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
-        @if(Action == "Delete")
+        @if(Delete)
         {
             <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }
-        @if(Action == "Create")
+        @if(Create)
         {
             <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Primary">Crear</MudButton>
         }

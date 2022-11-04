@@ -59,7 +59,7 @@ public partial class TareaComponent
         {
             { "Contenido", Tarea.Content },
             { "Tarea", Tarea },
-            {"Action", "Modify" }
+            {"Modify", true }
         };
 
         var dialog = DialogService.Show<TareaDialog>("Editar", parameters);
@@ -80,7 +80,7 @@ public partial class TareaComponent
 
     #endregion
 
-    #region Delte
+    #region Delete
 
     private async Task DeleteTareaAsync()
     {
@@ -88,7 +88,7 @@ public partial class TareaComponent
        {
             {"Contenido", "" },
            {"Tarea", Tarea },
-           {"Action", "Delete" }
+           {"Delete", true}
        };
 
         var dialog = DialogService.Show<TareaDialog>("¡AVISO!", parameters);

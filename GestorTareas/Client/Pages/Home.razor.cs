@@ -61,7 +61,7 @@ public partial  class Home
     {
         var parameters = new DialogParameters
         {
-            {"Action",  "Create" }
+            {"Create",  true }
         };
 
         var options = new DialogOptions()

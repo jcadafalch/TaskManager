@@ -10,14 +10,27 @@ public partial class TareaDialog
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    [Parameter] public TareaDTO Tarea { get; set; }
-    [Parameter] public string Contenido { get; set;}
-    [Parameter] public string Action { get; set; }
+
+    [Parameter]
+    public TareaDTO Tarea { get; set; }
+
+    [Parameter] 
+    public string Contenido { get; set; }
+
+    [Parameter]
+    public bool Create { get; set; } = default!;
+
+    [Parameter]
+    public bool Modify { get; set; } = default!;
+
+    [Parameter]
+    public bool Delete { get; set; } = default!; 
+
     public string Titulo { get; set; }
 
     protected async Task Submit()
     {
-        if(Action == "Modify")
+        if (Modify)
         {
             var updatetareadto = new UpdateTareaRequestDTO(Tarea.Id, Contenido);
             var successResponse = await HttpTareas.UpdateAsync(updatetareadto);
@@ -31,7 +44,7 @@ public partial class TareaDialog
             Snackbar.Add("La Tarea " + Tarea.Title + " se ha modificado correctamente", Severity.Success);
         }
 
-        if(Action == "Delete")
+        if (Delete)
         {
             var deletetareadto = new IdRequestDTO(Tarea.Id);
             var successResponse = await HttpTareas.DeleteAsync(deletetareadto);
@@ -45,12 +58,12 @@ public partial class TareaDialog
             Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
         }
 
-        if(Action == "Create")
+        if (Create)
         {
             var tareadto = new CreateTareaRequestDTO(Titulo, Contenido);
             var successResponse = await HttpTareas.CreateAsync(tareadto);
 
-            if(!successResponse)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en crear la tarea", Severity.Error);
                 return;
@@ -58,9 +71,9 @@ public partial class TareaDialog
 
             Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
         }
-        
+
         MudDialog.Close(DialogResult.Ok(true));
     }
 
-    void Cancel() => MudDialog.Cancel(); 
+    void Cancel() => MudDialog.Cancel();
 }
