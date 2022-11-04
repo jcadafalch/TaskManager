@@ -5,9 +5,13 @@
 </MudText>
 
 <EditForm Model="@Model" OnValidSubmit="OnValidSubmit">
-    <MudGrid>
-        <MudItem>
+
+    <MudGrid Class="pt-10" Justify="Justify.Center">
+        <MudItem Class="ma-7">
             <MudCard>
+                <MudCardHeader>
+                    <MudChip Color="Color.Surface" Size="Size.Large">@Model.Name</MudChip>
+                </MudCardHeader>
                 <MudCardContent>
                     <MudTextField Label="Nombre de la etiqueta" @bind-Value="Model.Name" For="@(() => Model.Name)" />
                 </MudCardContent>
@@ -17,6 +21,5 @@
             </MudCard>
         </MudItem>
     </MudGrid>
-</EditForm>
 
-<!-- Es crea el codi aquí per un error amb Visual Studio-->
+</EditForm>

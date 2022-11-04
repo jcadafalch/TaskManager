@@ -17,7 +17,7 @@ public partial class CrearEtiqueta
     public class CreateEtiqueta
     {
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = "Nombre etiqueta";
     }
 
     private void OnValidSubmit(EditContext context)
