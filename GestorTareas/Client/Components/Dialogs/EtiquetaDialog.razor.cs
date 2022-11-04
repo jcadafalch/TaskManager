@@ -10,13 +10,22 @@ public partial class EtiquetaDialog
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    [Parameter] public EtiquetaDTO Etiqueta { get; set; }
-    [Parameter] public string Contenido { get; set; }
-    [Parameter] public string Action { get; set; }
+
+    [Parameter] 
+    public EtiquetaDTO Etiqueta { get; set; }
+
+    [Parameter] 
+    public string Contenido { get; set; }
+
+    [Parameter]
+    public bool Modify { get; set; } = default!;
+
+    [Parameter]
+    public bool Delete { get; set; } = default!;
 
     protected async Task Submit()
     {
-        if(Action == "Modify")
+        if(Modify)
         {
             var updateEtiquetaDto = new UpdateEtiquetaRequestDTO(Etiqueta.Id, Contenido);
             var successResponse = await HttpEtiquetas.UpdateAsync(updateEtiquetaDto);
@@ -29,7 +38,7 @@ public partial class EtiquetaDialog
             Snackbar.Add("La etiqueta " + Etiqueta.Name + " se ha modificado correctamente", Severity.Success);
         }
 
-        if(Action == "Delete")
+        if(Delete)
         {
             var deleteEtiquetaDto = new DeleteEtiquetaRequestDTO(Etiqueta.Id);
             var successResponse = await HttpEtiquetas.DeleteAsync(deleteEtiquetaDto);

@@ -26,7 +26,7 @@ public partial class EtiquetaComponent
         {
             {"Contenido", Etiqueta.Name },
             {"Etiqueta", Etiqueta },
-            {"Action", "Modify" }
+            {"Modify", true}
         };
 
         var dialog = DialogService.Show<EtiquetaDialog>("Editar", parameters);
@@ -47,7 +47,7 @@ public partial class EtiquetaComponent
         {
             {"Contenido", "" },
             {"Etiqueta", Etiqueta},
-            {"Action", "Delete" }
+            {"Delete", true }
         };
 
         var dialog = DialogService.Show<EtiquetaDialog>("¡AVISO!", parameters);

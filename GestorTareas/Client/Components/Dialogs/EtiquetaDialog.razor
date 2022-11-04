@@ -1,20 +1,20 @@
 ﻿<MudDialog>
     <DialogContent>
-        @if(Action == "Modify"){
+        @if(Modify){
             <MudTextField @bind-Value="@Contenido" Label="Nombre de la etiqueta" Variant="Variant.Filled" />
         }
 
-        @if(Action == "Delete"){
+        @if(Delete){
             <MudText>Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
         }
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        @if(Action == "Modify"){
+        @if(Modify){
             <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
 
-        @if(Action == "Delete"){
+        @if(Delete){
             <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }
     </DialogActions>
