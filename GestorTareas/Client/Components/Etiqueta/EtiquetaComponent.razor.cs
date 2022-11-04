@@ -14,7 +14,10 @@ public partial class EtiquetaComponent
     public EtiquetaDTO Etiqueta { get; set; } = default!;
 
     [Parameter]
-    public string? Action { get; set; }
+    public bool Modify { get; set; } = default!;
+
+    [Parameter]
+    public bool Delete { get; set; } = default!;
 
     #region Modify
     protected async Task ModifyEtiquetaAsync()
