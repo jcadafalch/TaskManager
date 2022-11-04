@@ -10,11 +10,11 @@ namespace GestorTareas.Server.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class DbControllerEtiquetas : ControllerBase
+public class EtiquetasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
 
-    public DbControllerEtiquetas(GestorTareasDbContext dbContext)
+    public EtiquetasController(GestorTareasDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -25,7 +25,7 @@ public class DbControllerEtiquetas : ControllerBase
     /// <param name="cancellationToken">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha obtenido el listado correctamente - NoContentResult si no existen etiquetas</returns>
     [HttpGet("listetiqueta")]
-    public async Task<ActionResult> ListEtiquetasAsync(
+    public async Task<ActionResult> ListAsync(
         CancellationToken cancellationToken = default
     )
     {
@@ -56,7 +56,7 @@ public class DbControllerEtiquetas : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si la etiqueta se ha creado correctamente - BadRequestObjectResult si la etiqueta ya existe o si alguno de los campos es nulo</returns>
     [HttpPost("createetiqueta")]
-    public async Task<ActionResult> CreateEtiquetaAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CreateAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
     {
         // Comprovamos que el parametro recibido no es nulo ni vacio
         if (string.IsNullOrEmpty(request.Name))
@@ -86,7 +86,7 @@ public class DbControllerEtiquetas : ControllerBase
     /// <returns>OkObjectResult si se ha eliminado correctamente - NotFoundObjectResult si no se encuentra la etiqueta a eliminar</returns>
     [HttpDelete]
     [Route("/api/gestortareas/deleteetiqueta/{id}")]
-    public async Task<ActionResult> DeleteEtiquetaAsync(Guid Id, CancellationToken token = default)
+    public async Task<ActionResult> DeleteAsync(Guid Id, CancellationToken token = default)
     {
         //Buscamos la etiqueta en la base de datos
         var etiqueta = await _dbContext.Etiquetas.FirstOrDefaultAsync(e => e.Id == Id, token);
@@ -108,7 +108,7 @@ public class DbControllerEtiquetas : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha actualizado la etiqueta correctamente - BadRequestObjectResult si el nuevo titulo es nulo - NotFoundObjectResult si no se ha encontrado la etiqueta a actualizar></returns>
     [HttpPut("updateetiqueta")]
-    public async Task<ActionResult> UpdateEtiqueta(UpdateEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> UpdateAsync(UpdateEtiquetaRequestDTO request, CancellationToken token = default)
     {
         // Comprovamos que el parametro NewName no sea nulo ni vacio
         if (string.IsNullOrEmpty(request.NewName))

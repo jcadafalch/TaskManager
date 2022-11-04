@@ -10,11 +10,11 @@ namespace GestorTareas.Server.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class DbControllerTareas : ControllerBase
+public class TareasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
 
-    public DbControllerTareas(GestorTareasDbContext dbContext)
+    public TareasController(GestorTareasDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -25,7 +25,7 @@ public class DbControllerTareas : ControllerBase
     /// <param name="cancellationToken">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha obtenido el listado correctamente - NoContentResult si no existen tareas</returns>
     [HttpGet("list")]
-    public async Task<ActionResult> ListTareasAsync(
+    public async Task<ActionResult> ListAsync(
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
     )
     {
@@ -78,7 +78,7 @@ public class DbControllerTareas : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si la tarea se ha creado correctamente - BadRequestObjectResult si la tarea ya existe o si alguno de los campos es nulo</returns>
     [HttpPost("createtarea")]
-    public async Task<ActionResult> CreateTareaAsync(CreateTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CreateAsync(CreateTareaRequestDTO request, CancellationToken token = default)
     {
         // Comprovamos que los parametros recibidos no sean nulos ni vacios
         if (string.IsNullOrEmpty(request.Title))
@@ -111,7 +111,7 @@ public class DbControllerTareas : ControllerBase
     /// <returns>OkObjectResult si se ha eliminado correctamente - NotFoundObjectResult si no se encuentra la tarea a eliminar</returns>
     [HttpDelete]
     [Route("/api/gestortareas/deletetarea/{id}")]
-    public async Task<ActionResult> DeleteTareaAsync(Guid Id, CancellationToken token = default)
+    public async Task<ActionResult> DeleteAsync(Guid Id, CancellationToken token = default)
     {
         // Buscamos la tarea en la base de datos
         var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(t => t.Id == Id, token);
@@ -133,7 +133,7 @@ public class DbControllerTareas : ControllerBase
     /// <param name="token">Token de cancelacion</param>
     /// <returns>OkObjectResult si se ha actualizado la tarea correctamente - BadRequestObjectResult si el nuevo contenido es nulo - NotFoundObjectResult si no se ha encontrado la tarea a actualizar</returns>
     [HttpPut("updatetarea")]
-    public async Task<ActionResult> UpdateTareaAsync(UpdateTareaRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> UpdateAsync(UpdateTareaRequestDTO request, CancellationToken token = default)
     {
         // Comprovamos que el parametro NewContent no sea nulo ni vacio
         if (string.IsNullOrEmpty(request.NewContent))
@@ -160,9 +160,9 @@ public class DbControllerTareas : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha completado la tarea - NotFoundObjectResult si no se ha encontrado la tarea</returns>
     [HttpPost("completetarea")]
-    public async Task<ActionResult> CompleteTarea(IdRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> CompleteAsync(IdRequestDTO request, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, DateTime.Now, token);
+        return await ManageStatusAsync(request.Id, DateTime.Now, token);
     }
 
     /// <summary>
@@ -172,9 +172,9 @@ public class DbControllerTareas : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha establecido la tarea como pendiente - NotFoundObjectResult si no se ha encontrado la tarea</returns>
     [HttpPost("setpendingtarea")]
-    public async Task<ActionResult> SetPendingTareaAsync(IdRequestDTO request, CancellationToken token = default)
+    public async Task<ActionResult> SetPendingAsync(IdRequestDTO request, CancellationToken token = default)
     {
-        return await SetCompletedStatusAsync(request.Id, null, token);
+        return await ManageStatusAsync(request.Id, null, token);
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ public class DbControllerTareas : ControllerBase
     /// <param name="dateTime">Null si se descompleta o not null si se completa</param>
     /// <param name="token">Token de cancelación</param>
     /// <returns> OkObjectResult si se ha realizado la acción - NotFoundObjectResult si no se ha encontrado la tarea</returns>
-    private async Task<ActionResult> SetCompletedStatusAsync(Guid id, DateTime? dateTime, CancellationToken token = default)
+    private async Task<ActionResult> ManageStatusAsync(Guid id, DateTime? dateTime, CancellationToken token = default)
     {
         // Obtenemos la tarea de la base de datos
         var tarea = await _dbContext.Tareas.FirstOrDefaultAsync(x => x.Id == id, token);
@@ -212,7 +212,7 @@ public class DbControllerTareas : ControllerBase
     [HttpPut("addetiquetatotarea")]
     public async Task<ActionResult> AddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
-        return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, true, token);
+        return await ManageEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, true, token);
     }
 
     /// <summary>
@@ -224,7 +224,7 @@ public class DbControllerTareas : ControllerBase
     [HttpPut("removetiquettarea")]
     public async Task<ActionResult> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request, CancellationToken token = default)
     {
-        return await AddRemoveEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, false, token);
+        return await ManageEtiquetaToTareaAsync(request.IdTarea, request.IdEtiqueta, false, token);
     }
 
     /// <summary>
@@ -235,7 +235,7 @@ public class DbControllerTareas : ControllerBase
     /// <param name="Add">Bool para saber que acción se va hacer, true si se añade o false si se elimina</param>
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha eliminado/añadido etiqueta a la tarea; NotFoundObjectResult si no se ha encontrado la tarea o la etiqueta</returns>
-    private async Task<ActionResult> AddRemoveEtiquetaToTareaAsync(Guid IdTarea, Guid EtiquetaId, bool Add, CancellationToken token)
+    private async Task<ActionResult> ManageEtiquetaToTareaAsync(Guid IdTarea, Guid EtiquetaId, bool Add, CancellationToken token)
     {
         // Obtenemos la tarea de la base de datos
         var tarea = await _dbContext.Tareas.Include(t => t.Etiquetas).FirstOrDefaultAsync(t => t.Id == IdTarea, token);
