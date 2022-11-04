@@ -23,7 +23,13 @@ public partial class TareaComponent
     public bool TareaStatus { get; set; } = default;
 
     [Parameter]
-    public string? Action { get; set; }
+    public bool Delete { get; set; } = default!;
+
+    [Parameter]
+    public bool Modify { get; set; } = default!;
+
+    [Parameter]
+    public bool All { get; set; } = default!;
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; }
@@ -60,7 +66,7 @@ public partial class TareaComponent
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
-            if (Action == "All")
+            if (All)
             {
                 await UpdatePage();
                 return;
@@ -90,7 +96,7 @@ public partial class TareaComponent
 
         if (!result.Cancelled)
         {
-            if (Action == "All")
+            if (All)
             {
                 await UpdatePage();
                 return;
