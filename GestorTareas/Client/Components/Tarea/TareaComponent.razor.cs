@@ -1,4 +1,5 @@
 ﻿using GestorTareas.Client.Components.Dialogs;
+using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -8,6 +9,7 @@ namespace GestorTareas.Client.Components.Tarea;
 public partial class TareaComponent
 {
     [Inject] IDialogService DialogService { get; set; }
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 
@@ -153,7 +155,19 @@ public partial class TareaComponent
     // función para eliminar etiqueta de la tarea 
     private async Task RemoveEtiqueta(MudChip chip)
     {
-       
+       Console.WriteLine(chip.Tag);
+        EtiquetaDTO etiqueta = (EtiquetaDTO)chip.Tag;
+        var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, etiqueta.Id);
+        var response = await HttpTareas.GetRemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Snackbar.Add("Ha habido un error en retirar la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
+            return;
+        }
+
+       await UpdatePage();
+        return;
     }
 
     #endregion
