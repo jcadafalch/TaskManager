@@ -8,8 +8,8 @@ namespace GestorTareas.Client.Pages;
 
 public partial  class Home
 {
-    [Inject] protected TareasHttpClient Http { get; set; } = default!;
-    [Inject] protected EtiquetasHttpClient EtiquetasHttp { get; set; }
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; }
     [Inject] protected IDialogService DialogService { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
     private TareaDTO[]? tareas = default;
@@ -17,13 +17,13 @@ public partial  class Home
 
     private async Task CargarTareasAsync()
     {
-        tareas = await Http.GetListTareaAsync();
+        tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
     private async Task CargarEtiquetasAsync()
     {
-        etiquetas = await EtiquetasHttp.GetListEtiquetaAsync();
+        etiquetas = await HttpEtiquetas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -39,9 +39,9 @@ public partial  class Home
     protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
         var idRequest = new IdRequestDTO(id);
-        var response = isCompleted ? await Http.GetCompleteTareaAsync(idRequest) : await Http.GetSetPendingTareaAsync(idRequest);
+        var successResponse = isCompleted ? await HttpTareas.CompleteAsync(idRequest) : await HttpTareas.SetPendingAsync(idRequest);
 
-        if (!response.IsSuccessStatusCode)
+        if (!successResponse)
         {
             SnackbarError();
             return;

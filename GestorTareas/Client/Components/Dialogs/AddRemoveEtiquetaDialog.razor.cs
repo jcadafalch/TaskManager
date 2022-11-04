@@ -26,7 +26,7 @@ public partial class AddRemoveEtiquetaDialog
 
     private async Task CargarEtiquetasAsync()
     {
-        Etiquetas = await HttpEtiquetas.GetListEtiquetaAsync();
+        Etiquetas = await HttpEtiquetas.ListAsync();
         TareaEtiquetas = Tarea.Etiquetas.ToArray();
         await InvokeAsync(StateHasChanged);
     }
@@ -52,9 +52,9 @@ public partial class AddRemoveEtiquetaDialog
         else
         {
             var addEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, etiqueta.Id);
-            var response = await HttpTareas.GetAddEtiquetaToTareaAsync(addEtiquetaTarea);
+            var successResponse = await HttpTareas.AddEtiquetaToTareaAsync(addEtiquetaTarea);
 
-            if (!response.IsSuccessStatusCode)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en añadir la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
                 return;

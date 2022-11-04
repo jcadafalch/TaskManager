@@ -6,7 +6,7 @@ namespace GestorTareas.Client.Components.Tarea;
 
 public partial class SelectorTareaComponent
 {
-    [Inject] protected TareasHttpClient Http { get; set; } = default!;
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
 
     [Parameter]
     public TareaDTO[]? Tareas { get; set; } = default!;
@@ -19,7 +19,7 @@ public partial class SelectorTareaComponent
 
     private async Task CargarTareasAsync()
     {
-        Tareas = await Http.GetListTareaAsync();
+        Tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 

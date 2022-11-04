@@ -6,7 +6,7 @@ namespace GestorTareas.Client.Components.Etiqueta;
 
 public partial class SelectorEtiquetaComponent
 {
-    [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
 
     [Parameter]
     public EtiquetaDTO[]? Etiquetas { get; set; } = default!;
@@ -20,7 +20,7 @@ public partial class SelectorEtiquetaComponent
 
     private async Task CargarEtiquetasAsync()
     {
-        Etiquetas = await Http.GetListEtiquetaAsync();
+        Etiquetas = await HttpEtiquetas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 

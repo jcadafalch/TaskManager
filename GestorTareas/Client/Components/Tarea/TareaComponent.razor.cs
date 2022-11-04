@@ -135,9 +135,9 @@ public partial class TareaComponent
     {
         EtiquetaDTO etiqueta = (EtiquetaDTO)chip.Tag;
         var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, etiqueta.Id);
-        var response = await HttpTareas.GetRemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
+        var successResponse = await HttpTareas.RemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
 
-        if (!response.IsSuccessStatusCode)
+        if (!successResponse)
         {
             Snackbar.Add("Ha habido un error en retirar la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
             return;

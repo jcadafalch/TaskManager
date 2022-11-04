@@ -9,7 +9,7 @@ namespace GestorTareas.Client.Pages.Etiqueta;
 
 public partial class CrearEtiqueta
 {
-    [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
     CreateEtiqueta Model = new CreateEtiqueta();
@@ -28,9 +28,9 @@ public partial class CrearEtiqueta
     protected async Task CreateNewEtiquetaAsync()
     {
         var etiquetadto = new CreateEtiquetaRequestDTO(Model.Name);
-        var response = await Http.GetCreateEtiquetaAsync(etiquetadto);
+        var successResponse = await HttpEtiquetas.CreateAsync(etiquetadto);
 
-        if(!response.IsSuccessStatusCode)
+        if(!successResponse)
         {
             Snackbar.Add("Ha habido un error", Severity.Error);
             return;

@@ -12,24 +12,27 @@ public class EtiquetasHttpClient
         _httpClient = httpClient;
     }
 
-    public async Task<EtiquetaDTO[]> GetListEtiquetaAsync()
+    public async Task<EtiquetaDTO[]> ListAsync()
     {
-        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/dbcontrolleretiquetas/listetiqueta");
+        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/etiquetas/listetiqueta");
     }
 
-    public async Task<HttpResponseMessage> GetCreateEtiquetaAsync(CreateEtiquetaRequestDTO request)
+    public async Task<bool> CreateAsync(CreateEtiquetaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/dbcontrolleretiquetas/createetiqueta", request);
+        var response = await _httpClient.PostAsJsonAsync("/api/etiquetas/createetiqueta", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetUpdateEtiquetaAsync(UpdateEtiquetaRequestDTO request)
+    public async Task<bool> UpdateAsync(UpdateEtiquetaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/dbcontrolleretiquetas/updateetiqueta", request);
+        var response = await _httpClient.PutAsJsonAsync("/api/etiquetas/updateetiqueta", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetDeleteEtiquetaAsync(DeleteEtiquetaRequestDTO request)
+    public async Task<bool> DeleteAsync(DeleteEtiquetaRequestDTO request)
     {
-        return await _httpClient.DeleteAsync("/api/gestortareas/deleteetiqueta/" + request.Id);
+        var response = await _httpClient.DeleteAsync("/api/etiquetas/deleteetiqueta/" + request.Id);
+        return response.IsSuccessStatusCode;
     }
 
 }

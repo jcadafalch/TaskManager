@@ -7,7 +7,7 @@ namespace GestorTareas.Client.Components.Dialogs;
 
 public partial class EtiquetaDialog
 {
-    [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     [Parameter] public EtiquetaDTO Etiqueta { get; set; }
@@ -19,9 +19,9 @@ public partial class EtiquetaDialog
         if(Action == "Modify")
         {
             var updateEtiquetaDto = new UpdateEtiquetaRequestDTO(Etiqueta.Id, Contenido);
-            var response = await Http.GetUpdateEtiquetaAsync(updateEtiquetaDto);
+            var successResponse = await HttpEtiquetas.UpdateAsync(updateEtiquetaDto);
 
-            if (!response.IsSuccessStatusCode)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en modificar la tarea", Severity.Error);
                 return;
@@ -32,9 +32,9 @@ public partial class EtiquetaDialog
         if(Action == "Delete")
         {
             var deleteEtiquetaDto = new DeleteEtiquetaRequestDTO(Etiqueta.Id);
-            var response = await Http.GetDeleteEtiquetaAsync(deleteEtiquetaDto);
+            var successResponse = await HttpEtiquetas.DeleteAsync(deleteEtiquetaDto);
 
-            if (!response.IsSuccessStatusCode)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en eliminar la etiqueta", Severity.Error);
                 return;

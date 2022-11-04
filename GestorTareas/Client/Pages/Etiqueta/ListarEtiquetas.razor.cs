@@ -7,13 +7,13 @@ namespace GestorTareas.Client.Pages.Etiqueta
 {
     public partial class ListarEtiquetas
     {
-        [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
+        [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
 
         private EtiquetaDTO[]? etiquetas;
 
         private async Task CargarEtiquetasAsync()
         {
-            etiquetas = await Http.GetListEtiquetaAsync();
+            etiquetas = await HttpEtiquetas.ListAsync();
             await InvokeAsync(StateHasChanged);
         }
 

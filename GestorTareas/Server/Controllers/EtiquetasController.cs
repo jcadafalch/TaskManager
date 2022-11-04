@@ -85,7 +85,7 @@ public class EtiquetasController : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha eliminado correctamente - NotFoundObjectResult si no se encuentra la etiqueta a eliminar</returns>
     [HttpDelete]
-    [Route("/api/gestortareas/deleteetiqueta/{id}")]
+    [Route("deleteetiqueta/{id}")]
     public async Task<ActionResult> DeleteAsync(Guid Id, CancellationToken token = default)
     {
         //Buscamos la etiqueta en la base de datos

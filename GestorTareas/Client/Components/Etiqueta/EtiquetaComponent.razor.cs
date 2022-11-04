@@ -1,5 +1,4 @@
 ﻿using GestorTareas.Client.Components.Dialogs;
-using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -8,7 +7,6 @@ namespace GestorTareas.Client.Components.Etiqueta;
 
 public partial class EtiquetaComponent
 {
-    [Inject] protected EtiquetasHttpClient Http { get; set; } = default!;
     [Inject] IDialogService DialogService { get; set; }
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 

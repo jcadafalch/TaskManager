@@ -110,7 +110,7 @@ public class TareasController : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha eliminado correctamente - NotFoundObjectResult si no se encuentra la tarea a eliminar</returns>
     [HttpDelete]
-    [Route("/api/gestortareas/deletetarea/{id}")]
+    [Route("deletetarea/{id}")]
     public async Task<ActionResult> DeleteAsync(Guid Id, CancellationToken token = default)
     {
         // Buscamos la tarea en la base de datos

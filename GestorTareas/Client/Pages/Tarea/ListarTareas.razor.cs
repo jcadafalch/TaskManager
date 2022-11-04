@@ -8,13 +8,13 @@ namespace GestorTareas.Client.Pages.Tarea;
 
 public partial class ListarTareas
 {
-    [Inject] protected TareasHttpClient Http { get; set; } = default!;
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
     private TareaDTO[]? tareas = default;
 
     private async Task CargarTareasAsync()
     {
-        tareas = await Http.GetListTareaAsync();
+        tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
@@ -29,9 +29,9 @@ public partial class ListarTareas
     protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
         var idRequest = new IdRequestDTO(id);
-        HttpResponseMessage response = isCompleted ? await Http.GetCompleteTareaAsync(idRequest) : await Http.GetSetPendingTareaAsync(idRequest);
+        var successResponse = isCompleted ? await HttpTareas.CompleteAsync(idRequest) : await HttpTareas.SetPendingAsync(idRequest);
 
-        if (!response.IsSuccessStatusCode)
+        if (!successResponse)
         {
             SnackbarError();
             return;

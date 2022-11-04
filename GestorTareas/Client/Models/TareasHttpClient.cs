@@ -12,42 +12,50 @@ public class TareasHttpClient
         _httpClient = httpClient;
     }
 
-    public async Task<TareaDTO[]> GetListTareaAsync()
+    public async Task<TareaDTO[]> ListAsync()
     {
-        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/dbcontrollertareas/list");
+        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/tareas/list");
     }
 
-    public async Task<HttpResponseMessage> GetCreateTareaAsync(CreateTareaRequestDTO request)
+    public async Task<bool> CreateAsync(CreateTareaRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/createtarea", request);
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/createtarea", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetUpdateTareaAsync(UpdateTareaRequestDTO request)
+    public async Task<bool> UpdateAsync(UpdateTareaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/updatetarea", request);
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/updatetarea", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetDeleteTareaAsync(IdRequestDTO request)
+    public async Task<bool> DeleteAsync(IdRequestDTO request)
     {
-        return await _httpClient.DeleteAsync($"/api/gestortareas/deletetarea/{request.Id}");
+        var response = await _httpClient.DeleteAsync($"/api/tareas/deletetarea/{request.Id}");
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetCompleteTareaAsync(IdRequestDTO request)
+    public async Task<bool> CompleteAsync(IdRequestDTO request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/completetarea", request);
-    }
-    public async Task<HttpResponseMessage> GetSetPendingTareaAsync(IdRequestDTO request)
-    {
-        return await _httpClient.PostAsJsonAsync("/api/dbcontrollertareas/setpendingtarea", request);
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/completetarea", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetAddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
+    public async Task<bool> SetPendingAsync(IdRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/addetiquetatotarea", request);
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/setpendingtarea", request);
+        return response.IsSuccessStatusCode;
     }
 
-    public async Task<HttpResponseMessage> GetRemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
+    public async Task<bool> AddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/dbcontrollertareas/removetiquettarea/", request);
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/addetiquetatotarea", request);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
+    {
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/removetiquettarea/", request);
+        return response.IsSuccessStatusCode;
     }
 }

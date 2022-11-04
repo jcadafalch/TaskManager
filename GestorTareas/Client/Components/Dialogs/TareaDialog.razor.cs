@@ -7,7 +7,7 @@ namespace GestorTareas.Client.Components.Dialogs;
 
 public partial class TareaDialog
 {
-    [Inject] protected TareasHttpClient Http { get; set; } = default!;
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     [Parameter] public TareaDTO Tarea { get; set; }
@@ -20,9 +20,9 @@ public partial class TareaDialog
         if(Action == "Modify")
         {
             var updatetareadto = new UpdateTareaRequestDTO(Tarea.Id, Contenido);
-            var response = await Http.GetUpdateTareaAsync(updatetareadto);
+            var successResponse = await HttpTareas.UpdateAsync(updatetareadto);
 
-            if (!response.IsSuccessStatusCode)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en modificar la tarea", Severity.Error);
                 return;
@@ -34,9 +34,9 @@ public partial class TareaDialog
         if(Action == "Delete")
         {
             var deletetareadto = new IdRequestDTO(Tarea.Id);
-            var response = await Http.GetDeleteTareaAsync(deletetareadto);
+            var successResponse = await HttpTareas.DeleteAsync(deletetareadto);
 
-            if (!response.IsSuccessStatusCode)
+            if (!successResponse)
             {
                 Snackbar.Add("Ha habido un error en eliminar la tarea", Severity.Error);
                 return;
@@ -48,9 +48,9 @@ public partial class TareaDialog
         if(Action == "Create")
         {
             var tareadto = new CreateTareaRequestDTO(Titulo, Contenido);
-            var response = await Http.GetCreateTareaAsync(tareadto);
+            var successResponse = await HttpTareas.CreateAsync(tareadto);
 
-            if(!response.IsSuccessStatusCode)
+            if(!successResponse)
             {
                 Snackbar.Add("Ha habido un error en crear la tarea", Severity.Error);
                 return;
