@@ -1,4 +1,4 @@
-﻿<MudCard Elevation="3">
+﻿@*<MudCard Elevation="3">
     <MudCardContent>
         <MudText>@Etiqueta.Name</MudText>
     </MudCardContent>
@@ -17,4 +17,14 @@
         </MudCardActions>
     }
 
-</MudCard>
+</MudCard>*@
+
+@if (Modify)
+{
+    <MudChip Color="Color.Warning" Style="color: black" OnClose="ModifyEtiquetaAsync" Size="Size.Large" CloseIcon="@Icons.Filled.Edit">@Etiqueta.Name</MudChip>
+}
+
+@if(Delete)
+{
+    <MudChip Color="Color.Error" OnClose="DeleteEtiquetaAsync" Size="Size.Large">@Etiqueta.Name</MudChip>
+}
