@@ -50,7 +50,7 @@ public partial class EtiquetaComponent
             {"Delete", true }
         };
 
-        var dialog = DialogService.Show<EtiquetaDialog>("¡AVISO!", parameters);
+        var dialog = DialogService.Show<EtiquetaDialog>("¡ATENCIÓN!", parameters);
         var result = await dialog.Result;
 
         if (!result.Cancelled)

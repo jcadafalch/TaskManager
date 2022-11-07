@@ -5,7 +5,9 @@
         }
 
         @if(Delete){
-            <MudText>Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
+            <MudText><h3 style="font-weight: normal;">Estas a punto de eliminar la etiqueta <i>@Etiqueta.Name</i>.</h3></MudText>
+            <MudText Typo="Typo.body1"><b>Estás seguro?</b></MudText>
+            <MudText Typo="Typo.body2" Class="mt-2">Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
         }
     </DialogContent>
     <DialogActions>
