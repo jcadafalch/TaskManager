@@ -115,8 +115,10 @@ public partial class TareaComponent
     {
         var parameters = new DialogParameters
         {
-            {"LabelContent", "Selecciona la etiqueta que quieres añadir" },
-            {"Tarea", Tarea }
+            {"Tarea", Tarea },
+            {"Etiqueta", null },
+            {"Add", true },
+            {"Remove", false }
         };
 
         var options = new DialogOptions
@@ -140,17 +142,31 @@ public partial class TareaComponent
     private async Task RemoveEtiquetaToTarea(MudChip chip)
     {
         EtiquetaDTO etiqueta = (EtiquetaDTO)chip.Tag;
-        var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, etiqueta.Id);
-        var successResponse = await HttpTareas.RemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
-
-        if (!successResponse)
+        var parameters = new DialogParameters
         {
-            Snackbar.Add("Ha habido un error en retirar la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
-            return;
-        }
+            {"Tarea", Tarea },
+            {"Etiqueta", etiqueta },
+            {"Add", false },
+            {"Remove", true }
+        };
 
-        await UpdatePage();
-        return;
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            DisableBackdropClick = false,
+
+        };
+
+        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("¡ATENCIÓN!", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+
+            await UpdatePage();
+            return;
+
+        }
     }
 
     #endregion
