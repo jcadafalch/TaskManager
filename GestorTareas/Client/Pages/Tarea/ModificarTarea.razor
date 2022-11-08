@@ -6,7 +6,7 @@
 </MudText>
 
 @*Muestra el selector de tareas para elegir que tarea modificar*@
-<SelectorTareaComponent Tareas="Tareas" LabelContent="Selecciona la tarea que quieres modificar" OnTareaSelected=@(GetTareaSelected) />
+<SelectorTareaComponent LabelContent="Selecciona la tarea que quieres modificar" OnTareaSelected=@(GetTareaSelected) />
 
 @*Cuando se haya seleccionado una tarea, se mostrarà dicha tarea*@
 @if (!(Tarea is null))
