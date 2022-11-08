@@ -13,6 +13,7 @@
 }
 else
 {
+    @*Si hay tareas mostramos las tareas*@
     @if (tareas.Any())
     {
         <MudGrid Spacing="3" Justify="Justify.Center">
@@ -24,7 +25,7 @@ else
             }
         </MudGrid>
     }
-    else
+    else @*Si no hay tareas informamos al usuario*@
     {
         <MudText Typo="Typo.body1">
             No se han encontrado tareas

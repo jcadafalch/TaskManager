@@ -16,9 +16,10 @@ else
     @if (tareas.Any())
     {
         <MudGrid Spacing="5" Justify="Justify.Center">
+            @*Muestra un listado con todas las tareas*@
             @foreach (var tarea in tareas)
             {
-                <MudItem >
+                <MudItem>
                     <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
                 </MudItem>
             }

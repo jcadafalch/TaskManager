@@ -12,11 +12,14 @@
     </MudMainContent>
 </MudLayout>
 
+<!--Gestiona la apariencia de la aplicacion: Modo oscuro o sin modo oscuro-->
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_currentTheme" />
-<!--MaxWidth="MaxWidth.Medium"-->
+
+<!--Gestiona la configuración de los MudDailog-->
 <MudDialogProvider FullWidth="true"
                    DisableBackdropClick="true"
                    Position="DialogPosition.Center" />
+
 <MudSnackbarProvider />
 
 @code {

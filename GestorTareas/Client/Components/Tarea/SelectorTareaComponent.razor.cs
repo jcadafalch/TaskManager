@@ -9,13 +9,12 @@ public partial class SelectorTareaComponent
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
 
     [Parameter]
-    public TareaDTO[]? Tareas { get; set; } = default!;
-
-    [Parameter]
     public string LabelContent { get; set; } = default!;
 
     [Parameter]
     public EventCallback<TareaDTO> OnTareaSelected { get; set; }
+
+    public TareaDTO[]? Tareas { get; set; } = default!;
 
     private async Task CargarTareasAsync()
     {

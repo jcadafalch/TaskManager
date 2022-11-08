@@ -6,12 +6,16 @@ using MudBlazor;
 
 namespace GestorTareas.Client.Pages;
 
-public partial  class Home
+/// <summary>
+/// Pagina prinipal de la web
+/// </summary>
+public partial class Home
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; }
     [Inject] protected IDialogService DialogService { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
+
     private TareaDTO[]? tareas = default;
     private EtiquetaDTO[]? etiquetas = default!;
 
@@ -36,6 +40,11 @@ public partial  class Home
         }
     }
 
+    /// <summary>
+    /// Modifica el estado de la tarea
+    /// </summary>
+    /// <param name="isCompleted">Nuevo estado de la tarea; true=completada, false=no completada</param>
+    /// <param name="id">Id de la tarea</param>
     protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
         var idRequest = new IdRequestDTO(id);
@@ -49,14 +58,24 @@ public partial  class Home
         await CargarTareasAsync();
     }
 
+    /// <summary>
+    /// Actualiza la pagina
+    /// </summary>
+    /// <param name="update">Booleano para saber si hay que actualizar no</param>
     protected async Task UpdatePage(bool update)
     {
         if (update)
             await CargarTareasAsync();
     }
 
+    /// <summary>
+    /// Muestra una notificación indicando que la tarea no se ha podido completar
+    /// </summary>
     protected void SnackbarError() => Snackbar.Add("Error en completar la tarea", Severity.Error);
 
+    /// <summary>
+    /// Abre un popup para la creación de una nueva tarea
+    /// </summary>
     private async Task CreateTarea()
     {
         var parameters = new DialogParameters

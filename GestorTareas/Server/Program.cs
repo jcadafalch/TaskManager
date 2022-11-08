@@ -19,7 +19,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Si estamos ejecutando en modo desarrollo permitimos el uso de Swagger
 if (builder.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();

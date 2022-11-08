@@ -7,11 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GestorTareas.Client.Pages.Tarea;
 
+/// <summary>
+/// Psgina crear tarea
+/// </summary>
 public partial class CrearTarea
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
+
     CreateTarea model = new CreateTarea();
 
     public class CreateTarea
@@ -28,6 +32,10 @@ public partial class CrearTarea
         _ = CreateNewTareaAsync();
     }
 
+    /// <summary>
+    /// Gestiona la creación de una nueva tarea
+    /// </summary>
+    /// <returns>Muestra una notificación al usuario si el proceso ha sido satisfactorio o no</returns>
     protected async Task CreateNewTareaAsync()
     {
         var tareadto = new CreateTareaRequestDTO(model.Title, model.Content);

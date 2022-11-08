@@ -5,16 +5,17 @@
     Eliminar Tarea
 </MudText>
 
-
-    <SelectorTareaComponent Tareas="Tareas" LabelContent="Selecciona la tarea que quieres eliminar" OnTareaSelected=@(GetTareaSelected) />
-
-
+@*Muestra el selector de tareas para elegir que tarea eliminar*@
+<SelectorTareaComponent LabelContent="Selecciona la tarea que quieres eliminar" OnTareaSelected=@(GetTareaSelected) />
 
 
 
+
+@*Cuando se haya seleccionado una tarea, se mostrarà dicha tarea*@
 @if (!(Tarea is null))
 {
     <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        @*Muestra una tarea con los elementos necessarios para eliminarla*@
         <TareaComponent Tarea="Tarea" TareaStatus="Tarea.IsCompleted" All="false" Modify="false" Delete="true" />
     </div>
 }
