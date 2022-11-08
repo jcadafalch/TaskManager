@@ -19,8 +19,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddMudServices(config =>
 {
-    config.ResizeOptions = new ResizeOptions {  };
-    config.SnackbarConfiguration = new MudBlazor.SnackbarConfiguration {  };
+    config.ResizeOptions = new ResizeOptions { };
+    config.SnackbarConfiguration = new MudBlazor.SnackbarConfiguration { };
     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
 });
 

@@ -1,10 +1,14 @@
 ﻿<MudDialog>
     <DialogContent>
-        @if(Modify){
+        @*Si estamos en la página de modificar, mostramos un TextField con el nombre actual de la etiqueta.*@
+        @if (Modify)
+        {
             <MudTextField @bind-Value="@Contenido" Label="Nombre de la etiqueta" Variant="Variant.Filled" />
         }
 
-        @if(Delete){
+        @*Si estamos en la página de eliminar, mostramos mensaje de confirmación de la acción.*@
+        @if (Delete)
+        {
             <MudText><h3 style="font-weight: normal;">Estas a punto de eliminar la etiqueta <i>@Etiqueta.Name</i>.</h3></MudText>
             <MudText Typo="Typo.body1"><b>Estás seguro?</b></MudText>
             <MudText Typo="Typo.body2" Class="mt-2">Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
@@ -12,12 +16,17 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        @if(Modify){
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
+
+        @*Si estamos en la página de modificar, mostramos el botón de guardar cambios*@
+        @if (Modify)
+        {
+            <MudButton OnClick="ModifyAsync" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
 
-        @if(Delete){
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
+        @*Si estamos en la página de eliminar, mostramos el botón de eliminar.*@
+        @if (Delete)
+        {
+            <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }
     </DialogActions>
 </MudDialog>

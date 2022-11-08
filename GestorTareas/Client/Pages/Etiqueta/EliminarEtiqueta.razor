@@ -5,12 +5,13 @@
     Eliminar Etiqueta
 </MudText>
 
+@*Muestra el selector de etiquetas para elegir cual eliminar*@
+<SelectorEtiquetaComponent LabelContent="Selecciona la etiqueta que quieres eliminar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
 
-<SelectorEtiquetaComponent Etiquetas="Etiquetas" LabelContent="Selecciona la etiqueta que quieres eliminar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
-
+@*Cuando se haya seleccionado una etiqueta, se mostrarà dicha etiqueta*@
 @if (!(Etiqueta is null))
 {
     <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
-        <EtiquetaComponent Etiqueta="Etiqueta" Delete="true" Modify="false"/>
+        <EtiquetaComponent Etiqueta="Etiqueta" Delete="true" Modify="false" />
     </div>
 }

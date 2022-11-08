@@ -1,14 +1,19 @@
 ﻿<MudDialog>
     <DialogContent>
-        @if(Modify)
+        @*Si queremos modificar la tarea, mostramos un TextField*@
+        @if (Modify)
         {
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
         }
-        @if(Delete)
+
+        @*Si queremos eliminar la tarea, mostramos mensaje de aviso*@
+        @if (Delete)
         {
             <MudText>Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
         }
-        @if(Create)
+
+        @*Si queremos crear una tarea, mostramos los campos necesarios para hacerlo*@
+        @if (Create)
         {
             <MudTextField @bind-Value="@Titulo" Label="Titulo" Variant="Variant.Filled" />
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
@@ -16,17 +21,23 @@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        @if(Modify)
+
+        @*Si queremos modificar, mostramos botón de guardar cambios*@
+        @if (Modify)
         {
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
+            <MudButton OnClick="ModifyAsync" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
-        @if(Delete)
+
+        @*Si queremos eliminar, mostramos el botón de eliminar*@
+        @if (Delete)
         {
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
+            <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }
-        @if(Create)
+
+        @*Si queremos crear, mostramos el botón de crear*@
+        @if (Create)
         {
-            <MudButton OnClick="Submit" Variant="Variant.Filled" Color="Color.Primary">Crear</MudButton>
+            <MudButton OnClick="CreateAsync" Variant="Variant.Filled" Color="Color.Primary">Crear</MudButton>
         }
     </DialogActions>
 </MudDialog>

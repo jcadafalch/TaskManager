@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace GestorTareas.Client.Components.Dialogs;
-
+/// <summary>
+/// Muestra un diálogo con las acciones de tareas
+/// </summary>
 public partial class TareaDialog
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
@@ -28,52 +30,77 @@ public partial class TareaDialog
 
     public string Titulo { get; set; }
 
-    protected async Task Submit()
+    /// <summary>
+    /// Modificamos la tarea
+    /// </summary>
+    private async Task ModifyAsync()
     {
-        if (Modify)
+        // Creamos el DTO y hacemos la petición al servidor
+        var updatetareadto = new UpdateTareaRequestDTO(Tarea.Id, Contenido);
+        var successResponse = await HttpTareas.UpdateAsync(updatetareadto);
+
+        // Si no se ha podido añadir, mostramos un mensaje de error
+        if (!successResponse)
         {
-            var updatetareadto = new UpdateTareaRequestDTO(Tarea.Id, Contenido);
-            var successResponse = await HttpTareas.UpdateAsync(updatetareadto);
-
-            if (!successResponse)
-            {
-                Snackbar.Add("Ha habido un error en modificar la tarea", Severity.Error);
-                return;
-            }
-
-            Snackbar.Add("La Tarea " + Tarea.Title + " se ha modificado correctamente", Severity.Success);
+            Snackbar.Add("Ha habido un error en modificar la tarea", Severity.Error);
+            return;
         }
 
-        if (Delete)
-        {
-            var deletetareadto = new IdRequestDTO(Tarea.Id);
-            var successResponse = await HttpTareas.DeleteAsync(deletetareadto);
+        // Si se ha añadido, notificamos al usuario
+        Snackbar.Add("La Tarea " + Tarea.Title + " se ha modificado correctamente", Severity.Success);
 
-            if (!successResponse)
-            {
-                Snackbar.Add("Ha habido un error en eliminar la tarea", Severity.Error);
-                return;
-            }
-
-            Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
-        }
-
-        if (Create)
-        {
-            var tareadto = new CreateTareaRequestDTO(Titulo, Contenido);
-            var successResponse = await HttpTareas.CreateAsync(tareadto);
-
-            if (!successResponse)
-            {
-                Snackbar.Add("Ha habido un error en crear la tarea", Severity.Error);
-                return;
-            }
-
-            Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
-        }
-
+        // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
     }
 
+    /// <summary>
+    /// Eliminamos la tarea
+    /// </summary>
+    private async Task DeleteAsync()
+    {
+        // Creamos el DTO y hacemos la petición al servidor
+        var deletetareadto = new IdRequestDTO(Tarea.Id);
+        var successResponse = await HttpTareas.DeleteAsync(deletetareadto);
+
+        // Si no se ha podido añadir, mostramos un mensaje de error
+        if (!successResponse)
+        {
+            Snackbar.Add("Ha habido un error en eliminar la tarea", Severity.Error);
+            return;
+        }
+
+        // Si se ha añadido, notificamos al usuario
+        Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
+
+        // Cerramos el diálogo
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    /// <summary>
+    /// Creamos la tarea
+    /// </summary>
+    private async Task CreateAsync()
+    {
+        // Creamos el DTO y hacemos la petición al servidor
+        var tareadto = new CreateTareaRequestDTO(Titulo, Contenido);
+        var successResponse = await HttpTareas.CreateAsync(tareadto);
+
+        // Si no se ha podido añadir, mostramos un mensaje de error
+        if (!successResponse)
+        {
+            Snackbar.Add("Ha habido un error en crear la tarea", Severity.Error);
+            return;
+        }
+
+        // Si se ha añadido, notificamos al usuario
+        Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
+
+        // Cerramos el diálogo
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    /// <summary>
+    /// Cierra el diálogo sin hacer ninguna acción.
+    /// </summary>
     void Cancel() => MudDialog.Cancel();
 }

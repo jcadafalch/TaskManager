@@ -7,7 +7,7 @@ using MudBlazor;
 namespace GestorTareas.Client.Pages;
 
 /// <summary>
-/// Pagina prinipal de la web
+/// Página prinipal de la web
 /// </summary>
 public partial class Home
 {
@@ -16,23 +16,35 @@ public partial class Home
     [Inject] protected IDialogService DialogService { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
 
-    private TareaDTO[]? tareas = default;
-    private EtiquetaDTO[]? etiquetas = default!;
+    private TareaDTO[]? Tareas = default;
+    private EtiquetaDTO[]? Etiquetas = default!;
 
+    /// <summary>
+    /// Obtiene el listado de todas las tareas y lo asigna al atributo Tareas
+    /// </summary>
     private async Task CargarTareasAsync()
     {
-        tareas = await HttpTareas.ListAsync();
+        Tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Obtiene el listado de todas las etiquetas y lo asigna al atributo Etiquetas
+    /// </summary>
+    /// <returns></returns>
     private async Task CargarEtiquetasAsync()
     {
-        etiquetas = await HttpEtiquetas.ListAsync();
+        Etiquetas = await HttpEtiquetas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Cada vez que se renderiza la página se ejecuta este metodo
+    /// </summary>
+    /// <param name="firstRender">Indica si es la primera vez que se renderiza</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        /// Si es la primera que se renderiza se ejecuta lo siguiente
         if (firstRender)
         {
             await CargarTareasAsync();
@@ -47,19 +59,23 @@ public partial class Home
     /// <param name="id">Id de la tarea</param>
     protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
+        // Creamos el DTO y hacemos la petición al servidor
         var idRequest = new IdRequestDTO(id);
         var successResponse = isCompleted ? await HttpTareas.CompleteAsync(idRequest) : await HttpTareas.SetPendingAsync(idRequest);
 
+        // Si no se ha podido añadir, mostramos un mensaje de error
         if (!successResponse)
         {
             SnackbarError();
             return;
         }
+
+        // Si se ha modificado, actualizamos la página
         await CargarTareasAsync();
     }
 
     /// <summary>
-    /// Actualiza la pagina
+    /// Actualiza la página
     /// </summary>
     /// <param name="update">Booleano para saber si hay que actualizar no</param>
     protected async Task UpdatePage(bool update)
@@ -78,24 +94,29 @@ public partial class Home
     /// </summary>
     private async Task CreateTarea()
     {
+        // Definimos los parametros del diálogo
         var parameters = new DialogParameters
         {
             {"Create",  true }
         };
 
+        // Definimos las opciones del diálogo
         var options = new DialogOptions()
         {
             DisableBackdropClick = true
-    };
+        };
+
+        // Mostramos el diálogo y obtenemos el resultado
         var dialog = DialogService.Show<TareaDialog>("Crear Tarea", parameters, options);
         var result = await dialog.Result;
 
+        // Si se ha creado la tarea, volvemos a cargar las tareas
         if (!result.Cancelled)
         {
             await CargarTareasAsync();
             return;
         }
-        
+
     }
 
 }

@@ -6,24 +6,28 @@ using MudBlazor;
 namespace GestorTareas.Client.Pages.Tarea;
 
 /// <summary>
-/// Pagina listar tareas
+/// Página listar tareas
 /// </summary>
 public partial class ListarTareas
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; }
 
-    private TareaDTO[]? tareas = default;
+    private TareaDTO[]? Tareas = default;
 
     /// <summary>
     /// Obtiene el listado de todas las tareas y lo asigna al atributo tareas
     /// </summary>
     private async Task CargarTareasAsync()
     {
-        tareas = await HttpTareas.ListAsync();
+        Tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Cada vez que se renderiza la pagina se ejecuta este metodo
+    /// </summary>
+    /// <param name="firstRender">Indica si es la primera vez que se renderiza</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -39,15 +43,18 @@ public partial class ListarTareas
     /// <param name="id">Id de la tarea</param>
     protected async Task UpdateTareasCompleted(bool isCompleted, Guid id)
     {
+        // Creamos el DTO y hacemos la petición al servidor
         var idRequest = new IdRequestDTO(id);
         var successResponse = isCompleted ? await HttpTareas.CompleteAsync(idRequest) : await HttpTareas.SetPendingAsync(idRequest);
 
+        // Si no se ha podido añadir, mostramos un mensaje de error
         if (!successResponse)
         {
             SnackbarError();
             return;
         }
 
+        // Si se ha añadido, volvemos a cargar las tareas con el nuevo estado
         await CargarTareasAsync();
     }
 

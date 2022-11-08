@@ -5,7 +5,7 @@
     Listado Tareas
 </MudText>
 
-@if (tareas is null)
+@if (Tareas is null)
 {
     <MudText Typo="Typo.body1">
         Cargando...
@@ -13,11 +13,11 @@
 }
 else
 {
-    @if (tareas.Any())
+    @if (Tareas.Any())
     {
         <MudGrid Spacing="5" Justify="Justify.Center">
             @*Muestra un listado con todas las tareas*@
-            @foreach (var tarea in tareas)
+            @foreach (var tarea in Tareas)
             {
                 <MudItem>
                     <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />

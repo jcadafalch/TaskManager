@@ -5,7 +5,7 @@
 
 <MudButton Class="mt-3 mb-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="@CreateTarea">Crear Tarea</MudButton>
 
-@if (tareas is null)
+@if (Tareas is null)
 {
     <MudText Typo="Typo.body1">
         Cargando...
@@ -14,13 +14,13 @@
 else
 {
     @*Si hay tareas mostramos las tareas*@
-    @if (tareas.Any())
+    @if (Tareas.Any())
     {
         <MudGrid Spacing="3" Justify="Justify.Center">
-            @foreach (var tarea in tareas)
+            @foreach (var tarea in Tareas)
             {
                 <MudItem xs="12" md="4" xl="3">
-                    <TareaComponent All="true" Modify="false" Delete="false" Etiquetas="etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))" />
+                    <TareaComponent All="true" Modify="false" Delete="false" Etiquetas="Etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))" />
                 </MudItem>
             }
         </MudGrid>

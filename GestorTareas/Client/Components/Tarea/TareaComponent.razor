@@ -5,6 +5,8 @@
         <CardHeaderContent>
             <MudText Typo="Typo.h6">@Tarea.Title</MudText>
             <MudText Typo="Typo.caption">@Tarea.CreatedAt</MudText>
+
+            @*Si estamos en la página home, mostramos un chip con el estado de la tarea*@
             @if (All)
             {
                 <br />
@@ -12,6 +14,8 @@
             }
         </CardHeaderContent>
         <CardHeaderActions>
+
+            @*Si estamos en la página home, mostramos un menu de opciones*@
             @if (All)
             {
                 <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
@@ -22,6 +26,7 @@
                         </ChildContent>
                     </MudMenu>
             }
+            @*Sino, mostramos un checkbox con el estado de la tarea*@
             else
             {
                 <MudCheckBox T="bool" Checked="@TareaStatus" Color="@(TareaStatus ? Color.Success : Color.Secondary)" CheckedChanged="CheckBoxChanged" Disabled="!All && !Modify && !Delete ? false : true" />
@@ -32,6 +37,8 @@
     <MudCardContent Class="mt-n8">
         <MudDivider Light Class="mb-1" />
         <MudText Class="py-3">@Tarea.Content</MudText>
+
+        @*Si estamos en la página home, mostramos todas las etiquetas que tiene la tarea y un chip para añadir etiquetas a la tarea*@
         @if (All)
         {
             <MudDivider Light Class="mb-3" />
@@ -45,6 +52,7 @@
             }
         }
     </MudCardContent>
+    @*Si estamos en la página de eliminar o modificar una tarea, mostramos un botón para realizar esas acciones.*@
     @if (Delete || Modify)
     {
         <MudCardActions>

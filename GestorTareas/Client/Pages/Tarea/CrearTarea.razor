@@ -4,13 +4,13 @@
     Crear Tarea
 </MudText>
 
-<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+<EditForm Model="@Model" OnValidSubmit="OnValidSubmit">
     <MudGrid>
         <MudItem Class="mx-auto pa-6">
             <MudCard>
                 <MudCardContent>
-                    <MudTextField Label="Titulo de la tarea" @bind-Value="model.Title" For="@(() => model.Title)" />
-                    <MudTextField Lines="4" Label="Contenido de la tarea" @bind-Value="model.Content" For="@(() => model.Content)" />
+                    <MudTextField Label="Titulo de la tarea" @bind-Value="Model.Title" For="@(() => Model.Title)" />
+                    <MudTextField Lines="4" Label="Contenido de la tarea" @bind-Value="Model.Content" For="@(() => Model.Content)" />
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await CreateNewTareaAsync())">Crear Tarea</MudButton>

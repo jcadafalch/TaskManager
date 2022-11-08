@@ -5,11 +5,14 @@
     Modificar Etiqueta
 </MudText>
 
-<SelectorEtiquetaComponent Etiquetas="Etiquetas" LabelContent="Selecciona la etiqueta que quieres modificar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
+@*Muestra el selector de etiquetas para elegir que etiqueta modificar*@
+<SelectorEtiquetaComponent LabelContent="Selecciona la etiqueta que quieres modificar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
 
+@*Cuando se haya seleccionado una etiqueta, se mostrarà dicha etiqueta*@
 @if (!(Etiqueta is null))
 {
     <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        @*Muestra una etiqueta con los elementos necessarios para modificarla*@
         <EtiquetaComponent Etiqueta="Etiqueta" Modify="true" Delete="false" />
     </div>
 }

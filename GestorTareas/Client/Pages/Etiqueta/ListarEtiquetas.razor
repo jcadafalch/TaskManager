@@ -4,21 +4,28 @@
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Listar Etiqueta
 </MudText>
-@if(etiquetas is null){
+@if (Etiquetas is null)
+{
     <MudText Typo="Typo.body1">
         Cargando...
     </MudText>
-}else{
-    @if(etiquetas.Any()){
+}
+else
+{
+    @if (Etiquetas.Any())
+    {
 
         <div class="m-6">
-            @foreach (var etiqueta in etiquetas)
+            @*Muestra un listado con todas las etiquetas*@
+            @foreach (var etiqueta in Etiquetas)
             {
                 <MudChip Color="Color.Surface" Size="Size.Large">@etiqueta.Name</MudChip>
             }
         </div>
-        
-    }else{
+
+    }
+    else
+    {
         <MudText Typo="Typo.body1">
             No se han encontrado etiquetas
         </MudText>

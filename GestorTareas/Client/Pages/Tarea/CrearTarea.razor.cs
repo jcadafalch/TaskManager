@@ -16,8 +16,11 @@ public partial class CrearTarea
     [Inject] protected NavigationManager NavigationManager { get; set; }
     [Inject] protected ISnackbar Snackbar { get; set; }
 
-    CreateTarea model = new CreateTarea();
+    CreateTarea Model = new();
 
+    /// <summary>
+    /// Classe con los atributos del modelo del formulario
+    /// </summary>
     public class CreateTarea
     {
         [Required]
@@ -27,6 +30,10 @@ public partial class CrearTarea
         public string Content { get; set; }
     }
 
+    /// <summary>
+    /// Cuando formulario se envia de forma satisfactoria, crea la nueva tarea
+    /// </summary>
+    /// <param name="context">Contexto del formulario</param>
     private void OnValidSubmit(EditContext context)
     {
         _ = CreateNewTareaAsync();
@@ -38,17 +45,19 @@ public partial class CrearTarea
     /// <returns>Muestra una notificación al usuario si el proceso ha sido satisfactorio o no</returns>
     protected async Task CreateNewTareaAsync()
     {
-        var tareadto = new CreateTareaRequestDTO(model.Title, model.Content);
+        // Creamos el DTO y hacemos la petición al servidor
+        var tareadto = new CreateTareaRequestDTO(Model.Title, Model.Content);
         var successResponse = await HttpTareas.CreateAsync(tareadto);
 
+        // Si no se ha podido añadir, mostramos un mensaje de error
         if (!successResponse)
         {
             Snackbar.Add("Ha habido un error", Severity.Error);
             return;
         }
 
-        Snackbar.Add("La tarea " + model.Title + " se ha creado correctamente", Severity.Success);
-        await InvokeAsync(StateHasChanged);
+        // Si se ha añadido, notificamos al usuario i navegamos a la pagina home
+        Snackbar.Add("La tarea " + Model.Title + " se ha creado correctamente", Severity.Success);
         NavigationManager.NavigateTo("/");
 
     }
