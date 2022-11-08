@@ -7,7 +7,6 @@ namespace GestorTareas.Client.Pages.Tarea;
 /// </summary>
 public partial class EliminarTarea
 {
-    private TareaDTO[]? Tareas { get; set; }
     private TareaDTO Tarea { get; set; }
 
     /// <summary>
