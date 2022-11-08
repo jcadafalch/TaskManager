@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudLayout Style="@($"background-color:{Colors.Grey.Lighten4}")">
+<MudLayout>
     <AppBar OnSidebarToggled="ToggleSideBar" OnThemeToggled="ToggleTheme" />
 
     <NavMenu SideBarOpen="_sidebarOpen" />
@@ -13,7 +13,7 @@
 </MudLayout>
 
 <!--Gestiona la apariencia de la aplicacion: Modo oscuro o sin modo oscuro-->
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_currentTheme" />
+<MudThemeProvider Theme="_currentTheme" />
 
 <!--Gestiona la configuración de los MudDailog-->
 <MudDialogProvider FullWidth="true"
@@ -23,11 +23,10 @@
 <MudSnackbarProvider />
 
 @code {
-    private MudTheme _currentTheme = new();
-    private bool _isDarkMode;
+    private MudTheme _currentTheme = new MudTheme();
     public bool _sidebarOpen = false;
 
 
-    private void ToggleTheme(bool darkMode) => _isDarkMode = darkMode;
+    private void ToggleTheme(MudTheme changedTheme) => _currentTheme = changedTheme;
     private void ToggleSideBar() => _sidebarOpen = !_sidebarOpen;
 }
