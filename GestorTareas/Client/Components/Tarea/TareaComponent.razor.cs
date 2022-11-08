@@ -147,10 +147,7 @@ public partial class TareaComponent
         // Definimos los parametros del dialogo
         var parameters = new DialogParameters
         {
-            {"Tarea", Tarea },
-            {"Etiqueta", null },
-            {"Add", true },
-            {"Remove", false }
+            {"Tarea", Tarea }
         };
 
         // Definimos las opciones del dialogo
@@ -162,7 +159,7 @@ public partial class TareaComponent
         };
 
         // Mostramos el dialogo y obtenemos el resultado
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("Añadir etiqueta a tarea", parameters, options);
+        var dialog = DialogService.Show<AddEtiquetaToTareaDialog>("Añadir etiqueta a tarea", parameters, options);
         var result = await dialog.Result;
 
         // Si se ha añadido una etiqueta a la tarea, actualizamos la pagina
@@ -187,8 +184,6 @@ public partial class TareaComponent
         {
             {"Tarea", Tarea },
             {"Etiqueta", etiqueta },
-            {"Add", false },
-            {"Remove", true }
         };
 
         // Definimos las opciones del dialogo
@@ -200,7 +195,7 @@ public partial class TareaComponent
         };
 
         // Mostramos el dialogo y obtenemos el resultado
-        var dialog = DialogService.Show<AddRemoveEtiquetaDialog>("¡ATENCIÓN!", parameters, options);
+        var dialog = DialogService.Show<RemoveEtiquetaToTareaDialog>("¡ATENCIÓN!", parameters, options);
         var result = await dialog.Result;
 
         // Si se ha retirado la etiqueta, actualizamos la pagina

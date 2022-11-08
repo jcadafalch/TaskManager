@@ -6,9 +6,9 @@ using MudBlazor;
 namespace GestorTareas.Client.Components.Dialogs;
 
 /// <summary>
-/// Diálogo para añadir o retirar una etiqueta de una tarea
+/// Diálogo para añadir una etiqueta de una tarea
 /// </summary>
-public partial class AddRemoveEtiquetaDialog
+public partial class AddEtiquetaToTareaDialog
 {
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
@@ -16,19 +16,7 @@ public partial class AddRemoveEtiquetaDialog
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
     [Parameter]
-    public string Action { get; set; } = default!;
-
-    [Parameter]
     public TareaDTO Tarea { get; set; }
-
-    [Parameter]
-    public bool Add { get; set; } = default!;
-
-    [Parameter]
-    public bool Remove { get; set; } = default!;
-
-    [Parameter]
-    public EtiquetaDTO Etiqueta { get; set; } = default!;
 
     private EtiquetaDTO[] Etiquetas { get; set; } = default!;
     private EtiquetaDTO[] EtiquetasTarea { get; set; } = default!;
@@ -90,28 +78,6 @@ public partial class AddRemoveEtiquetaDialog
 
 
         // Cerramos el diálogo
-        MudDialog.Close(DialogResult.Ok(true));
-    }
-
-    /// <summary>
-    /// Retira la etiqueta de la tarea
-    /// </summary>
-    private async Task RemoveEtiqueta()
-    {
-        // Creamos el DTO i hacemos la petición al servidor
-        var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, Etiqueta.Id);
-        var successResponse = await HttpTareas.RemoveEtiquetaToTareaAsync(removeEtiquetaTarea);
-
-        // Si no se ha podido retirar, mostramos un mensaje de error
-        if (!successResponse)
-        {
-            Snackbar.Add("Ha habido un error en retirar la etiqueta " + Etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
-            return;
-        }
-
-        // Si se ha retirado, notificamos al usuario
-        Snackbar.Add("Se ha retirado la etiqueta " + Etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Success);
-
         MudDialog.Close(DialogResult.Ok(true));
     }
 
