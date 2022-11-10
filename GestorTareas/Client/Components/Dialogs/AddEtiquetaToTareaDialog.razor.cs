@@ -39,7 +39,7 @@ public partial class AddEtiquetaToTareaDialog
     {
         if (firstRender)
         {
-            if (Tarea.Etiquetas is null)
+            if (Tarea.Etiquetas is not null)
             {
                 await CargarEtiquetasAsync();
                 await InvokeAsync(StateHasChanged);

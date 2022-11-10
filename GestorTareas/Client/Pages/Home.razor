@@ -20,7 +20,7 @@ else
             @foreach (var tarea in Tareas)
             {
                 <MudItem xs="12" md="4" xl="3">
-                    <TareaComponent All="true" Modify="false" Delete="false" Etiquetas="Etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))" />
+                    <CompleteTareaComponent Etiquetas="Etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))" />
                 </MudItem>
             }
         </MudGrid>
