@@ -52,7 +52,6 @@ public partial class TareaComponent
     protected async Task CheckBoxChanged(bool e)
     {
         TareaStatus = e;
-        await InvokeAsync(StateHasChanged);
         await OnStatusChanged.InvokeAsync(TareaStatus);
     }
 
@@ -62,7 +61,6 @@ public partial class TareaComponent
     protected async Task OnChangeStatus()
     {
         TareaStatus = !TareaStatus;
-        await InvokeAsync(StateHasChanged);
         await OnStatusChanged.InvokeAsync(TareaStatus);
     }
     #endregion
