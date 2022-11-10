@@ -13,13 +13,13 @@ public partial class AddEtiquetaToTareaDialog
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; } = default!;
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public TareaDTO Tarea { get; set; }
+    public TareaDTO Tarea { get; set; } = default!;
 
     private EtiquetaDTO[] Etiquetas { get; set; } = default!;
-    private EtiquetaDTO[] EtiquetasTarea { get; set; } = default!;
+    private IEnumerable<EtiquetaDTO> EtiquetasTarea { get; set; } = default!;
 
     /// <summary>
     /// Obtiene el listado de todas las etiquetas y lo asigna al atributo Etiquetas;
@@ -29,7 +29,6 @@ public partial class AddEtiquetaToTareaDialog
     {
         Etiquetas = await HttpEtiquetas.ListAsync();
         EtiquetasTarea = Tarea.Etiquetas.ToArray();
-        await InvokeAsync(StateHasChanged);
     }
 
     /// <summary>
@@ -40,8 +39,12 @@ public partial class AddEtiquetaToTareaDialog
     {
         if (firstRender)
         {
-            if (Tarea.Etiquetas is not null)
+            if (Tarea.Etiquetas is null)
+            {
                 await CargarEtiquetasAsync();
+                await InvokeAsync(StateHasChanged);
+            }
+                
         }
     }
 
@@ -55,7 +58,7 @@ public partial class AddEtiquetaToTareaDialog
         EtiquetaDTO etiqueta = (EtiquetaDTO)chip.Tag;
 
         // Si la etiqueta ya está añadida, mostramos un mensaje de error.
-        if (Tarea.Etiquetas.Where(e => e.Id == etiqueta.Id).FirstOrDefault() != null)
+        if (Tarea.Etiquetas.Any(e => e.Id == etiqueta.Id))
         {
             Snackbar.Add("La etiqueta " + etiqueta.Name + " ya esta añadida a la tarea " + Tarea.Title, Severity.Warning);
             Cancel();
@@ -68,8 +71,8 @@ public partial class AddEtiquetaToTareaDialog
 
         // Si no se ha podido añadir, mostramos un mensaje de error
         if (!successResponse)
-        {
-            Snackbar.Add("Ha habido un error en añadir la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
+        { 
+            Snackbar.Add($"Ha habido un error en añadir la etiqueta {etiqueta.Name} a la tarea {Tarea.Title}", Severity.Error);
             return;
         }
 

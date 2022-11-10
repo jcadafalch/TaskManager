@@ -15,14 +15,14 @@ public partial class RemoveEtiquetaToTareaDialog
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
     [Parameter]
-    public TareaDTO Tarea { get; set; }
+    public TareaDTO Tarea { get; set; } = default!;
     [Parameter]
     public EtiquetaDTO Etiqueta { get; set; } = default!;
 
     /// <summary>
     /// Retira la etiqueta de la tarea
     /// </summary>
-    private async Task RemoveEtiqueta()
+    private async Task RemoveEtiquetaAsync()
     {
         // Creamos el DTO i hacemos la petición al servidor
         var removeEtiquetaTarea = new ManageEtiquetaTareaRequestDTO(Tarea.Id, Etiqueta.Id);

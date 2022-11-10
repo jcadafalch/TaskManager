@@ -21,7 +21,7 @@ public class EtiquetasHttpClient
     /// <returns>Listado de etiquetas</returns>
     public async Task<EtiquetaDTO[]> ListAsync()
     {
-        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/etiquetas/listetiqueta");
+        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/etiquetas/listetiqueta") ?? Array.Empty<EtiquetaDTO>();
     }
 
     /// <summary>

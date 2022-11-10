@@ -1,6 +1,7 @@
 ﻿@using GestorTareas.Client.Components.Etiqueta
 
-<MudCard Elevation="3" Style="width: 100%; height: 100%">
+@*background-color:{Colors.BlueGrey.Lighten2};*@
+<MudCard Elevation="3" Style=@($"background-color: var(--mud-palette-table-lines); width: 100%; height: 100%")>
     <MudCardHeader Class="pt-2">
         <CardHeaderContent>
             <MudText Typo="Typo.h6">@Tarea.Title</MudText>
@@ -20,11 +21,11 @@
             {
                 <MudMenu Icon="@Icons.Filled.Settings" Class="pt-1" Size="Size.Small" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
                     <ChildContent>
-                        <MudMenuItem OnClick="@ChangeStatus">@(TareaStatus ? "Marcar como pendiente" : "Completar")</MudMenuItem>
-                            <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
-                            <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
-                        </ChildContent>
-                    </MudMenu>
+                        <MudMenuItem OnClick="@OnChangeStatus">@(TareaStatus ? "Marcar como pendiente" : "Completar")</MudMenuItem>
+                        <MudMenuItem OnClick="@ModifyTarea">Modificar</MudMenuItem>
+                        <MudMenuItem OnClick="@DeleteTareaAsync">Eliminar</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
             }
             @*Sino, mostramos un checkbox con el estado de la tarea*@
             else
@@ -34,7 +35,7 @@
 
         </CardHeaderActions>
     </MudCardHeader>
-    <MudCardContent Class="mt-n8">
+    <MudCardContent Class="mt-n8 pl-2 ps-2 pr pe">
         <MudDivider Light Class="mb-1" />
         <MudText Class="py-3">@Tarea.Content</MudText>
 
@@ -42,7 +43,7 @@
         @if (All)
         {
             <MudDivider Light Class="mb-3" />
-            <MudChip Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Icon="@Icons.Filled.Add" />
+            <MudChip Style="padding-right: 6px;" Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Icon="@Icons.Filled.Add" />
             @if (Tarea.Etiquetas is not null && Tarea.Etiquetas.Any())
             {
                 @foreach (var etiqueta in Tarea.Etiquetas)

@@ -17,10 +17,11 @@ public partial class EtiquetaComponent
     public EtiquetaDTO Etiqueta { get; set; } = default!;
 
     [Parameter]
-    public bool Modify { get; set; } = default!;
+    public bool IsModify { get; set; } = default!;
 
     [Parameter]
-    public bool Delete { get; set; } = default!;
+    public bool IsDelete { get; set; } = default!;
+
 
     #region Modify
     /// <summary>
@@ -44,7 +45,7 @@ public partial class EtiquetaComponent
         if (!result.Cancelled)
         {
             await InvokeAsync(StateHasChanged);
-            NavigationManager.NavigateTo("/");
+            //NavigationManager.NavigateTo("/");
         }
     }
     #endregion
@@ -71,7 +72,7 @@ public partial class EtiquetaComponent
         if (!result.Cancelled)
         {
             await InvokeAsync(StateHasChanged);
-            NavigationManager.NavigateTo("/");
+            //NavigationManager.NavigateTo("/");
         }
     }
 

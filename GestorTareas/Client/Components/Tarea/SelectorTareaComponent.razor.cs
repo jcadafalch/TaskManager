@@ -55,6 +55,6 @@ public partial class SelectorTareaComponent
     /// <summary>
     /// Expressión lambda que devuelve el titulo de la tarea
     /// </summary>
-    private Func<TareaDTO, string> TareaToString => t => t.Title;
+    private static Func<TareaDTO, string> TareaToString => t => t.Title;
 
 }

@@ -1,4 +1,6 @@
 using GestorTareas.Server.Controllers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using System.Text.Json.Serialization;
 
@@ -9,7 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<GestorTareasDbContext>();
+var connectionString = builder.Configuration.GetConnectionString("BloggingDatabase");
+builder.Services.AddDbContext<GestorTareasDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+
+    if(builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+    }
+});
 
 //builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

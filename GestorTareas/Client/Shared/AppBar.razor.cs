@@ -8,25 +8,30 @@ namespace GestorTareas.Client.Shared;
 /// </summary>
 public partial class AppBar
 {
-    private bool _isLightMode = true;
-    private MudTheme _currentTheme = new MudTheme();
+    //private bool _isLightMode = true;
+    //private MudTheme _currentTheme = new MudTheme();
+    private bool _IsDarkMode;
 
     [Parameter]
     public EventCallback OnSidebarToggled { get; set; }
 
     [Parameter]
-    public EventCallback<MudTheme> OnThemeToggled { get; set; }
+    public EventCallback<bool> OnThemeToggled { get; set; }
+    //public EventCallback<MudTheme> OnThemeToggled { get; set; }
+
 
     /// <summary>
     /// Alterna el tema de la web
     /// </summary>
     private async Task ToggleTheme()
     {
-        _isLightMode = !_isLightMode;
+        //_isLightMode = !_isLightMode;
 
-        _currentTheme = !_isLightMode ? GenerateDarkTheme() : new MudTheme();
+        //_currentTheme = !_isLightMode ? GenerateDarkTheme() : new MudTheme();
 
-        await OnThemeToggled.InvokeAsync(_currentTheme);
+        //await OnThemeToggled.InvokeAsync(_currentTheme);
+        _IsDarkMode = !_IsDarkMode;
+        await OnThemeToggled.InvokeAsync(_IsDarkMode);
     }
 
     /// <summary>

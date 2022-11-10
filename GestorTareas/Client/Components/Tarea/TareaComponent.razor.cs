@@ -3,6 +3,8 @@ using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using MudBlazor.Utilities;
+using static MudBlazor.Colors;
 
 namespace GestorTareas.Client.Components.Tarea;
 
@@ -39,6 +41,9 @@ public partial class TareaComponent
     [Parameter]
     public EventCallback<bool> OnTareaChanged { get; set; }
 
+    [Parameter]
+    public bool IsDarkMode { get; set; } = default!;
+
     #region Estado de la tarea
     /// <summary>
     /// Informa al la classe que contiene el componente que el estado de la tarea ha cambiado y con que valor
@@ -54,7 +59,7 @@ public partial class TareaComponent
     /// <summary>
     /// Informa al la classe que contiene el componente que el estado de la tarea ha cambiado y con que valor
     /// </summary>
-    protected async Task ChangeStatus()
+    protected async Task OnChangeStatus()
     {
         TareaStatus = !TareaStatus;
         await InvokeAsync(StateHasChanged);
@@ -92,7 +97,6 @@ public partial class TareaComponent
 
             // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
             await InvokeAsync(StateHasChanged);
-            NavigationManager.NavigateTo("/");
 
         }
     }
@@ -130,7 +134,6 @@ public partial class TareaComponent
 
             // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
             await InvokeAsync(StateHasChanged);
-            NavigationManager.NavigateTo("/");
         }
 
     }

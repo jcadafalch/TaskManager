@@ -1,10 +1,10 @@
 ﻿<MudDialog>
     <DialogContent>
-        <MudText><h3 style="font-weight: normal;">Estas a punto de eliminar la etiqueta <i>@Etiqueta.Name</i>.</h3></MudText>
-        <MudText Typo="Typo.body1"><b>Estás seguro?</b></MudText>
+        <MudText><h3 style="font-weight: normal;">Estas a punto de eliminar la etiqueta <em>@Etiqueta.Name</em>.</h3></MudText>
+        <MudText Typo="Typo.body1"><strong>Estás seguro?</strong></MudText>
         <MudText Typo="Typo.body2" Class="mt-2">Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="RemoveEtiqueta" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Filled.LabelOff">Retirar!</MudButton>
+        <MudButton OnClick="RemoveEtiquetaAsync" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Filled.LabelOff">Retirar!</MudButton>
     </DialogActions>
 </MudDialog>

@@ -6,7 +6,7 @@ namespace GestorTareas.Client.Components.Dialogs;
 /// <summary>
 /// Diálogo genérico para realizar alguna acción.
 /// </summary>
-public partial class MudDialogComponent
+public partial class DialogComponent
 {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 

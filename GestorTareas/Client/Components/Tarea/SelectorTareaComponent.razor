@@ -1,6 +1,6 @@
 ﻿@using GestorTareas.Shared
 <div class="d-flex  gap-4">
-    <MudIconButton Icon="@Icons.Filled.Cached" Color="Color.Primary" Size="Size.Medium" OnClick="CargarTareasAsync" Disabled="@(Tareas is not null)" />
+    @*<MudIconButton Icon="@Icons.Filled.Cached" Color="Color.Primary" Size="Size.Medium" OnClick="CargarTareasAsync" Disabled="@(Tareas is not null)" />*@
     <MudSelect T="TareaDTO"
                SelectedValuesChanged="OnValuesSelected"
                Label="@LabelContent"

@@ -111,12 +111,11 @@ public partial class Home
         var result = await dialog.Result;
 
         // Si se ha creado la tarea, volvemos a cargar las tareas
-        if (!result.Cancelled)
-        {
-            await CargarTareasAsync();
+        if (result.Cancelled)
             return;
-        }
 
+        await CargarTareasAsync();
+        return;
     }
 
 }

@@ -55,5 +55,5 @@ public partial class SelectorEtiquetaComponent
     /// <summary>
     /// Expressión lambda que devuelve el titulo de la etiqueta
     /// </summary>
-    private Func<EtiquetaDTO, string> EtiquetaToString => e => e.Name;
+    private static Func<EtiquetaDTO, string> EtiquetaToString => e => e.Name;
 }

@@ -1,11 +1,11 @@
 ﻿@*Si estamos en la página de Modificar Etiqueta, mostramos la etiqueta con la opción de modificar*@
-@if (Modify)
+@if (IsModify)
 {
     <MudChip Color="Color.Warning" Style="color: black" OnClose="ModifyEtiquetaAsync" Size="Size.Large" CloseIcon="@Icons.Filled.Edit">@Etiqueta.Name</MudChip>
 }
 
 @*Si estamos en la página de Eliminar Etiqueta, mostramos la etiqueta con la opción de eliminar*@
-@if(Delete)
+@if(IsDelete)
 {
     <MudChip Color="Color.Error" OnClose="DeleteEtiquetaAsync" Size="Size.Large">@Etiqueta.Name</MudChip>
 }
