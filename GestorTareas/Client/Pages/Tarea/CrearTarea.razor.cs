@@ -13,8 +13,8 @@ namespace GestorTareas.Client.Pages.Tarea;
 public partial class CrearTarea
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
-    [Inject] protected NavigationManager NavigationManager { get; set; }
-    [Inject] protected ISnackbar Snackbar { get; set; }
+    [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
 
     CreateTarea Model = new();
 
@@ -24,10 +24,10 @@ public partial class CrearTarea
     public class CreateTarea
     {
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = default!;
 
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = default!;
     }
 
     /// <summary>

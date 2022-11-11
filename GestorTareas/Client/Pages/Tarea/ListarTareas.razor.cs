@@ -11,7 +11,7 @@ namespace GestorTareas.Client.Pages.Tarea;
 public partial class ListarTareas
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
-    [Inject] protected ISnackbar Snackbar { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
 
     private TareaDTO[]? Tareas = default;
 

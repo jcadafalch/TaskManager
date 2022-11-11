@@ -13,8 +13,8 @@ namespace GestorTareas.Client.Pages.Etiqueta;
 public partial class CrearEtiqueta
 {
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
-    [Inject] protected NavigationManager NavigationManager { get; set; }
-    [Inject] protected ISnackbar Snackbar { get; set; }
+    [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
 
     /// <summary>
     /// Classe con los atributos del modelo del formulario

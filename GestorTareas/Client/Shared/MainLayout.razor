@@ -26,7 +26,7 @@
 @code {
     //private MudTheme _currentTheme = new MudTheme();
     //private MudTheme _currentTheme = new();
-    private BaseMudThemeProvider _mudThemeProvider;
+    private BaseMudThemeProvider? _mudThemeProvider;
     private bool _isDarkMode;
     public bool _sidebarOpen = false;
 
@@ -39,8 +39,10 @@
     {
         if (firstRender)
         {
-            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-            StateHasChanged();
+            if(_mudThemeProvider is not null){
+                _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+                StateHasChanged();
+            }
         }
     }
 }

@@ -11,14 +11,14 @@ namespace GestorTareas.Client.Components.Dialogs;
 public partial class EtiquetaDialog
 {
     [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
-    [Inject] protected ISnackbar Snackbar { get; set; }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public EtiquetaDTO Etiqueta { get; set; }
+    public EtiquetaDTO Etiqueta { get; set; } = default!;
 
     [Parameter]
-    public string Contenido { get; set; }
+    public string Contenido { get; set; } = default!;
 
     [Parameter]
     public bool IsModify { get; set; } = default!;

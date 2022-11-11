@@ -10,14 +10,14 @@ namespace GestorTareas.Client.Components.Dialogs;
 public partial class TareaDialog
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
-    [Inject] protected ISnackbar Snackbar { get; set; }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public TareaDTO Tarea { get; set; }
+    public TareaDTO Tarea { get; set; } = default!;
 
     [Parameter] 
-    public string Contenido { get; set; }
+    public string Contenido { get; set; } = default!;
 
     [Parameter]
     public bool IsCreate { get; set; } = default!;
@@ -28,7 +28,7 @@ public partial class TareaDialog
     [Parameter]
     public bool IsDelete { get; set; } = default!; 
 
-    public string Titulo { get; set; }
+    public string Titulo { get; set; } = default!;
 
     /// <summary>
     /// Modificamos la tarea

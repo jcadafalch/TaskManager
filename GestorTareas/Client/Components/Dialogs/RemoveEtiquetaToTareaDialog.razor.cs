@@ -12,7 +12,7 @@ public partial class RemoveEtiquetaToTareaDialog
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected ISnackbar Snackbar { get; set; } = default!;
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
     public TareaDTO Tarea { get; set; } = default!;

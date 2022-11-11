@@ -7,7 +7,7 @@ namespace GestorTareas.Client.Pages.Tarea;
 /// </summary>
 public partial class EliminarTarea
 {
-    private TareaDTO Tarea { get; set; }
+    private TareaDTO Tarea { get; set; } = default!;
 
     /// <summary>
     /// Obtiene la tarea seleccionada en el selector y la asigna al atributo Tarea

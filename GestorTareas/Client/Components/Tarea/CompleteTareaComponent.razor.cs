@@ -13,7 +13,7 @@ namespace GestorTareas.Client.Components.Tarea;
 /// </summary>
 public partial class CompleteTareaComponent
 {
-    [Inject] IDialogService DialogService { get; set; }
+    [Inject] IDialogService DialogService { get; set; } = default!;
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 
@@ -21,7 +21,7 @@ public partial class CompleteTareaComponent
     public TareaDTO Tarea { get; set; } = default!;
 
     [Parameter]
-    public EtiquetaDTO[] Etiquetas { get; set; }
+    public EtiquetaDTO[] Etiquetas { get; set; } = default!;
 
     [Parameter]
     public bool TareaStatus { get; set; } = default;
@@ -68,14 +68,10 @@ public partial class CompleteTareaComponent
         // Si se ha modificado la tarea
         if (!result.Cancelled)
         {
-            // Si estamos en la pagina home, actualizamos la pagina
+            //Actualizamos la pagina
 
             await UpdatePage();
             return;
-
-
-            // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
-            await InvokeAsync(StateHasChanged);
 
         }
     }
@@ -104,13 +100,9 @@ public partial class CompleteTareaComponent
         // Si se ha eliminado la tarea
         if (!result.Cancelled)
         {
-            // Si estamos en la pagina home, actualizamos la pagina
+            //Actualizamos la pagina
             await UpdatePage();
             return;
-
-
-            // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
-            await InvokeAsync(StateHasChanged);
         }
 
     }

@@ -7,7 +7,7 @@ namespace GestorTareas.Client.Pages.Etiqueta;
 /// </summary>
 public partial class EliminarEtiqueta
 {
-    private EtiquetaDTO Etiqueta { get; set; }
+    private EtiquetaDTO Etiqueta { get; set; } = default!;
 
     /// <summary>
     /// Obtiene la etiqueta seleccionada del selecor y la asigna al atributo Etiqueta
