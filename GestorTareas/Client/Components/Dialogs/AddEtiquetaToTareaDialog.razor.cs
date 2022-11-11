@@ -60,7 +60,7 @@ public partial class AddEtiquetaToTareaDialog
         // Si la etiqueta ya está añadida, mostramos un mensaje de error.
         if (Tarea.Etiquetas.Any(e => e.Id == etiqueta.Id))
         {
-            Snackbar.Add("La etiqueta " + etiqueta.Name + " ya esta añadida a la tarea " + Tarea.Title, Severity.Warning);
+            Snackbar.Add($"La etiqueta {etiqueta.Name} ya esta añadida a la tarea {Tarea.Title}", Severity.Warning);
             Cancel();
             return;
         }
@@ -77,7 +77,7 @@ public partial class AddEtiquetaToTareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("Se ha añadido la etiqueta " + etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Success);
+        Snackbar.Add($"Se ha añadido la etiqueta {etiqueta.Name} a la tarea {Tarea.Title}", Severity.Success);
 
 
         // Cerramos el diálogo

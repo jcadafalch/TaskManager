@@ -57,7 +57,7 @@ public partial class CrearTarea
         }
 
         // Si se ha añadido, notificamos al usuario i navegamos a la pagina home
-        Snackbar.Add("La tarea " + Model.Title + " se ha creado correctamente", Severity.Success);
+        Snackbar.Add($"La tarea {Model.Title} se ha creado correctamente", Severity.Success);
         NavigationManager.NavigateTo("/");
 
     }

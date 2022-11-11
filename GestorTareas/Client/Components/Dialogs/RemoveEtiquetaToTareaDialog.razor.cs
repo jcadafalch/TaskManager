@@ -31,12 +31,12 @@ public partial class RemoveEtiquetaToTareaDialog
         // Si no se ha podido retirar, mostramos un mensaje de error
         if (!successResponse)
         {
-            Snackbar.Add("Ha habido un error en retirar la etiqueta " + Etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Error);
+            Snackbar.Add($"Ha habido un error en retirar la etiqueta {Etiqueta.Name} a la tarea {Tarea.Title}", Severity.Error);
             return;
         }
 
         // Si se ha retirado, notificamos al usuario
-        Snackbar.Add("Se ha retirado la etiqueta " + Etiqueta.Name + " a la tarea " + Tarea.Title, Severity.Success);
+        Snackbar.Add($"Se ha retirado la etiqueta {Etiqueta.Name} a la tarea {Tarea.Title}", Severity.Success);
 
         MudDialog.Close(DialogResult.Ok(true));
     }

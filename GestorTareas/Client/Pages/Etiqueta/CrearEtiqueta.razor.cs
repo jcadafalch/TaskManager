@@ -54,7 +54,7 @@ public partial class CrearEtiqueta
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La etiqueta " + Model.Name + " se ha creado correctamente", Severity.Success);
+        Snackbar.Add($"La etiqueta {Model.Name} se ha creado correctamente", Severity.Success);
         NavigationManager.NavigateTo("/");
     }
 }

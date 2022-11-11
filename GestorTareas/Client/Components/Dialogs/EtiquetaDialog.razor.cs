@@ -43,7 +43,7 @@ public partial class EtiquetaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La etiqueta " + Etiqueta.Name + " se ha modificado correctamente", Severity.Success);
+        Snackbar.Add($"La etiqueta {Etiqueta.Name} se ha modificado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
@@ -61,12 +61,12 @@ public partial class EtiquetaDialog
         // Si no se ha podido eliminar, mostramos un mensaje de error
         if (!successResponse)
         {
-            Snackbar.Add("Ha habido un error en eliminar la etiqueta", Severity.Error);
+            Snackbar.Add($"Ha habido un error en eliminar la etiqueta {Etiqueta.Name}", Severity.Error);
             return;
         }
 
         // Si se ha eliminado, notificamos al usuario
-        Snackbar.Add("La etiqueta " + Etiqueta.Name + " se ha eliminado correctamente", Severity.Success);
+        Snackbar.Add($"La etiqueta {Etiqueta.Name} se ha eliminado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));

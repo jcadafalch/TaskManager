@@ -47,7 +47,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La Tarea " + Tarea.Title + " se ha modificado correctamente", Severity.Success);
+        Snackbar.Add($"La Tarea {Tarea.Title} se ha modificado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
@@ -70,7 +70,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
+        Snackbar.Add($"La tarea {Tarea.Title} se ha eliminado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
@@ -93,7 +93,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
+        Snackbar.Add($"La tarea {Titulo} se ha creado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
