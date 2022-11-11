@@ -14,7 +14,7 @@ public partial class DialogComponent
 
     [Parameter] public string ButtonText { get; set; } = default!;
 
-    [Parameter] public Color Color { get; set; }
+    [Parameter] public Color Color { get; set; } = default!;
 
     /// <summary>
     /// Cierra el diálogo indicando que se acepta la acción
