@@ -1,13 +1,13 @@
 ﻿<MudDialog>
     <DialogContent>
         @*Si estamos en la página de modificar, mostramos un TextField con el nombre actual de la etiqueta.*@
-        @if (Modify)
+        @if (IsModify)
         {
             <MudTextField @bind-Value="@Contenido" Label="Nombre de la etiqueta" Variant="Variant.Filled" />
         }
 
         @*Si estamos en la página de eliminar, mostramos mensaje de confirmación de la acción.*@
-        @if (Delete)
+        @if (IsDelete)
         {
             <MudText><h3 style="font-weight: normal;">Estas a punto de eliminar la etiqueta <i>@Etiqueta.Name</i>.</h3></MudText>
             <MudText Typo="Typo.body1"><b>Estás seguro?</b></MudText>
@@ -18,13 +18,13 @@
         <MudButton OnClick="Cancel">Cancel</MudButton>
 
         @*Si estamos en la página de modificar, mostramos el botón de guardar cambios*@
-        @if (Modify)
+        @if (IsModify)
         {
             <MudButton OnClick="ModifyAsync" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
 
         @*Si estamos en la página de eliminar, mostramos el botón de eliminar.*@
-        @if (Delete)
+        @if (IsDelete)
         {
             <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }

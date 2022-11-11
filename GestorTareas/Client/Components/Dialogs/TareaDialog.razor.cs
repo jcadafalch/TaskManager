@@ -20,13 +20,13 @@ public partial class TareaDialog
     public string Contenido { get; set; }
 
     [Parameter]
-    public bool Create { get; set; } = default!;
+    public bool IsCreate { get; set; } = default!;
 
     [Parameter]
-    public bool Modify { get; set; } = default!;
+    public bool IsModify { get; set; } = default!;
 
     [Parameter]
-    public bool Delete { get; set; } = default!; 
+    public bool IsDelete { get; set; } = default!; 
 
     public string Titulo { get; set; }
 

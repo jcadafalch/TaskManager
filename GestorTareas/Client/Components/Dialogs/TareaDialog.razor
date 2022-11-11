@@ -1,19 +1,19 @@
 ﻿<MudDialog>
     <DialogContent>
         @*Si queremos modificar la tarea, mostramos un TextField*@
-        @if (Modify)
+        @if (IsModify)
         {
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
         }
 
         @*Si queremos eliminar la tarea, mostramos mensaje de aviso*@
-        @if (Delete)
+        @if (IsDelete)
         {
             <MudText>Esta acción <b><i>NO</i></b> se puede deshacer!</MudText>
         }
 
         @*Si queremos crear una tarea, mostramos los campos necesarios para hacerlo*@
-        @if (Create)
+        @if (IsCreate)
         {
             <MudTextField @bind-Value="@Titulo" Label="Titulo" Variant="Variant.Filled" />
             <MudTextField Lines="4" @bind-Value="@Contenido" Label="Contenido" Variant="Variant.Filled" />
@@ -23,19 +23,19 @@
         <MudButton OnClick="Cancel">Cancel</MudButton>
 
         @*Si queremos modificar, mostramos botón de guardar cambios*@
-        @if (Modify)
+        @if (IsModify)
         {
             <MudButton OnClick="ModifyAsync" Variant="Variant.Filled" Color="Color.Warning">Guardar Cambios</MudButton>
         }
 
         @*Si queremos eliminar, mostramos el botón de eliminar*@
-        @if (Delete)
+        @if (IsDelete)
         {
             <MudButton OnClick="DeleteAsync" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Eliminar!</MudButton>
         }
 
         @*Si queremos crear, mostramos el botón de crear*@
-        @if (Create)
+        @if (IsCreate)
         {
             <MudButton OnClick="CreateAsync" Variant="Variant.Filled" Color="Color.Primary">Crear</MudButton>
         }

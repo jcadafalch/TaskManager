@@ -34,7 +34,7 @@ public partial class EtiquetaComponent
         {
             {"Contenido", Etiqueta.Name },
             {"Etiqueta", Etiqueta },
-            {"Modify", true}
+            {"IsModify", true}
         };
 
         // Mostramos el diálogo y obtenemos el resultado
@@ -61,7 +61,7 @@ public partial class EtiquetaComponent
         {
             {"Contenido", "" },
             {"Etiqueta", Etiqueta},
-            {"Delete", true }
+            {"IsDelete", true }
         };
 
         // Mostramos el diálogo y obtenemos el resultado

@@ -58,7 +58,7 @@ public partial class CompleteTareaComponent
         {
             { "Contenido", Tarea.Content },
             { "Tarea", Tarea },
-            {"Modify", true }
+            { "IsModify", true }
         };
 
         // Mostramos el dialogo y obtenemos el resultado
@@ -69,10 +69,10 @@ public partial class CompleteTareaComponent
         if (!result.Cancelled)
         {
             // Si estamos en la pagina home, actualizamos la pagina
-           
-                await UpdatePage();
-                return;
-            
+
+            await UpdatePage();
+            return;
+
 
             // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
             await InvokeAsync(StateHasChanged);
@@ -94,7 +94,7 @@ public partial class CompleteTareaComponent
        {
             {"Contenido", "" },
            {"Tarea", Tarea },
-           {"Delete", true}
+           {"IsDelete", true}
        };
 
         // Mostramos el dialogo y obtenemos el resultado
@@ -105,9 +105,9 @@ public partial class CompleteTareaComponent
         if (!result.Cancelled)
         {
             // Si estamos en la pagina home, actualizamos la pagina
-                await UpdatePage();
-                return;
-            
+            await UpdatePage();
+            return;
+
 
             // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
             await InvokeAsync(StateHasChanged);

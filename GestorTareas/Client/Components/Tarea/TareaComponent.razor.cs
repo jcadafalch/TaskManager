@@ -20,10 +20,10 @@ public partial class TareaComponent
     public bool TareaStatus { get; set; } = default!;
 
     [Parameter]
-    public bool ShowModifyButton { get; set; } = default!;
+    public bool IsModify { get; set; } = default!;
 
     [Parameter]
-    public bool ShowDeleteButton { get; set; } = default!;
+    public bool IsDelete { get; set; } = default!;
 
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; } = default!;
@@ -58,8 +58,8 @@ public partial class TareaComponent
         {
             {"Contenido", Contenido },
             {"Tarea", Tarea },
-            {"Delete", Delete},
-            {"Modify", Modify }
+            {"IsDelete", Delete},
+            {"IsModify", Modify }
         };
 
         // Mostramos el dialogo y obtenemos el resultado

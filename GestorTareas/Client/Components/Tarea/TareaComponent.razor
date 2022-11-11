@@ -5,7 +5,7 @@
             <MudText Typo="Typo.caption">@Tarea.CreatedAt</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudCheckBox T="bool" Checked="@TareaStatus" Color="@(TareaStatus ? Color.Success : Color.Secondary)" CheckedChanged="CheckBoxChanged" Disabled="!ShowModifyButton && !ShowDeleteButton ? false : true"/>
+            <MudCheckBox T="bool" Checked="@TareaStatus" Color="@(TareaStatus ? Color.Success : Color.Secondary)" CheckedChanged="CheckBoxChanged" Disabled="!IsModify && !IsDelete ? false : true"/>
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent Class="mt-n8 pl-2 ps-2 pr pe">
@@ -13,12 +13,12 @@
         <MudText Class="py-3">@Tarea.Content</MudText>
         <MudCardActions>
             @*Si estamos en la página de eliminar o modificar una tarea, mostramos un botón para realizar esas acciones.*@
-            @if (ShowModifyButton)
+            @if (IsModify)
             {
                 <MudButton Variant="Variant.Text" Color="Color.Warning" OnClick="ModifyTareaAsync">Editar</MudButton>
             }
 
-            @if (ShowDeleteButton)
+            @if (IsDelete)
             {
                 <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="DeleteTareaAsync"> Eliminar Tarea</MudButton>
             }

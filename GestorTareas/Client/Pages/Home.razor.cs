@@ -97,7 +97,7 @@ public partial class Home
         // Definimos los parametros del diálogo
         var parameters = new DialogParameters
         {
-            {"Create",  true }
+            {"IsCreate",  true }
         };
 
         // Definimos las opciones del diálogo
