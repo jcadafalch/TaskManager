@@ -43,7 +43,7 @@ namespace GestorTareas.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -82,13 +82,15 @@ namespace GestorTareas.Server.Migrations
                         .WithMany()
                         .HasForeignKey("EtiquetasId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_EtiquetaTarea_Etiquetas_EtiquetasId");
 
                     b.HasOne("GestorTareas.Dominio.Tarea", null)
                         .WithMany()
                         .HasForeignKey("TareasId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_EtiquetaTarea_Tareas_TareasId");
                 });
 #pragma warning restore 612, 618
         }

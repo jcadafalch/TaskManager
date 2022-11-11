@@ -9,14 +9,12 @@ public record TareaDTO(
     bool IsCompleted,
 
     /* Mejor pedir el tipo IEnumerable (interfaz/abstracto) que List (implementación) */
-    IEnumerable<TareaEtiquetaDTO> TareaEtiquetas);
+    IEnumerable<EtiquetaDTO> Etiquetas);
 
 public record CreateTareaRequestDTO(string Title, string Content);
 
-public record UpdateTareaRequest(Guid Id, string? NewContent, bool IsCompleted);
+public record UpdateTareaRequestDTO(Guid Id, string? NewContent);
 
-public record DeleteTareaRequestDTO(Guid Id);
+public record IdRequestDTO(Guid Id);
 
-public record CompleteTareaRequestDTO(Guid Id);
-
-public record SetPendingTareaRequestDTO(Guid Id);
+public record ManageEtiquetaTareaRequestDTO(Guid IdTarea, Guid IdEtiqueta);

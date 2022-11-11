@@ -3,11 +3,11 @@ namespace GestorTareas.Shared;
 
 public record EtiquetaDTO(
     Guid Id,
-    string Title,
-    DateTime CreatedAt,
-
-    /* Mejor pedir el tipo IEnumerable (interfaz/abstracto) que List (implementación) */
-    IEnumerable<TareaEtiquetaDTO> TareaEtiquetas
+    string Name
 );
 
-public record CrearEtiquetaRequestDTO(string Name);
+public record CreateEtiquetaRequestDTO(string Name);
+
+public record UpdateEtiquetaRequestDTO(Guid Id, string NewName);
+
+public record DeleteEtiquetaRequestDTO(Guid Id);

@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\GestorTareas-Dominio\GestorTareas.Dominio.csproj" />
     <ProjectReference Include="..\Client\GestorTareas.Client.csproj" />
-    <ProjectReference Include="..\Shared\GestorTareas.Shared.csproj" />
   </ItemGroup>
 
 

@@ -1,5 +1,18 @@
 ﻿@page "/modificar-tarea"
+@using GestorTareas.Client.Components.Tarea
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Modificar Tarea
 </MudText>
+
+@*Muestra el selector de tareas para elegir que tarea modificar*@
+<SelectorTareaComponent LabelContent="Selecciona la tarea que quieres modificar" OnTareaSelected=@(GetTareaSelected) />
+
+@*Cuando se haya seleccionado una tarea, se mostrarà dicha tarea*@
+@if (!(Tarea is null))
+{
+    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        @*Muestra una tarea con los elementos necessarios para modificarla*@
+        <TareaComponent Tarea="Tarea" TareaStatus="Tarea.IsCompleted" IsModify="true"/>
+    </div>
+}

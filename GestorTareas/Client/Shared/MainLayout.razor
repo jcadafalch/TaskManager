@@ -4,7 +4,7 @@
     <AppBar OnSidebarToggled="ToggleSideBar" OnThemeToggled="ToggleTheme" />
 
     <NavMenu SideBarOpen="_sidebarOpen" />
-    
+
     <MudMainContent Class="pt-16 px-16">
         <MudContainer Class="mt-6">
             @Body
@@ -12,13 +12,35 @@
     </MudMainContent>
 </MudLayout>
 
-<MudThemeProvider Theme="_currentTheme" />
+<!--Gestiona la apariencia de la aplicación: Modo oscuro o sin modo oscuro-->
+@*Theme="_currentTheme"*@
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" @ref="@_mudThemeProvider" />
+
+<!--Gestiona la configuración de los MudDailog-->
+<MudDialogProvider FullWidth="true"
+                   DisableBackdropClick="true"
+                   Position="DialogPosition.Center" />
+
+<MudSnackbarProvider />
 
 @code {
-    private MudTheme _currentTheme = new MudTheme();
+    //private MudTheme _currentTheme = new MudTheme();
+    //private MudTheme _currentTheme = new();
+    private BaseMudThemeProvider _mudThemeProvider;
+    private bool _isDarkMode;
     public bool _sidebarOpen = false;
 
 
-    private void ToggleTheme(MudTheme changedTheme) => _currentTheme = changedTheme;
+    //private void ToggleTheme(MudTheme changedTheme) => _currentTheme = changedTheme;
+    private void ToggleTheme(bool darkMode) => _isDarkMode = darkMode;
     private void ToggleSideBar() => _sidebarOpen = !_sidebarOpen;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            StateHasChanged();
+        }
+    }
 }

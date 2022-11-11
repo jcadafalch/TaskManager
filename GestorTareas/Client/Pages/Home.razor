@@ -1,3 +1,34 @@
-﻿<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+﻿@using GestorTareas.Client.Components.Tarea
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Gestor Tareas
 </MudText>
+
+<MudButton Class="mt-3 mb-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="@CreateTarea">Crear Tarea</MudButton>
+
+@if (Tareas is null)
+{
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}
+else
+{
+    @*Si hay tareas mostramos las tareas*@
+    @if (Tareas.Any())
+    {
+        <MudGrid Spacing="3" Justify="Justify.Center">
+            @foreach (var tarea in Tareas)
+            {
+                <MudItem xs="12" md="4" xl="3">
+                    <CompleteTareaComponent Etiquetas="Etiquetas" Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) OnTareaChanged="@(async x => await UpdatePage(x))" />
+                </MudItem>
+            }
+        </MudGrid>
+    }
+    else @*Si no hay tareas informamos al usuario*@
+    {
+        <MudText Typo="Typo.body1">
+            No se han encontrado tareas
+        </MudText>
+    }
+}

@@ -1,12 +1,12 @@
 ﻿<MudAppBar Elevation="3">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="async () => await OnSidebarToggled.InvokeAsync()" />
     <MudSpacer />
-    @if (_isLightMode)
+    @if (!_IsDarkMode @*_isLightMode*@)
     {
-        <MudIconButton Icon="@Icons.Filled.LightMode" Color="Color.Inherit" OnClick="ToggleTheme" Title="Activar modo oscuro"/>
+        <MudIconButton Icon="@Icons.Filled.DarkMode" Color="Color.Inherit" OnClick="ToggleTheme" Title="Activar modo oscuro" />
     }
     else
     {
-        <MudIconButton Icon="@Icons.Filled.DarkMode" Color="Color.Inherit" OnClick="ToggleTheme" Title="Desactivar modo oscuro" />
+        <MudIconButton Icon="@Icons.Filled.LightMode" Color="Color.Inherit" OnClick="ToggleTheme" Title="Desactivar modo oscuro" />
     }
 </MudAppBar>

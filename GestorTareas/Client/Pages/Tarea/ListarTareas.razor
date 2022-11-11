@@ -1,5 +1,34 @@
 ﻿@page "/listar-tareas"
+@using GestorTareas.Client.Components.Tarea
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
-    Listar Tareas
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
+    Listado Tareas
 </MudText>
+
+@if (Tareas is null)
+{
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}
+else
+{
+    @if (Tareas.Any())
+    {
+        <MudGrid Spacing="5" Justify="Justify.Center">
+            @*Muestra un listado con todas las tareas*@
+            @foreach (var tarea in Tareas)
+            {
+                <MudItem>
+                    <TareaComponent Tarea="tarea" TareaStatus="tarea.IsCompleted" OnStatusChanged=@(async x => await UpdateTareasCompleted(x, tarea.Id)) />
+                </MudItem>
+            }
+        </MudGrid>
+    }
+    else
+    {
+        <MudText Typo="Typo.body1">
+            No se han encontrado tareas
+        </MudText>
+    }
+}

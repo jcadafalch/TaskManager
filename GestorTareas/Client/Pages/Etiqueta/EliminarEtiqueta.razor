@@ -1,5 +1,17 @@
 ﻿@page "/eliminar-etiqueta"
+@using GestorTareas.Client.Components.Etiqueta
 
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Eliminar Etiqueta
 </MudText>
+
+@*Muestra el selector de etiquetas para elegir cual eliminar*@
+<SelectorEtiquetaComponent LabelContent="Selecciona la etiqueta que quieres eliminar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
+
+@*Cuando se haya seleccionado una etiqueta, se mostrarà dicha etiqueta*@
+@if (!(Etiqueta is null))
+{
+    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
+        <EtiquetaComponent Etiqueta="Etiqueta" IsDelete="true" IsModify="false" />
+    </div>
+}

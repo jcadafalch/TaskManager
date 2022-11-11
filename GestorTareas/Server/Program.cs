@@ -1,6 +1,8 @@
 using GestorTareas.Server.Controllers;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,17 +11,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<GestorTareasDbContext>();
+var connectionString = builder.Configuration.GetConnectionString("BloggingDatabase");
+builder.Services.AddDbContext<GestorTareasDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
 
-builder.Services.AddControllersWithViews();
+    if(builder.Environment.IsDevelopment())
+    {
+        options.EnableSensitiveDataLogging();
+    }
+});
+
+//builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddRazorPages();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Si estamos ejecutando en modo desarrollo permitimos el uso de Swagger
+if (builder.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
 
@@ -32,7 +44,7 @@ else
 }
 
 app.UseCors(policy =>
-    policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
+    policy.WithOrigins("http://localhost:5130")
     .AllowAnyMethod()
     .WithHeaders(HeaderNames.ContentType));
 

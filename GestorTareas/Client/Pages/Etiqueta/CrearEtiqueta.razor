@@ -3,3 +3,23 @@
 <MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
     Crear Etiqueta
 </MudText>
+
+<EditForm Model="@Model" OnValidSubmit="OnValidSubmit">
+
+    <MudGrid Justify="Justify.Center">
+        <MudItem Class="ma-7">
+            <MudCard>
+                <MudCardHeader>
+                    <MudChip Color="Color.Surface" Size="Size.Large">@Model.Name</MudChip>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudTextField Label="Nombre de la etiqueta" @bind-Value="Model.Name" For="@(() => Model.Name)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await CreateNewEtiquetaAsync())">Crear Etiqueta</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+</EditForm>
