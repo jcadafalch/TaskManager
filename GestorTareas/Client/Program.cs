@@ -22,7 +22,6 @@ builder.Services.AddMudServices(config =>
     config.ResizeOptions = new ResizeOptions { };
     config.SnackbarConfiguration = new MudBlazor.SnackbarConfiguration { };
     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
-    config.SnackbarConfiguration.HideTransitionDuration = 250;
 });
 
 await builder.Build().RunAsync();

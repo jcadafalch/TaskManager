@@ -51,7 +51,7 @@ public partial class TareaComponent
     /// <param name="Modify">true si queremos modificar; false si no.</param>
     /// <param name="Delete">true si queremos eliminar; false si no</param>
     /// <param name="DialogTitle">Titulo del dialogo</param>
-    private async Task ShowDialog(String? Contenido, bool Modify, bool Delete, String DialogTitle)
+    private async Task ShowDialog(string? Contenido, bool Modify, bool Delete, string DialogTitle)
     {
         // Definimos los parametros del diálogo
         var parameters = new DialogParameters
@@ -66,10 +66,16 @@ public partial class TareaComponent
         var dialog = DialogService.Show<TareaDialog>(DialogTitle, parameters);
         var result = await dialog.Result;
 
-        // Si se ha realizado la acción
-        if (!result.Cancelled)
+        // Si se ha cancelado la acción
+        if (result.Cancelled)
         {
-            NavigationManager.NavigateTo("/");
+            return;
         }
+
+        if(Modify)
+            NavigationManager.NavigateTo("modificar-tarea", false, true);
+
+        if(Delete)
+            NavigationManager.NavigateTo("eliminar-tarea", false, true);
     }
 }
