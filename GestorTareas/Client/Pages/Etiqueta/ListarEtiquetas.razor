@@ -1,9 +1,10 @@
 ﻿@page "/listar-etiquetas"
 @using GestorTareas.Client.Components.Etiqueta
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
     Listar Etiqueta
 </MudText>
+
 @if (Etiquetas is null)
 {
     <MudText Typo="Typo.body1">
@@ -14,14 +15,14 @@ else
 {
     @if (Etiquetas.Any())
     {
-
-        <div class="m-6">
-            @*Muestra un listado con todas las etiquetas*@
+        <MudGrid Spacing="5" Justify="Justify.Center">
             @foreach (var etiqueta in Etiquetas)
             {
-                <MudChip Color="Color.Surface" Size="Size.Large">@etiqueta.Name</MudChip>
+                <MudItem>
+                    <MudChip Color="Color.Surface" Size="Size.Large">@etiqueta.Name</MudChip>
+                </MudItem>
             }
-        </div>
+        </MudGrid>
 
     }
     else

@@ -28,6 +28,9 @@ public partial class TareaComponent
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; } = default!;
 
+    [Parameter]
+    public EventCallback UpdatePage { get; set; } = default!;
+
     private async Task CheckBoxChanged(bool e)
     {
         TareaStatus = e;
@@ -72,10 +75,7 @@ public partial class TareaComponent
             return;
         }
 
-        if(Modify)
-            NavigationManager.NavigateTo("modificar-tarea", false, true);
-
-        if(Delete)
-            NavigationManager.NavigateTo("eliminar-tarea", false, true);
+        await InvokeAsync(StateHasChanged);
+        await UpdatePage.InvokeAsync();
     }
 }

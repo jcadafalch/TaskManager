@@ -22,6 +22,9 @@ public partial class EtiquetaComponent
     [Parameter]
     public bool IsDelete { get; set; } = default!;
 
+    [Parameter]
+    public EventCallback UpdatePage { get; set; } = default!;
+
 
     #region Modify
     /// <summary>
@@ -65,10 +68,7 @@ public partial class EtiquetaComponent
         if (result.Cancelled)
             return;
 
-        if(Modify)
-            NavigationManager.NavigateTo("modificar-tarea", false, true);
-
-        if(Delete)
-            NavigationManager.NavigateTo("modificar-tarea", false, true);
+        await InvokeAsync(StateHasChanged);
+        await UpdatePage.InvokeAsync();
     }
 }

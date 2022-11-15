@@ -1,18 +1,31 @@
 ﻿@page "/modificar-etiqueta"
 @using GestorTareas.Client.Components.Etiqueta
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
     Modificar Etiqueta
 </MudText>
 
-@*Muestra el selector de etiquetas para elegir que etiqueta modificar*@
-<SelectorEtiquetaComponent LabelContent="Selecciona la etiqueta que quieres modificar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
-
-@*Cuando se haya seleccionado una etiqueta, se mostrarà dicha etiqueta*@
-@if (!(Etiqueta is null))
+@if (Etiquetas is null)
 {
-    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
-        @*Muestra una etiqueta con los elementos necessarios para modificarla*@
-        <EtiquetaComponent Etiqueta="Etiqueta" IsModify="true" IsDelete="false" />
-    </div>
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}
+else
+{
+    @if (Etiquetas.Any())
+    {
+        <MudGrid Spacing="5" Justify="Justify.Center">
+            @foreach (var etiqueta in Etiquetas)
+            {
+                <MudItem><EtiquetaComponent Etiqueta="etiqueta" IsDelete="false" IsModify="true" UpdatePage="@UpdatePage" /></MudItem>
+            }
+        </MudGrid>
+    }
+    else
+    {
+        <MudText Typo="Typo.body1">
+            No se han encontrado etiquetas
+        </MudText>
+    }
 }

@@ -1,17 +1,32 @@
 ﻿@page "/eliminar-etiqueta"
 @using GestorTareas.Client.Components.Etiqueta
 
-<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary">
+<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Primary" Class="pb-6">
     Eliminar Etiqueta
 </MudText>
 
-@*Muestra el selector de etiquetas para elegir cual eliminar*@
-<SelectorEtiquetaComponent LabelContent="Selecciona la etiqueta que quieres eliminar" OnEtiquetaSelected=@(GetEtiquetaSelected) />
-
-@*Cuando se haya seleccionado una etiqueta, se mostrarà dicha etiqueta*@
-@if (!(Etiqueta is null))
+@if (Etiquetas is null)
 {
-    <div class="align-content-center d-flex flex-grow-1 gap-4 mt-6">
-        <EtiquetaComponent Etiqueta="Etiqueta" IsDelete="true" IsModify="false" />
-    </div>
+    <MudText Typo="Typo.body1">
+        Cargando...
+    </MudText>
+}
+else
+{
+    @if (Etiquetas.Any())
+    {
+        <MudGrid Spacing="5" Justify="Justify.Center">
+            @foreach (var etiqueta in Etiquetas)
+            {
+                <MudItem><EtiquetaComponent Etiqueta="etiqueta" IsDelete="true" IsModify="false" UpdatePage="@UpdatePage" /></MudItem>
+            }
+        </MudGrid>
+
+    }
+    else
+    {
+        <MudText Typo="Typo.body1">
+            No se han encontrado etiquetas
+        </MudText>
+    }
 }
