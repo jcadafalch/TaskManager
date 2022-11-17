@@ -3,8 +3,6 @@ using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using MudBlazor.Utilities;
-using static MudBlazor.Colors;
 
 namespace GestorTareas.Client.Components.Tarea;
 
@@ -31,9 +29,6 @@ public partial class CompleteTareaComponent
 
     [Parameter]
     public EventCallback<bool> OnTareaChanged { get; set; }
-
-    [Parameter]
-    public bool IsDarkMode { get; set; } = default!;
 
     #region Estado de la tarea
 

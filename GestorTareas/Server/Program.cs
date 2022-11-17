@@ -1,6 +1,5 @@
 using GestorTareas.Server.Controllers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using System.Text.Json.Serialization;
 
