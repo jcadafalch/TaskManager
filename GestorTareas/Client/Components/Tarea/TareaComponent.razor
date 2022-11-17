@@ -12,7 +12,7 @@
         <MudDivider Light Class="mb-1" />
         <pre style="padding-top: 12px; padding-left: 12px; padding-right: 12px;">@Tarea.Content</pre>
     </MudCardContent>
-    <MudCardActions Style="mb-3">
+    <MudCardActions Style="display: flex; justify-content: end;"> 
         @*Si estamos en la página de eliminar o modificar una tarea, mostramos un botón para realizar esas acciones.*@
         @if (IsModify)
         {
