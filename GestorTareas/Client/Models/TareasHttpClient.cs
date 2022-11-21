@@ -19,7 +19,7 @@ public class TareasHttpClient
     /// Obtiene un listado con todas las tareas.
     /// </summary>
     /// <returns>Listado de tareas.</returns>
-    public async Task<TareaDTO[]> ListAsync()
+    public async Task<TareaDTO[]?> ListAsync()
     {
         return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/tareas/list");
     }

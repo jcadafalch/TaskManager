@@ -10,14 +10,14 @@ namespace GestorTareas.Client.Components.Dialogs;
 public partial class TareaDialog
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
-    [Inject] protected ISnackbar Snackbar { get; set; }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public TareaDTO Tarea { get; set; }
+    public TareaDTO Tarea { get; set; } = default!;
 
     [Parameter] 
-    public string Contenido { get; set; }
+    public string Contenido { get; set; } = default!;
 
     [Parameter]
     public bool IsCreate { get; set; } = default!;
@@ -28,7 +28,7 @@ public partial class TareaDialog
     [Parameter]
     public bool IsDelete { get; set; } = default!; 
 
-    public string Titulo { get; set; }
+    public string Titulo { get; set; } = default!;
 
     /// <summary>
     /// Modificamos la tarea
@@ -47,7 +47,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La Tarea " + Tarea.Title + " se ha modificado correctamente", Severity.Success);
+        Snackbar.Add($"La Tarea {Tarea.Title} se ha modificado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
@@ -70,7 +70,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La tarea " + Tarea.Title + " se ha eliminado correctamente", Severity.Success);
+        Snackbar.Add($"La tarea {Tarea.Title} se ha eliminado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));
@@ -93,7 +93,7 @@ public partial class TareaDialog
         }
 
         // Si se ha añadido, notificamos al usuario
-        Snackbar.Add("La tarea " + Titulo + " se ha creado correctamente", Severity.Success);
+        Snackbar.Add($"La tarea {Titulo} se ha creado correctamente", Severity.Success);
 
         // Cerramos el diálogo
         MudDialog.Close(DialogResult.Ok(true));

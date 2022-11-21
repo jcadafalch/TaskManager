@@ -12,9 +12,9 @@ namespace GestorTareas.Client.Pages;
 public partial class Home
 {
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
-    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; }
-    [Inject] protected IDialogService DialogService { get; set; }
-    [Inject] protected ISnackbar Snackbar { get; set; }
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
+    [Inject] protected IDialogService DialogService { get; set; } = default!;
+    [Inject] protected ISnackbar Snackbar { get; set; } = default!;
 
     private TareaDTO[]? Tareas = default;
     private EtiquetaDTO[]? Etiquetas = default!;

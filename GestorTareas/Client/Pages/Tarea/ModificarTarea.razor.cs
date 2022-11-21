@@ -1,4 +1,6 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 
 namespace GestorTareas.Client.Pages.Tarea;
 
@@ -7,16 +9,32 @@ namespace GestorTareas.Client.Pages.Tarea;
 /// </summary>
 public partial class ModificarTarea
 {
-    private TareaDTO? Tarea { get; set; } = null;
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
+    private TareaDTO[]? Tareas = default;
 
     /// <summary>
-    /// Obtiene la tarea seleccionada en el selector y la asigna al atributo Tarea
+    /// Obtiene el listado de todas las tareas y lo asigna al atributo tareas
     /// </summary>
-    /// <param name="tarea">DTO de tarea</param>
-    protected async void GetTareaSelected(TareaDTO tarea)
+    private async Task CargarTareasAsync()
     {
-        Tarea = tarea;
+        Tareas = await HttpTareas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Cada vez que se renderiza la pagina se ejecuta este metodo
+    /// </summary>
+    /// <param name="firstRender">Indica si es la primera vez que se renderiza</param>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CargarTareasAsync();
+        }
+    }
+
+    private async Task UpdatePage()
+    {
+        await CargarTareasAsync();
+    }
 }

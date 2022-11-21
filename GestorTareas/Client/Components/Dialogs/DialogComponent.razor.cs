@@ -8,13 +8,13 @@ namespace GestorTareas.Client.Components.Dialogs;
 /// </summary>
 public partial class DialogComponent
 {
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
 
-    [Parameter] public string ContentText { get; set; }
+    [Parameter] public string ContentText { get; set; } = default!;
 
-    [Parameter] public string ButtonText { get; set; }
+    [Parameter] public string ButtonText { get; set; } = default!;
 
-    [Parameter] public Color Color { get; set; }
+    [Parameter] public Color Color { get; set; } = default!;
 
     /// <summary>
     /// Cierra el diálogo indicando que se acepta la acción

@@ -3,8 +3,6 @@ using GestorTareas.Client.Models;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using MudBlazor.Utilities;
-using static MudBlazor.Colors;
 
 namespace GestorTareas.Client.Components.Tarea;
 
@@ -13,7 +11,7 @@ namespace GestorTareas.Client.Components.Tarea;
 /// </summary>
 public partial class CompleteTareaComponent
 {
-    [Inject] IDialogService DialogService { get; set; }
+    [Inject] IDialogService DialogService { get; set; } = default!;
     [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
 
@@ -21,7 +19,7 @@ public partial class CompleteTareaComponent
     public TareaDTO Tarea { get; set; } = default!;
 
     [Parameter]
-    public EtiquetaDTO[] Etiquetas { get; set; }
+    public EtiquetaDTO[] Etiquetas { get; set; } = default!;
 
     [Parameter]
     public bool TareaStatus { get; set; } = default;
@@ -31,9 +29,6 @@ public partial class CompleteTareaComponent
 
     [Parameter]
     public EventCallback<bool> OnTareaChanged { get; set; }
-
-    [Parameter]
-    public bool IsDarkMode { get; set; } = default!;
 
     #region Estado de la tarea
 
@@ -47,74 +42,18 @@ public partial class CompleteTareaComponent
     }
     #endregion
 
-    #region Modify
+    #region Modificar
     /// <summary>
     /// Muestra un dialogo para modificar la tarea
     /// </summary>
-    protected async Task ModifyTarea()
-    {
-        // Definimos los parametros del dialogo
-        var parameters = new DialogParameters
-        {
-            { "Contenido", Tarea.Content },
-            { "Tarea", Tarea },
-            { "IsModify", true }
-        };
-
-        // Mostramos el dialogo y obtenemos el resultado
-        var dialog = DialogService.Show<TareaDialog>("Editar", parameters);
-        var result = await dialog.Result;
-
-        // Si se ha modificado la tarea
-        if (!result.Cancelled)
-        {
-            // Si estamos en la pagina home, actualizamos la pagina
-
-            await UpdatePage();
-            return;
-
-
-            // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
-            await InvokeAsync(StateHasChanged);
-
-        }
-    }
-
+    protected async Task ModifyTarea() => await ShowDialog(Tarea.Content, true, false, "Editar");
     #endregion
 
-    #region Delete
-
+    #region Eliminar
     /// <summary>
     /// Muestra un dialogo para eliminar la tarea
     /// </summary>
-    private async Task DeleteTareaAsync()
-    {
-        // Definimos los parametros del dialogo
-        var parameters = new DialogParameters
-       {
-            {"Contenido", "" },
-           {"Tarea", Tarea },
-           {"IsDelete", true}
-       };
-
-        // Mostramos el dialogo y obtenemos el resultado
-        var dialog = DialogService.Show<TareaDialog>("¡AVISO!", parameters);
-        var result = await dialog.Result;
-
-        // Si se ha eliminado la tarea
-        if (!result.Cancelled)
-        {
-            // Si estamos en la pagina home, actualizamos la pagina
-            await UpdatePage();
-            return;
-
-
-            // Si no estamos en el home, notificamos al componente que ha cambiado y navegamos a la pagina home
-            await InvokeAsync(StateHasChanged);
-        }
-
-    }
-
+    private async Task DeleteTareaAsync() => await ShowDialog("", false, true, "¡AVISO!");
     #endregion
 
     #region Etiquetas
@@ -187,6 +126,37 @@ public partial class CompleteTareaComponent
         }
     }
 
+    #endregion
+
+    #region ShowDialog
+    /// <summary>
+    /// Muestra un dialogo para realizar la acción deseada
+    /// </summary>
+    /// <param name="Contenido">Contenido de la tarea</param>
+    /// <param name="Modify">true si queremos modificar; false si no.</param>
+    /// <param name="Delete">true si queremos eliminar; false si no</param>
+    /// <param name="DialogTitle">Titulo del dialogo</param>
+    private async Task ShowDialog(string? Contenido, bool Modify, bool Delete, string DialogTitle)
+    {
+        // Definimos los parametros del diálogo
+        var parameters = new DialogParameters
+        {
+            { "Contenido", Contenido},
+            { "Tarea", Tarea },
+            { "IsModify", Modify },
+            {"IsDelete", Delete}
+        };
+
+        // Mostramos el dialogo y obtenemos el resultado
+        var dialog = DialogService.Show<TareaDialog>(DialogTitle, parameters);
+        var result = await dialog.Result;
+
+        if (result.Cancelled)
+            return;
+
+        await UpdatePage();
+        return;
+    }
     #endregion
 
     /// <summary>

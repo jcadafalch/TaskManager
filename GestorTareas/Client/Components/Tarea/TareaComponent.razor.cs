@@ -28,6 +28,9 @@ public partial class TareaComponent
     [Parameter]
     public EventCallback<bool> OnStatusChanged { get; set; } = default!;
 
+    [Parameter]
+    public EventCallback UpdatePage { get; set; } = default!;
+
     private async Task CheckBoxChanged(bool e)
     {
         TareaStatus = e;
@@ -51,7 +54,7 @@ public partial class TareaComponent
     /// <param name="Modify">true si queremos modificar; false si no.</param>
     /// <param name="Delete">true si queremos eliminar; false si no</param>
     /// <param name="DialogTitle">Titulo del dialogo</param>
-    private async Task ShowDialog(String Contenido, bool Modify, bool Delete, String DialogTitle)
+    private async Task ShowDialog(string? Contenido, bool Modify, bool Delete, string DialogTitle)
     {
         // Definimos los parametros del diálogo
         var parameters = new DialogParameters
@@ -66,10 +69,13 @@ public partial class TareaComponent
         var dialog = DialogService.Show<TareaDialog>(DialogTitle, parameters);
         var result = await dialog.Result;
 
-        // Si se ha realizado la acción
-        if (!result.Cancelled)
+        // Si se ha cancelado la acción
+        if (result.Cancelled)
         {
-            NavigationManager.NavigateTo("/");
+            return;
         }
+
+        await InvokeAsync(StateHasChanged);
+        await UpdatePage.InvokeAsync();
     }
 }

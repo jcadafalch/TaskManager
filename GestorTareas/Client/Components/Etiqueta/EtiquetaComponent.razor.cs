@@ -22,59 +22,53 @@ public partial class EtiquetaComponent
     [Parameter]
     public bool IsDelete { get; set; } = default!;
 
+    [Parameter]
+    public EventCallback UpdatePage { get; set; } = default!;
+
 
     #region Modify
     /// <summary>
     /// Muestra un diálogo para modificar la etiqueta
     /// </summary>
-    protected async Task ModifyEtiquetaAsync()
-    {
-        // Definimos los parametros del diálogo
-        var parameters = new DialogParameters
-        {
-            {"Contenido", Etiqueta.Name },
-            {"Etiqueta", Etiqueta },
-            {"IsModify", true}
-        };
+    protected async Task ModifyEtiquetaAsync() => await ShowDialog(Etiqueta.Name, true, false, "Editar");
 
-        // Mostramos el diálogo y obtenemos el resultado
-        var dialog = DialogService.Show<EtiquetaDialog>("Editar", parameters);
-        var result = await dialog.Result;
-
-        // Si se ha modificado la etiqueta, notificamos al componente que ha cambiado y navegamos a la pagina home.
-        if (!result.Cancelled)
-        {
-            await InvokeAsync(StateHasChanged);
-            //NavigationManager.NavigateTo("/");
-        }
-    }
     #endregion
 
     #region Delete
     /// <summary>
     /// Muestra un diálogo para eliminar la etiqueta
     /// </summary>
-    protected async Task DeleteEtiquetaAsync()
+    protected async Task DeleteEtiquetaAsync() => await ShowDialog("", false, true, "¡ATENCIÓN!");
+
+    #endregion
+
+    /// <summary>
+    /// Muestra un dialogo para realizar la acción deseada
+    /// </summary>
+    /// <param name="Name">Nombre de la etiqueta</param>
+    /// <param name="Modify">true si queremos modificar; false si no.</param>
+    /// <param name="Delete">true si queremos eliminar; false si no</param>
+    /// <param name="DialogTitle">Titulo del dialogo</param>
+    private async Task ShowDialog(string? Name, bool Modify, bool Delete, string DialogTitle)
     {
-        // Definimos los parametros del dialogo
+        // Definimos los parametros del diálogo
         var parameters = new DialogParameters
         {
-            {"Contenido", "" },
-            {"Etiqueta", Etiqueta},
-            {"IsDelete", true }
+            {"Contenido", Name},
+            {"Etiqueta", Etiqueta },
+            {"IsModify", Modify},
+            {"IsDelete", Delete }
         };
 
         // Mostramos el diálogo y obtenemos el resultado
-        var dialog = DialogService.Show<EtiquetaDialog>("¡ATENCIÓN!", parameters);
+        var dialog = DialogService.Show<EtiquetaDialog>(DialogTitle, parameters);
         var result = await dialog.Result;
 
-        // Si se ha eliminado la etiqueta, notificamos al componente que ha cambiado y navegamos a la pagina home
-        if (!result.Cancelled)
-        {
-            await InvokeAsync(StateHasChanged);
-            //NavigationManager.NavigateTo("/");
-        }
-    }
+        // Si se ha cancelado la acción
+        if (result.Cancelled)
+            return;
 
-    #endregion
+        await InvokeAsync(StateHasChanged);
+        await UpdatePage.InvokeAsync();
+    }
 }

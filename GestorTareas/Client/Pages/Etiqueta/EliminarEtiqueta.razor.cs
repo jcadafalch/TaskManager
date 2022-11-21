@@ -1,4 +1,6 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Models;
+using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 
 namespace GestorTareas.Client.Pages.Etiqueta;
 
@@ -7,15 +9,29 @@ namespace GestorTareas.Client.Pages.Etiqueta;
 /// </summary>
 public partial class EliminarEtiqueta
 {
-    private EtiquetaDTO Etiqueta { get; set; }
+    [Inject] protected EtiquetasHttpClient HttpEtiquetas { get; set; } = default!;
+
+    private EtiquetaDTO[]? Etiquetas;
 
     /// <summary>
-    /// Obtiene la etiqueta seleccionada del selecor y la asigna al atributo Etiqueta
+    /// Obtiene el listado de todas las etiquetas y lo asigna al atributo etiquetas
     /// </summary>
-    /// <param name="etiqueta">DTO de etiqueta</param>
-    protected async void GetEtiquetaSelected(EtiquetaDTO etiqueta)
+    private async Task CargarEtiquetasAsync()
     {
-        Etiqueta = etiqueta;
+        Etiquetas = await HttpEtiquetas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await CargarEtiquetasAsync();
+    }
+
+    private async Task UpdatePage()
+    {
+        await CargarEtiquetasAsync();
+    }
+
 }
+

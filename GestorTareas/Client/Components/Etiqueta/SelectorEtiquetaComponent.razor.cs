@@ -17,6 +17,7 @@ public partial class SelectorEtiquetaComponent
     [Parameter]
     public EventCallback<EtiquetaDTO> OnEtiquetaSelected { get; set; }
 
+    private EtiquetaDTO? Etiqueta;
     public EtiquetaDTO[]? Etiquetas { get; set; } = default!;
 
     /// <summary>
@@ -24,6 +25,7 @@ public partial class SelectorEtiquetaComponent
     /// </summary>
     private async Task CargarEtiquetasAsync()
     {
+        Etiqueta = null;
         Etiquetas = await HttpEtiquetas.ListAsync();
         await InvokeAsync(StateHasChanged);
     }
@@ -46,10 +48,28 @@ public partial class SelectorEtiquetaComponent
     /// <param name="items">IEnumerable de la etiqueta seleccionada</param>
     protected async Task OnValuesSelected(IEnumerable<EtiquetaDTO> items)
     {
-        if (items.Count() > 1 && !items.Any())
+        try
+        {
+            if (items.Count() > 1 && !items.Any())
+                return;
+
+            await OnEtiquetaSelected.InvokeAsync(items.First());
+        }
+        catch (Exception)
+        {
+        }
+        
+    }
+
+    private async Task OnSelectItem(EtiquetaDTO? etiqueta)
+    {
+        if (etiqueta is null)
             return;
 
-        await OnEtiquetaSelected.InvokeAsync(items.First());
+        Etiqueta = etiqueta;
+
+        await OnEtiquetaSelected.InvokeAsync(etiqueta);
+        await InvokeAsync(StateHasChanged);
     }
 
     /// <summary>

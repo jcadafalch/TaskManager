@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using MudBlazor;
 
 namespace GestorTareas.Client.Shared;
 
@@ -8,16 +7,14 @@ namespace GestorTareas.Client.Shared;
 /// </summary>
 public partial class AppBar
 {
-    //private bool _isLightMode = true;
-    //private MudTheme _currentTheme = new MudTheme();
-    private bool _IsDarkMode;
+    [Parameter]
+    public bool IsDarkMode { get; set; }
 
     [Parameter]
     public EventCallback OnSidebarToggled { get; set; }
 
     [Parameter]
     public EventCallback<bool> OnThemeToggled { get; set; }
-    //public EventCallback<MudTheme> OnThemeToggled { get; set; }
 
 
     /// <summary>
@@ -25,35 +22,7 @@ public partial class AppBar
     /// </summary>
     private async Task ToggleTheme()
     {
-        //_isLightMode = !_isLightMode;
-
-        //_currentTheme = !_isLightMode ? GenerateDarkTheme() : new MudTheme();
-
-        //await OnThemeToggled.InvokeAsync(_currentTheme);
-        _IsDarkMode = !_IsDarkMode;
-        await OnThemeToggled.InvokeAsync(_IsDarkMode);
+        IsDarkMode = !IsDarkMode;
+        await OnThemeToggled.InvokeAsync(IsDarkMode);
     }
-
-    /// <summary>
-    /// Genera un tema oscuro
-    /// </summary>
-    /// <returns>MudTheme con el tema oscuroo</returns>
-    private MudTheme GenerateDarkTheme() =>
-        new MudTheme
-        {
-            Palette = new Palette()
-            {
-                Black = "#27272f",
-                Background = "#32333d",
-                BackgroundGrey = "#27272f",
-                Surface = "#373740",
-                TextPrimary = "#ffffffb3",
-                TextSecondary = "rgba(255,255,255, 0.50)",
-                AppbarBackground = "#27272f",
-                AppbarText = "#ffffffb3",
-                DrawerBackground = "#27272f",
-                DrawerText = "#ffffffb3",
-                DrawerIcon = "#ffffffb3"
-            }
-        };
 }
