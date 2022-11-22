@@ -13,10 +13,12 @@ namespace GestorTareas.Server.Controllers;
 public class TareasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
+    private readonly IDataService _dataService;
 
-    public TareasController(GestorTareasDbContext dbContext)
+    public TareasController(GestorTareasDbContext dbContext, IDataService dataService)
     {
         _dbContext = dbContext;
+        _dataService = dataService;
     }
 
     /// <summary>
@@ -29,6 +31,13 @@ public class TareasController : ControllerBase
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
     )
     {
+        List<Tarea> data = _dataService.Get("tareas");
+
+        if (data != null)
+        {
+            return Ok(data);
+        }
+
         // Cargamos todas las tareas de la base de datos
         var tareas = await _dbContext.Tareas
 
@@ -67,6 +76,8 @@ public class TareasController : ControllerBase
                 //       el más común y abstracto, `IEnumerable`, como tipo de dato de parámetro.
                 t.Etiquetas.Select(e => new EtiquetaDTO(e.Id, e.Name)).ToList())
             );
+
+        _dataService.Upsert("tareas", tareas, TimeSpan.FromMinutes(1));
 
         return Ok(tareas);
     }

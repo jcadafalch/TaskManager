@@ -1,3 +1,4 @@
+using GestorTareas.Server;
 using GestorTareas.Server.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
@@ -26,6 +27,9 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options => options.Jso
 builder.Services.AddRazorPages();
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<IDataService, DataService>();
 
 var app = builder.Build();
 
