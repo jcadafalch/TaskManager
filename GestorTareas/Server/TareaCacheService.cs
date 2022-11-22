@@ -4,11 +4,11 @@ using Microsoft.Extensions.Caching.Memory;
 namespace GestorTareas.Server;
 
 
-public class DataService : IDataService
+public class TareaCacheService : ITareaCacheService
 {
     private readonly IMemoryCache _memoryCache;
 
-    public DataService(IMemoryCache memoryCache)
+    public TareaCacheService(IMemoryCache memoryCache)
     {
         _memoryCache = memoryCache;
     }
@@ -55,7 +55,7 @@ public class DataService : IDataService
     }
 }
 
-public interface IDataService
+public interface ITareaCacheService
 {
     List<Tarea>? Get(String key);
 

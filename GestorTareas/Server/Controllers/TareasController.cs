@@ -13,9 +13,9 @@ namespace GestorTareas.Server.Controllers;
 public class TareasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
-    private readonly IDataService _dataService;
+    private readonly ITareaCacheService _dataService;
 
-    public TareasController(GestorTareasDbContext dbContext, IDataService dataService)
+    public TareasController(GestorTareasDbContext dbContext, ITareaCacheService dataService)
     {
         _dbContext = dbContext;
         _dataService = dataService;
@@ -31,8 +31,10 @@ public class TareasController : ControllerBase
         CancellationToken cancellationToken = default // <-- No te olvides del token de cancelación
     )
     {
+        // Obtenemos las tareas de la cache
         List<Tarea> data = _dataService.Get("tareas");
 
+        // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
         {
             return Ok(data);
@@ -77,6 +79,7 @@ public class TareasController : ControllerBase
                 t.Etiquetas.Select(e => new EtiquetaDTO(e.Id, e.Name)).ToList())
             );
 
+        // Añadimos en cache el listado de tareas
         _dataService.Upsert("tareas", tareas, TimeSpan.FromMinutes(1));
 
         return Ok(tareas);
@@ -112,8 +115,13 @@ public class TareasController : ControllerBase
 
         await _dbContext.Tareas.AddAsync(tarea, token);
         await _dbContext.SaveChangesAsync(token);
+
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, exista la nueva.
+        CleanCache();
+
         return Ok(tarea);
     }
+
     /// <summary>
     /// Elimina una tarea
     /// </summary>
@@ -134,6 +142,10 @@ public class TareasController : ControllerBase
         // Si se encuentra la tarea, la eliminamos de la base de datos
         _dbContext.Remove(tarea);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false); ;
+
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, no exista esta tarea.
+        CleanCache();
+
         return Ok(tarea);
     }
 
@@ -161,6 +173,10 @@ public class TareasController : ControllerBase
         tarea.Content = request.NewContent;
         _dbContext.Tareas.Update(tarea);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, esté actualizada.
+        CleanCache();
+
         return Ok(tarea);
     }
 
@@ -208,6 +224,10 @@ public class TareasController : ControllerBase
         tarea.CompletedAt = dateTime;
         _dbContext.Tareas.Update(tarea);
         await _dbContext.SaveChangesAsync(token);
+
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, tenga el estado correcto.
+        CleanCache();
+
         return Ok(tarea);
     }
 
@@ -278,7 +298,24 @@ public class TareasController : ControllerBase
 
         // Actualitzamos la base de datos
         await _dbContext.SaveChangesAsync(token);
+
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, tenga las etiquetas adecuadas.
+        CleanCache();
+
         return Ok(tarea);
     }
     #endregion
+
+    /// <summary>
+    /// Elimina las tareas existentes en cache
+    /// </summary>
+    private void CleanCache()
+    {
+        List<Tarea> data = _dataService.Get("tareas");
+
+        if (data != null)
+        {
+            _dataService.Delete("tareas");
+        }
+    }
 }

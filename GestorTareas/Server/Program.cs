@@ -29,7 +29,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<IDataService, DataService>();
+builder.Services.AddSingleton<ITareaCacheService, TareaCacheService>();
 
 var app = builder.Build();
 
