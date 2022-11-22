@@ -1,8 +1,8 @@
 ﻿using GestorTareas.Dominio;
+using GestorTareas.Server.Interfaces;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
 
 namespace GestorTareas.Server.Controllers;
 
@@ -14,9 +14,9 @@ namespace GestorTareas.Server.Controllers;
 public class EtiquetasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
-    private readonly IEtiquetaCache _etiquetaCacheService;
+    private readonly IEtiquetaCacheService _etiquetaCacheService;
 
-    public EtiquetasController(GestorTareasDbContext dbContext, IEtiquetaCache etiquetaCacheService)
+    public EtiquetasController(GestorTareasDbContext dbContext, IEtiquetaCacheService etiquetaCacheService)
     {
         _dbContext = dbContext;
         _etiquetaCacheService = etiquetaCacheService;

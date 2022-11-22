@@ -1,4 +1,5 @@
 ﻿using GestorTareas.Dominio;
+using GestorTareas.Server.Interfaces;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +14,12 @@ namespace GestorTareas.Server.Controllers;
 public class TareasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
-    private readonly ITareaCacheService _dataService;
+    private readonly ITareaCacheService _tareaCacheService;
 
     public TareasController(GestorTareasDbContext dbContext, ITareaCacheService dataService)
     {
         _dbContext = dbContext;
-        _dataService = dataService;
+        _tareaCacheService = dataService;
     }
 
     /// <summary>
@@ -32,7 +33,7 @@ public class TareasController : ControllerBase
     )
     {
         // Obtenemos las tareas de la cache
-        List<Tarea> data = _dataService.Get("tareas");
+        List<Tarea> data = _tareaCacheService.Get("tareas");
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
@@ -80,7 +81,7 @@ public class TareasController : ControllerBase
             );
 
         // Añadimos en cache el listado de tareas
-        _dataService.Upsert("tareas", tareas, TimeSpan.FromMinutes(1));
+        _tareaCacheService.Upsert("tareas", tareas, TimeSpan.FromMinutes(1));
 
         return Ok(tareas);
     }
@@ -174,7 +175,7 @@ public class TareasController : ControllerBase
         _dbContext.Tareas.Update(tarea);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
-        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, esté actualizada.
+        // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, esten actualizadas.
         CleanCache();
 
         return Ok(tarea);
@@ -311,11 +312,11 @@ public class TareasController : ControllerBase
     /// </summary>
     private void CleanCache()
     {
-        List<Tarea> data = _dataService.Get("tareas");
+        List<Tarea> data = _tareaCacheService.Get("tareas");
 
         if (data != null)
         {
-            _dataService.Delete("tareas");
+            _tareaCacheService.Delete("tareas");
         }
     }
 }

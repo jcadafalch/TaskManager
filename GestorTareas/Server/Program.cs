@@ -1,5 +1,6 @@
-using GestorTareas.Server;
 using GestorTareas.Server.Controllers;
+using GestorTareas.Server.Interfaces;
+using GestorTareas.Server.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using System.Text.Json.Serialization;
@@ -30,7 +31,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ITareaCacheService, TareaCacheService>();
-builder.Services.AddSingleton<ITareaCacheService, EtiquetaCacheService>();
+builder.Services.AddSingleton<IEtiquetaCacheService, EtiquetaCacheService>();
 
 var app = builder.Build();
 
