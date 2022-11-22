@@ -2,6 +2,7 @@
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace GestorTareas.Server.Controllers;
 
@@ -13,10 +14,12 @@ namespace GestorTareas.Server.Controllers;
 public class EtiquetasController : ControllerBase
 {
     private readonly GestorTareasDbContext _dbContext;
+    private readonly IEtiquetaCache _etiquetaCacheService;
 
-    public EtiquetasController(GestorTareasDbContext dbContext)
+    public EtiquetasController(GestorTareasDbContext dbContext, IEtiquetaCache etiquetaCacheService)
     {
         _dbContext = dbContext;
+        _etiquetaCacheService = etiquetaCacheService;
     }
 
     /// <summary>
@@ -29,6 +32,16 @@ public class EtiquetasController : ControllerBase
         CancellationToken cancellationToken = default
     )
     {
+        // Obtenemos las etiquetas de la cache
+        List<Etiqueta> data = _etiquetaCacheService.Get("etiquetas");
+
+        // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
+        if (data != null)
+        {
+            return Ok(data);
+        }
+
+
         // Cargamos todas las etiquetas de la base de datos
         var etiquetas = await _dbContext.Etiquetas
              .Include(t => t.Tareas)
@@ -45,6 +58,9 @@ public class EtiquetasController : ControllerBase
                 e.Id,
                 e.Name
             ));
+
+        // Añadimos en cache el listado de tareas
+        _etiquetaCacheService.Upsert("etiquetas", etiquetas, TimeSpan.FromMinutes(1));
 
         return Ok(etiquetas);
     }
@@ -75,6 +91,10 @@ public class EtiquetasController : ControllerBase
 
         await _dbContext.Etiquetas.AddAsync(etiqueta, token).ConfigureAwait(false);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+
+        // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, exista la nueva.
+        CleanCache();
+
         return Ok(etiqueta);
     }
 
@@ -98,6 +118,10 @@ public class EtiquetasController : ControllerBase
         // Si se encuentra la etiqueta, la eliminamos de la base de datos
         _dbContext.Remove(etiqueta);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+
+        // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, no exista esta etiqueta.
+        CleanCache();
+
         return Ok(etiqueta);
     }
 
@@ -125,6 +149,23 @@ public class EtiquetasController : ControllerBase
         etiqueta.Name = request.NewName;
         _dbContext.Etiquetas.Update(etiqueta);
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
+
+        // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, estén actualizadas.
+        CleanCache();
+
         return Ok(etiqueta);
+    }
+
+    /// <summary>
+    /// Elimina las etiquetas existentes en cache
+    /// </summary>
+    private void CleanCache()
+    {
+        List<Etiqueta> data = _etiquetaCacheService.Get("etiquetas");
+
+        if (data != null)
+        {
+            _etiquetaCacheService.Delete("etiquetas");
+        }
     }
 }

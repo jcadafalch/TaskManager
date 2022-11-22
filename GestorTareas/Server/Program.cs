@@ -30,6 +30,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ITareaCacheService, TareaCacheService>();
+builder.Services.AddSingleton<ITareaCacheService, EtiquetaCacheService>();
 
 var app = builder.Build();
 
