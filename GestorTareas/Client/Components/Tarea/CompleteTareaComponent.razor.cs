@@ -157,6 +157,17 @@ public partial class CompleteTareaComponent
         await UpdatePage();
         return;
     }
+
+    private async Task AddImage()
+    {
+        var dialog = DialogService.Show<AddImage>("Adjunta las imagenes que quieres añadir");
+        var result = await dialog.Result;
+
+        if(result.Cancelled) return;
+
+        //await UpdatePage();
+        return;
+    }
     #endregion
 
     /// <summary>
