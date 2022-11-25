@@ -46,7 +46,7 @@ public class TareaCacheService : ITareaCacheService
         }
     }
 
-    public void Delete()
+    public void Clear()
     {
         try
         {

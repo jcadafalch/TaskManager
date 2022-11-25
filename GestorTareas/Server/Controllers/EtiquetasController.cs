@@ -93,7 +93,7 @@ public class EtiquetasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
         // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, exista la nueva.
-        CleanCache();
+        _etiquetaCacheService.Clear();
 
         return Ok(etiqueta);
     }
@@ -120,7 +120,7 @@ public class EtiquetasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
         // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, no exista esta etiqueta.
-        CleanCache();
+        _etiquetaCacheService.Clear();
 
         return Ok(etiqueta);
     }
@@ -151,21 +151,9 @@ public class EtiquetasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
         // Eliminaos las etiquetas que tengamos en cache, para que la proxima vez que el usuario las obtenga, estén actualizadas.
-        CleanCache();
+        _etiquetaCacheService.Clear();
 
         return Ok(etiqueta);
     }
 
-    /// <summary>
-    /// Elimina las etiquetas existentes en cache
-    /// </summary>
-    private void CleanCache()
-    {
-        List<Etiqueta>? data = _etiquetaCacheService.Get();
-
-        if (data != null)
-        {
-            _etiquetaCacheService.Delete();
-        }
-    }
 }

@@ -118,7 +118,7 @@ public class TareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token);
 
         // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, exista la nueva.
-        CleanCache();
+        _tareaCacheService.Clear();
 
         return Ok(tarea);
     }
@@ -145,7 +145,7 @@ public class TareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false); ;
 
         // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, no exista esta tarea.
-        CleanCache();
+        _tareaCacheService.Clear();
 
         return Ok(tarea);
     }
@@ -176,7 +176,7 @@ public class TareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
         // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, esten actualizadas.
-        CleanCache();
+        _tareaCacheService.Clear();
 
         return Ok(tarea);
     }
@@ -227,7 +227,7 @@ public class TareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token);
 
         // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, tenga el estado correcto.
-        CleanCache();
+        _tareaCacheService.Clear();
 
         return Ok(tarea);
     }
@@ -301,22 +301,9 @@ public class TareasController : ControllerBase
         await _dbContext.SaveChangesAsync(token);
 
         // Eliminaos las tareas que tengamos en cache, para que la proxima vez que el usuario las obtenga, tenga las etiquetas adecuadas.
-        CleanCache();
+        _tareaCacheService.Clear();
 
         return Ok(tarea);
     }
     #endregion
-
-    /// <summary>
-    /// Elimina las tareas existentes en cache
-    /// </summary>
-    private void CleanCache()
-    {
-        List<Tarea>? data = _tareaCacheService.Get();
-
-        if (data != null)
-        {
-            _tareaCacheService.Delete();
-        }
-    }
 }

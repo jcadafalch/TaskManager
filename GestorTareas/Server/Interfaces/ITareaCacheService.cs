@@ -23,7 +23,7 @@ public interface ITareaCacheService
     void Upsert(List<Tarea> value, TimeSpan expiration);
 
     /// <summary>
-    /// Elimina de caché el contenido que tenga como nombre clave el valor pasado como parametro
+    /// Elimina de caché el contenido
     /// </summary>
-    void Delete();
+    void Clear();
 }

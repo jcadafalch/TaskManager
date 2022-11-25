@@ -58,9 +58,9 @@ internal sealed class EtiquetaCacheService : IEtiquetaCacheService
     }
 
     /// <summary>
-    /// Elimina de caché el contenido que tenga como nombre clave el valor pasado como parametro
+    /// Elimina de caché el contenido
     /// </summary>
-    public void Delete()
+    public void Clear()
     {
         try
         {
