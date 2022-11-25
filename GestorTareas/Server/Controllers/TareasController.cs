@@ -33,7 +33,7 @@ public class TareasController : ControllerBase
     )
     {
         // Obtenemos las tareas de la cache
-        List<Tarea>? data = _tareaCacheService.Get("tareas");
+        List<Tarea>? data = _tareaCacheService.Get();
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
@@ -81,7 +81,7 @@ public class TareasController : ControllerBase
             );
 
         // Añadimos en cache el listado de tareas
-        _tareaCacheService.Upsert("tareas", tareas, TimeSpan.FromMinutes(1));
+        _tareaCacheService.Upsert(tareas, TimeSpan.FromMinutes(1));
 
         return Ok(tareas);
     }
@@ -312,11 +312,11 @@ public class TareasController : ControllerBase
     /// </summary>
     private void CleanCache()
     {
-        List<Tarea>? data = _tareaCacheService.Get("tareas");
+        List<Tarea>? data = _tareaCacheService.Get();
 
         if (data != null)
         {
-            _tareaCacheService.Delete("tareas");
+            _tareaCacheService.Delete();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace GestorTareas.Server.Services;
 
 public class TareaCacheService : ITareaCacheService
 {
+    private const string Key = "tareas";
     private readonly IMemoryCache _memoryCache;
 
     public TareaCacheService(IMemoryCache memoryCache)
@@ -14,17 +15,17 @@ public class TareaCacheService : ITareaCacheService
         _memoryCache = memoryCache;
     }
 
-    public List<Tarea>? Get(string key)
+    public List<Tarea>? Get()
     {
-        var found = _memoryCache.TryGetValue(key, out var value);
+        var found = _memoryCache.TryGetValue(Key, out var value);
         return found ? value as List<Tarea> : null;
     }
 
-    public void Upsert(string key, List<Tarea> value)
+    public void Upsert(List<Tarea> value)
     {
         try
         {
-            var s = _memoryCache.Set(key, value);
+            var s = _memoryCache.Set(Key, value);
         }
         catch (Exception ex)
         {
@@ -33,11 +34,11 @@ public class TareaCacheService : ITareaCacheService
     }
 
 
-    public void Upsert(string key, List<Tarea> value, TimeSpan expiration)
+    public void Upsert(List<Tarea> value, TimeSpan expiration)
     {
         try
         {
-            var s = _memoryCache.Set(key, value, expiration);
+            var s = _memoryCache.Set(Key, value, expiration);
         }
         catch (Exception ex)
         {
@@ -45,11 +46,11 @@ public class TareaCacheService : ITareaCacheService
         }
     }
 
-    public void Delete(string key)
+    public void Delete()
     {
         try
         {
-            _memoryCache.Remove(key);
+            _memoryCache.Remove(Key);
         }
         catch (Exception ex)
         {

@@ -33,7 +33,7 @@ public class EtiquetasController : ControllerBase
     )
     {
         // Obtenemos las etiquetas de la cache
-        List<Etiqueta>? data = _etiquetaCacheService.Get("etiquetas");
+        List<Etiqueta>? data = _etiquetaCacheService.Get();
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
@@ -60,7 +60,7 @@ public class EtiquetasController : ControllerBase
             ));
 
         // Añadimos en cache el listado de tareas
-        _etiquetaCacheService.Upsert("etiquetas", etiquetas, TimeSpan.FromMinutes(1));
+        _etiquetaCacheService.Upsert(etiquetas, TimeSpan.FromMinutes(1));
 
         return Ok(etiquetas);
     }
@@ -161,11 +161,11 @@ public class EtiquetasController : ControllerBase
     /// </summary>
     private void CleanCache()
     {
-        List<Etiqueta>? data = _etiquetaCacheService.Get("etiquetas");
+        List<Etiqueta>? data = _etiquetaCacheService.Get();
 
         if (data != null)
         {
-            _etiquetaCacheService.Delete("etiquetas");
+            _etiquetaCacheService.Delete();
         }
     }
 }
