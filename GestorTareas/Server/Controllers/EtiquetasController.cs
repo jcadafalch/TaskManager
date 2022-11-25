@@ -27,13 +27,13 @@ public class EtiquetasController : ControllerBase
     /// </summary>
     /// <param name="cancellationToken">Token de cancelación</param>
     /// <returns>OkObjectResult si se ha obtenido el listado correctamente - NoContentResult si no existen etiquetas</returns>
-    [HttpGet("listetiqueta")]
-    public async Task<ActionResult> ListAsync(
+    [Route("listetiqueta"), HttpGet]
+    public async Task<IActionResult> ListAsync(
         CancellationToken cancellationToken = default
     )
     {
         // Obtenemos las etiquetas de la cache
-        List<Etiqueta> data = _etiquetaCacheService.Get("etiquetas");
+        List<Etiqueta>? data = _etiquetaCacheService.Get("etiquetas");
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
@@ -72,7 +72,7 @@ public class EtiquetasController : ControllerBase
     /// <param name="token">Token de cancelación</param>
     /// <returns>OkObjectResult si la etiqueta se ha creado correctamente - BadRequestObjectResult si la etiqueta ya existe o si alguno de los campos es nulo</returns>
     [HttpPost("createetiqueta")]
-    public async Task<ActionResult> CreateAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
+    public async Task<IActionResult> CreateAsync(CreateEtiquetaRequestDTO request, CancellationToken token = default)
     {
         // Comprovamos que el parametro recibido no es nulo ni vacio
         if (string.IsNullOrEmpty(request.Name))
@@ -161,7 +161,7 @@ public class EtiquetasController : ControllerBase
     /// </summary>
     private void CleanCache()
     {
-        List<Etiqueta> data = _etiquetaCacheService.Get("etiquetas");
+        List<Etiqueta>? data = _etiquetaCacheService.Get("etiquetas");
 
         if (data != null)
         {

@@ -51,7 +51,10 @@ else
 app.UseCors(policy =>
     policy.WithOrigins("http://localhost:5130")
     .AllowAnyMethod()
-    .WithHeaders(HeaderNames.ContentType));
+    .AllowAnyHeader()
+    .AllowAnyOrigin()
+    .AllowCredentials()
+);
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();

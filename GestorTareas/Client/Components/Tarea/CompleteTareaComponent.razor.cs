@@ -30,6 +30,8 @@ public partial class CompleteTareaComponent
     [Parameter]
     public EventCallback<bool> OnTareaChanged { get; set; }
 
+    private string ImgUrl = "C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\Images\\mountains.jpg";
+
     #region Estado de la tarea
 
     /// <summary>
@@ -165,7 +167,7 @@ public partial class CompleteTareaComponent
 
         if(result.Cancelled) return;
 
-        //await UpdatePage();
+        await UpdatePage();
         return;
     }
     #endregion

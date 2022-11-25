@@ -27,12 +27,12 @@
             </CardHeaderActions>
         </MudCardHeader>
         <MudCardContent Class="mt-n8 pl-2 ps-2 pr pe">
-            <MudDivider Light Class="mb-1" />
+            <MudDivider Class="mb-1" />
             <pre style="padding-top: 12px; padding-bottom: 12px;">@Tarea.Content</pre>
 
             @*Si estamos en la página home, mostramos todas las etiquetas que tiene la tarea y un chip para añadir etiquetas a la tarea*@
 
-            <MudDivider Light Class="mb-3" />
+            <MudDivider Class="mb-3" />
             <MudChip Style="padding-right: 6px;" Color="Color.Info" OnClick="AddEtiquetaToTarea" Size="Size.Small" Icon="@Icons.Filled.Add" />
 
         @if (Tarea.Etiquetas is not null && Tarea.Etiquetas.Any())
@@ -42,6 +42,8 @@
                 <MudChip Color="Color.Surface" OnClose="RemoveEtiquetaToTarea" Size="Size.Small" Tag="@etiqueta">@etiqueta.Name</MudChip>
             }
         }
+        <br />
+        <MudImage Fluid="true" Src="C:\\Users\\j.cadafalch\\Documents\\GitHub\\GestorTareas\\GestorTareas\\Client\\Images\\mountains.jpg" Alt="Image" Class="rounded-lg" Elevation="2" />
 
     </MudCardContent>
 

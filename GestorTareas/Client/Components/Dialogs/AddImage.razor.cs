@@ -9,26 +9,9 @@ public partial class AddImage
     [Inject] protected ISnackbar Snackbar { get; set; } = default!;
     [CascadingParameter] protected MudDialogInstance MudDialog { get; set; } = default!;
 
-    private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
-    private string DragClass = DefaultDragClass;
-    private List<string> fileNames = new List<string>();
+    IList<IBrowserFile> files = new List<IBrowserFile>();
 
-    private void OnInputFileChanged(InputFileChangeEventArgs e)
-    {
-        ClearDragClass();
-        var files = e.GetMultipleFiles();
-        foreach(var file in files)
-        {
-            fileNames.Add(file.Name);
-        }
-    }
-
-    private async Task Clear()
-    {
-        fileNames.Clear();
-        ClearDragClass();
-        await Task.Delay(100);
-    }
+    private void UploadFiles(IBrowserFile file) => files.Add(file);
 
     private void Upload()
     {
@@ -39,10 +22,6 @@ public partial class AddImage
         MudDialog.Close(DialogResult.Ok(true));
         
     }
-
-    private void SetDragClass() => DragClass = $"{DefaultDragClass} mud-border-primary";
-
-    private void ClearDragClass() => DragClass = DefaultDragClass;
 
     /// <summary>
     /// Cierra el diálogo sin hacer ninguna acción.

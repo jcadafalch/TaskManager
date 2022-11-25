@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace GestorTareas.Server.Services;
 
-public class EtiquetaCacheService : IEtiquetaCacheService
+internal sealed class EtiquetaCacheService : IEtiquetaCacheService
 {
     private readonly IMemoryCache _memoryCache;
 
