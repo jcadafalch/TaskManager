@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 
 namespace GestorTareas.Client.Components.Dialogs;
@@ -22,6 +23,12 @@ public partial class AddImage
         MudDialog.Close(DialogResult.Ok(true));
         
     }
+
+    /// <summary>
+    /// Retira un fichero de la lista de ficheros a subir
+    /// </summary>
+    /// <param name="file">Fichero a retirar</param>
+    private void RemoveFile(IBrowserFile file) => files.Remove(file);
 
     /// <summary>
     /// Cierra el diálogo sin hacer ninguna acción.
