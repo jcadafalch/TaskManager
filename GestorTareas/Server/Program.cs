@@ -48,13 +48,18 @@ else
     app.UseExceptionHandler("/Error");
 }
 
-app.UseCors(policy =>
+/*app.UseCors(policy =>
     policy.WithOrigins("http://localhost:5130")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowAnyOrigin()
     .AllowCredentials()
-);
+);*/
+
+app.UseCors(policy =>
+    policy.WithOrigins("http://localhost:5130")
+    .AllowAnyMethod()
+    .WithHeaders(HeaderNames.ContentType));
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
