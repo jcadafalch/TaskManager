@@ -33,7 +33,7 @@ public class TareasController : ControllerBase
     )
     {
         // Obtenemos las tareas de la cache
-        List<Tarea>? data = _tareaCacheService.Get();
+        IEnumerable<Tarea>? data = _tareaCacheService.Get();
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)
