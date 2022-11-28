@@ -1,26 +1,5 @@
 ﻿<MudDialog>
     <DialogContent>
-        <!--<MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0" @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass">
-
-            <ButtonTemplate>
-                <MudPaper Height="300px" Outlined="true" Class="@DragClass">
-                    <MudText Typo="Typo.h6">Arrastre y suelte las imagnes aquí o haga clic</MudText>
-        @foreach (var file in fileNames)
-        {
-                        <MudChip Color="Color.Dark" Text="@file" />
-        }
-                </MudPaper>
-            </ButtonTemplate>
-        </MudFileUpload>-->
-        <div style="display: flex; flex-direction: row;">
-            <div>
-
-            </div>
-            <div>
-
-            </div>
-        </div>
-
         <MudGrid>
             <MudItem xs="12" sm="6">
                 <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Class="mb-4">
@@ -29,34 +8,45 @@
                                    Variant="Variant.Filled"
                                    Color="Color.Primary"
                                    StartIcon="@Icons.Filled.CloudUpload"
-                                   for="@context"
-                        >
-
+                                   for="@context">
                             Subir archivos
                         </MudButton>
+                    </ButtonTemplate>
+                </MudFileUpload>
+
+                <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0" @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass">
+                    <ButtonTemplate>
+                        <MudPaper Outlined="true" Class="@DragClass">
+                            <MudText Typo="Typo.h6">Arrastre y suelte las imagnes aquí o haga clic</MudText>
+                        </MudPaper>
                     </ButtonTemplate>
                 </MudFileUpload>
             </MudItem>
 
             <MudItem xs="12" sm="6">
-                @if (files != null)
+
+                @if (Files != null)
                 {
-                    <MudText Typo="@Typo.h6">@files.Count() Archivo@(files.Count() == 1 ? "" : "s"):</MudText>
-                    <MudList>
-                        @foreach (var file in files)
-                        {
-                            <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
-                                @file.Name (<code>@file.Size bytes</code>)
-                                <MudIconButton Icon="@Icons.Filled.Close" Color="Color.Error" Title="Eliminar archivo" Size="Size.Small" Tag="@file" OnClick="@(e => RemoveFile(file))" />
-                            </MudListItem>
-                        }
-                    </MudList>
+                    <MudText Typo="@Typo.h6">@Files.Count() Archivo@(Files.Count() == 1 ? "" : "s"):</MudText>
+                    <MudContainer Style="max-height:300px; overflow-y: scroll">
+                        <MudList>
+                            @foreach (var file in Files)
+                            {
+                                <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
+                                    @file.Name (<code>@file.Size bytes</code>)
+                                    <MudIconButton Icon="@Icons.Filled.Close" Color="Color.Error" Title="Eliminar archivo" Size="Size.Small" Tag="@file" OnClick="@(e => RemoveFile(file))" />
+                                </MudListItem>
+                            }
+                        </MudList>
+                    </MudContainer>
+                    
                 }
+
             </MudItem>
         </MudGrid>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Upload" Disabled="@(!files.Any())" Color="Color.Primary" Variant="Variant.Filled">Upload</MudButton>
+        <MudButton OnClick="Upload" Disabled="@(!Files.Any())" Color="Color.Primary" Variant="Variant.Filled">Upload</MudButton>
         <MudButton OnClick="Cancel">Cancel</MudButton>
     </DialogActions>
 </MudDialog>
