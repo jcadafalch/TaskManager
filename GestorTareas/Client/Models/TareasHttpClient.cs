@@ -21,7 +21,9 @@ public class TareasHttpClient
     /// <returns>Listado de tareas.</returns>
     public async Task<TareaDTO[]?> ListAsync()
     {
-        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/tareas/list");
+        CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+        CancellationToken token = cancelTokenSource.Token;
+        return await _httpClient.GetFromJsonAsync<TareaDTO[]>("/api/tareas/list", token);
     }
 
     /// <summary>
@@ -31,7 +33,8 @@ public class TareasHttpClient
     /// <returns>true si la tarea se ha creado; sino, false.</returns>
     public async Task<bool> CreateAsync(CreateTareaRequestDTO request)
     {
-        var response = await _httpClient.PostAsJsonAsync("/api/tareas/createtarea", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/createtarea", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -42,7 +45,8 @@ public class TareasHttpClient
     /// <returns>true si la tarea se ha actualizado; sino, false.</returns>
     public async Task<bool> UpdateAsync(UpdateTareaRequestDTO request)
     {
-        var response = await _httpClient.PutAsJsonAsync("/api/tareas/updatetarea", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/updatetarea", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -53,7 +57,8 @@ public class TareasHttpClient
     /// <returns>true si la tarea se ha eliminado; sino, false.</returns>
     public async Task<bool> DeleteAsync(IdRequestDTO request)
     {
-        var response = await _httpClient.DeleteAsync($"/api/tareas/deletetarea/{request.Id}");
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.DeleteAsync($"/api/tareas/deletetarea/{request.Id}", tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -64,7 +69,8 @@ public class TareasHttpClient
     /// <returns>true si la tarea se ha completado; sino, false.</returns>
     public async Task<bool> CompleteAsync(IdRequestDTO request)
     {
-        var response = await _httpClient.PostAsJsonAsync("/api/tareas/completetarea", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/completetarea", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -75,7 +81,8 @@ public class TareasHttpClient
     /// <returns>true si la tarea se ha establecido como pendiente; sino, false.</returns>
     public async Task<bool> SetPendingAsync(IdRequestDTO request)
     {
-        var response = await _httpClient.PostAsJsonAsync("/api/tareas/setpendingtarea", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PostAsJsonAsync("/api/tareas/setpendingtarea", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -86,7 +93,8 @@ public class TareasHttpClient
     /// <returns>true si se ha añadido la etiqueta a la tarea; sino, false.</returns>
     public async Task<bool> AddEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        var response = await _httpClient.PutAsJsonAsync("/api/tareas/addetiquetatotarea", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/addetiquetatotarea", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -97,7 +105,8 @@ public class TareasHttpClient
     /// <returns>true si se ha retirado la etiqueta a la tarea; sino, false.</returns>
     public async Task<bool> RemoveEtiquetaToTareaAsync(ManageEtiquetaTareaRequestDTO request)
     {
-        var response = await _httpClient.PutAsJsonAsync("/api/tareas/removetiquettarea/", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/removetiquettarea/", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 }

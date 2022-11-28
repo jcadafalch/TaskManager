@@ -1,4 +1,5 @@
 ﻿using GestorTareas.Shared;
+using System;
 using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Models;
@@ -21,7 +22,8 @@ public class EtiquetasHttpClient
     /// <returns>Listado de etiquetas</returns>
     public async Task<EtiquetaDTO[]> ListAsync()
     {
-        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/etiquetas/listetiqueta") ?? Array.Empty<EtiquetaDTO>();
+        var tokenSource = new CancellationTokenSource();
+        return await _httpClient.GetFromJsonAsync<EtiquetaDTO[]>("/api/etiquetas/listetiqueta", tokenSource.Token) ?? Array.Empty<EtiquetaDTO>();
     }
 
     /// <summary>
@@ -31,7 +33,8 @@ public class EtiquetasHttpClient
     /// <returns>true si la etiqueta se ha creado; sino, false.</returns>
     public async Task<bool> CreateAsync(CreateEtiquetaRequestDTO request)
     {
-        var response = await _httpClient.PostAsJsonAsync("/api/etiquetas/createetiqueta", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PostAsJsonAsync("/api/etiquetas/createetiqueta", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -42,7 +45,8 @@ public class EtiquetasHttpClient
     /// <returns>true si la etiqueta se ha actualizado; sino, false.</returns>
     public async Task<bool> UpdateAsync(UpdateEtiquetaRequestDTO request)
     {
-        var response = await _httpClient.PutAsJsonAsync("/api/etiquetas/updateetiqueta", request);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PutAsJsonAsync("/api/etiquetas/updateetiqueta", request, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
@@ -53,7 +57,8 @@ public class EtiquetasHttpClient
     /// <returns>true si la etiqueta se ha eliminado; sino, false.</returns>
     public async Task<bool> DeleteAsync(DeleteEtiquetaRequestDTO request)
     {
-        var response = await _httpClient.DeleteAsync("/api/etiquetas/deleteetiqueta/" + request.Id);
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.DeleteAsync("/api/etiquetas/deleteetiqueta/" + request.Id, tokenSource.Token);
         return response.IsSuccessStatusCode;
     }
 
