@@ -15,13 +15,13 @@ public class TareaCacheService : ITareaCacheService
         _memoryCache = memoryCache;
     }
 
-    public IEnumerable<Tarea>? Get()
+    public List<Tarea>? Get()
     {
         var found = _memoryCache.TryGetValue(Key, out var value);
-        return found ? value as IEnumerable<Tarea> : null;
+        return found ? value as List<Tarea> : null;
     }
 
-    public void Upsert(IEnumerable<Tarea> value)
+    public void Upsert(List<Tarea> value)
     {
         try
         {

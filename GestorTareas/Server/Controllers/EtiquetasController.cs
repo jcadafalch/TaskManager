@@ -33,7 +33,7 @@ public class EtiquetasController : ControllerBase
     )
     {
         // Obtenemos las etiquetas de la cache
-        IEnumerable<Etiqueta>? data = _etiquetaCacheService.Get();
+        List<Etiqueta>? data = _etiquetaCacheService.Get();
 
         // Si hay tareas las devolvemos, sino, las recuperamos de la base de datos
         if (data != null)

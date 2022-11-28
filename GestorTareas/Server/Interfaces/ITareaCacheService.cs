@@ -8,19 +8,19 @@ public interface ITareaCacheService
     /// Obtiene el listado de tareas de cache
     /// </summary>
     /// <returns>Listado de tareas en cache</returns>
-    IEnumerable<Tarea>? Get();
+    List<Tarea>? Get();
 
     /// <summary>
     /// Inserta o actualiza valores en cache
     /// </summary>
     /// <param name="value">Valor que se va a almacenar</param>
-    void Upsert(IEnumerable<Tarea> value);
+    void Upsert(List<Tarea> value);
 
     /// <summary>
     /// Inserta o actualiza valores en cache
     /// </summary>
     /// <param name="value">Valor que se va a almacenar</param>
-    void Upsert(IEnumerable<Tarea> value, TimeSpan expiration);
+    void Upsert(List<Tarea> value, TimeSpan expiration);
 
     /// <summary>
     /// Elimina de caché el contenido
