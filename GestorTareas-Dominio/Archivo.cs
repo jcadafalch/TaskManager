@@ -27,9 +27,4 @@ public class Archivo
     /// Fecha en que se subio el archivo
     /// </summary>
     public DateTime UploadedAt { get; set; } = DateTime.Now;
-
-    /// <summary>
-    /// Tarea a la que pertenece el archivo
-    /// </summary>
-    public Tarea Tarea { get; set; } = default(Tarea);
 }

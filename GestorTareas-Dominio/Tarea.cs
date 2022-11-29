@@ -54,7 +54,7 @@ namespace GestorTareas.Dominio
 
         public void AddArchivo(Archivo archivo) => Archivos.Add(archivo);
 
-        public void RemoveArchivo(Archivo archivo) => Archivos.Remove(archivo);
+        public void RemoveArchivo(Guid archivoId) => Archivos.Remove(Archivos.FirstOrDefault(a => a.Id == archivoId));
 
         #endregion
     }

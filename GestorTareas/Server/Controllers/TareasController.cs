@@ -3,6 +3,7 @@ using GestorTareas.Server.Interfaces;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace GestorTareas.Server.Controllers;
 
@@ -305,5 +306,57 @@ public class TareasController : ControllerBase
 
         return Ok(tarea);
     }
+    #endregion
+
+    #region Add & Remove Archivos
+
+    public async Task<IActionResult> AddArchivo(AddArchivoTareaRequestDTO request, CancellationToken token)
+    {
+        // Obtenemos la tarea de la base de datos
+        var tarea = await _dbContext.Tareas.Include(t => t.Archivos).FirstOrDefaultAsync(t => t.Id == request.IdTarea, token);
+        
+        // Si no existe la tarea, devolvemos NotFound
+        if (tarea is null)
+            return NotFound();
+
+        if (request.File.IsNullOrEmpty() || request.Extension.IsNullOrEmpty())
+            return BadRequest("El archivo no es accesible");
+
+        var archivo = new Archivo()
+        {
+            File = request.File,
+            Extension = request.Extension
+        };
+
+        // Añadimos el archivo a la tarea
+        tarea.AddArchivo(archivo);
+        _dbContext.Tareas.Update(tarea);
+
+        // Actualizamos la base de datos
+        await _dbContext.SaveChangesAsync(token);
+
+        return Ok(tarea);
+    }
+
+    public async Task<IActionResult> RemoveArchivo(RemoveArchivoTareaRequestDTO request, CancellationToken token)
+    {
+
+        //Obtenemos el archivo de la base de datos.
+        var tarea = await _dbContext.Tareas.Include(t => t.Archivos).FirstOrDefaultAsync(t => t.Id == request.IdTarea, token);
+
+        // Si no existe la tarea, devolvemos NotFound
+        if (tarea is null)
+            return NotFound();
+
+        // Retiramos el archivo de la base de datos
+        tarea.RemoveArchivo(request.IdArchivo);
+        _dbContext.Tareas.Update(tarea);
+
+        // Actualizamos la base de datos
+        await _dbContext.SaveChangesAsync(token);
+
+        return Ok(tarea);
+    }
+
     #endregion
 }

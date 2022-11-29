@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DTOArchivo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="DTOArchivo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 </Project>

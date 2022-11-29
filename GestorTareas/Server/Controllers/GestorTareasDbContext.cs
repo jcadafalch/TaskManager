@@ -10,6 +10,7 @@ namespace GestorTareas.Server.Controllers
     {
         public DbSet<Tarea> Tareas { get; set; } = default!;
         public DbSet<Etiqueta> Etiquetas { get; set; } = default!;
+        public DbSet<Archivo> Archivos { get; set; } = default!;
 
         public GestorTareasDbContext(DbContextOptions<GestorTareasDbContext> options) : base(options) { }
 
