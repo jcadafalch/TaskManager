@@ -41,11 +41,20 @@ namespace GestorTareas.Dominio
         /// </summary>
         public ICollection<Etiqueta> Etiquetas { get; } = new List<Etiqueta>();
 
+        /// <summary>
+        /// Archivos que perteneces a esta tarea
+        /// </summary>
+        public ICollection<Archivo> Archivos { get; } = new List<Archivo>();
+
         #region Métodos
 
         public void AddEtiqueta(Etiqueta etiqueta) =>  Etiquetas.Add(etiqueta);
         
         public void RemoveEtiqueta(Etiqueta etiqueta) => Etiquetas.Remove(etiqueta);
+
+        public void AddArchivo(Archivo archivo) => Archivos.Add(archivo);
+
+        public void RemoveArchivo(Archivo archivo) => Archivos.Remove(archivo);
 
         #endregion
     }
