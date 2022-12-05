@@ -2,7 +2,7 @@
 using System;
 using System.Net.Http.Json;
 
-namespace GestorTareas.Client.Models;
+namespace GestorTareas.Client.Http;
 
 /// <summary>
 /// Gestiona las peticiones de etiquetas al servidor

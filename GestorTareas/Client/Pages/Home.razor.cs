@@ -1,5 +1,5 @@
 ﻿using GestorTareas.Client.Components.Dialogs;
-using GestorTareas.Client.Models;
+using GestorTareas.Client.Http;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;

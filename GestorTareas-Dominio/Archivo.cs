@@ -4,12 +4,18 @@
 #nullable disable
 namespace GestorTareas.Dominio;
 
-public class Archivo
+public sealed class Archivo
 {
     /// <summary>
     /// Identificador del archivo
     /// </summary>
     public Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Nombre del archivo
+    /// </summary>
+    [Required]
+    public string Name { get; set; } = default(string);
 
     /// <summary>
     /// Contenido del archivo
@@ -27,4 +33,8 @@ public class Archivo
     /// Fecha en que se subio el archivo
     /// </summary>
     public DateTime UploadedAt { get; set; } = DateTime.Now;
+
+    public Guid TareaId { get; set; }
+    public Tarea Tarea { get; set; }
+
 }

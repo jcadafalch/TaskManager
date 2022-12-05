@@ -1,5 +1,5 @@
 ﻿using GestorTareas.Client.Components.Dialogs;
-using GestorTareas.Client.Models;
+using GestorTareas.Client.Http;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -162,7 +162,11 @@ public partial class CompleteTareaComponent
 
     private async Task AddImage()
     {
-        var dialog = DialogService.Show<AddImage>("Adjunta las imagenes que quieres añadir");
+        var parameters = new DialogParameters
+        {
+            {"Tarea", Tarea }
+        };
+        var dialog = DialogService.Show<AddImage>("Adjunta los archivos que quieres añadir", parameters);
         var result = await dialog.Result;
 
         if(result.Cancelled) return;

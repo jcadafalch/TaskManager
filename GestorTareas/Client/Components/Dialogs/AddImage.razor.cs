@@ -1,30 +1,77 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using GestorTareas.Client.Http;
+using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
+using System.Net.Http.Headers;
 
 namespace GestorTareas.Client.Components.Dialogs;
 
 public partial class AddImage
 {
     [Inject] protected ISnackbar Snackbar { get; set; } = default!;
+    [Inject] protected TareasHttpClient HttpTareas { get; set; } = default!;
     [CascadingParameter] protected MudDialogInstance MudDialog { get; set; } = default!;
 
-    IList<IBrowserFile> Files = new List<IBrowserFile>();
+    [Parameter]
+    public TareaDTO Tarea { get; set; } = default!;
+
+    private IList<IBrowserFile> Files = new List<IBrowserFile>();
+    private int MaxAllowdFiles = int.MaxValue; //Canivar més tard per valors més exactes
+    private long MaxSizeFiles = long.MaxValue; //Canivar més tard per valors més exactes
 
     private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
     private string DragClass = DefaultDragClass;
 
-    private void UploadFiles(IBrowserFile file) => Files.Add(file);
-
-    private void Upload()
+    private async void Upload()
     {
-        // Upload files here
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
-        Snackbar.Add("TODO: Upload your files!", Severity.Normal);
+        List<string>? notUploadFiles = new();
+        foreach (var file in Files)
+        {
 
+            /* var destPath = Path.GetTempPath();
+             Console.WriteLine(destPath);
+             Console.WriteLine(File.Exists(destPath + file.Name));
+             Console.WriteLine(Path.Combine(file.Name));*/
+
+            using Stream s = file.OpenReadStream();
+            using MemoryStream ms = new MemoryStream();
+            await s.CopyToAsync(ms);
+            byte[] fileBytes = ms.ToArray();
+
+            Console.WriteLine(fileBytes.ToString());
+            Console.WriteLine(fileBytes.Length);
+            Console.WriteLine(new FileInfo(file.Name).Extension);
+            string extn = new FileInfo(file.Name).Extension;
+
+            var addArchivoTarea = new AddArchivoTareaRequestDTO(Tarea.Id, file.Name, fileBytes, extn);
+            var successResponse = await HttpTareas.AddArchivoToTareaAsync(addArchivoTarea);
+
+            if (!successResponse)
+            {
+                notUploadFiles.Add(file.Name);
+            }
+        }
+
+        if (notUploadFiles is not null)
+        {
+            Snackbar.Configuration.SnackbarVariant = Variant.Filled;
+            Snackbar.Add("Los siguientes ficheros no se han podido añadir:", Severity.Info);
+
+            Snackbar.Configuration.SnackbarVariant = Variant.Outlined;
+            foreach (var file in notUploadFiles)
+            {
+                Snackbar.Add(file, Severity.Error);
+            }
+
+            //Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+            //Snackbar.Add("TODO: Upload your files!", Severity.Normal);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+
+        Snackbar.Add("Se han añadido todos archivos correctamente", Severity.Success);
         MudDialog.Close(DialogResult.Ok(true));
-        
     }
 
     /// <summary>
@@ -33,13 +80,30 @@ public partial class AddImage
     /// <param name="file">Fichero a retirar</param>
     private void RemoveFile(IBrowserFile file) => Files.Remove(file);
 
-    private void OnInputFileChanged(InputFileChangeEventArgs e)
+    private async Task OnInputFileChanged(InputFileChangeEventArgs e)
     {
         ClearDragClass();
-        var files = e.GetMultipleFiles();
+        /*var files = e.GetMultipleFiles();
         foreach(var file in files)
         {
             Files.Add(file);
+            Console.WriteLine(Path.GetFullPath(file.Name));
+        }*/
+
+        //using var content = new MultipartFormDataContent();
+
+        foreach (var file in e.GetMultipleFiles(MaxAllowdFiles))
+        {
+            using var fileContent = new StreamContent(file.OpenReadStream(MaxSizeFiles));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+            Files.Add(file);
+
+            /*content.Add(
+                  content: fileContent,
+                  name: "\"files\"",
+                  fileName: file.Name
+                );*/
         }
     }
 
@@ -50,7 +114,7 @@ public partial class AddImage
 
     private void ClearDragClass()
     {
-        DragClass= DefaultDragClass;
+        DragClass = DefaultDragClass;
     }
 
     /// <summary>

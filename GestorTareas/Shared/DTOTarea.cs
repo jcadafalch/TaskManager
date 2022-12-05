@@ -19,6 +19,6 @@ public record IdRequestDTO(Guid Id);
 
 public record ManageEtiquetaTareaRequestDTO(Guid IdTarea, Guid IdEtiqueta);
 
-public record AddArchivoTareaRequestDTO(Guid IdTarea, byte[] File, string Extension);
+public record AddArchivoTareaRequestDTO(Guid IdTarea, string Name, byte[] File, string Extension);
 
 public record RemoveArchivoTareaRequestDTO(Guid IdTarea, Guid IdArchivo);

@@ -224,6 +224,7 @@ public class TareasController : ControllerBase
 
         // Cambiamos el estado de la tarea y actualizamos la base de datos con los nuevos valores.
         tarea.CompletedAt = dateTime;
+
         _dbContext.Tareas.Update(tarea);
         await _dbContext.SaveChangesAsync(token);
 
@@ -310,10 +311,11 @@ public class TareasController : ControllerBase
 
     #region Add & Remove Archivos
 
+    [HttpPut("addarchivototarea")]
     public async Task<IActionResult> AddArchivo(AddArchivoTareaRequestDTO request, CancellationToken token)
     {
         // Obtenemos la tarea de la base de datos
-        var tarea = await _dbContext.Tareas.Include(t => t.Archivos).FirstOrDefaultAsync(t => t.Id == request.IdTarea, token);
+        var tarea = await _dbContext.Tareas.SingleOrDefaultAsync(t => t.Id == request.IdTarea, token);
         
         // Si no existe la tarea, devolvemos NotFound
         if (tarea is null)
@@ -325,12 +327,12 @@ public class TareasController : ControllerBase
         var archivo = new Archivo()
         {
             File = request.File,
-            Extension = request.Extension
+            Name = request.Name,
+            Extension = request.Extension,
+            TareaId = tarea.Id,
         };
 
-        // Añadimos el archivo a la tarea
-        tarea.AddArchivo(archivo);
-        _dbContext.Tareas.Update(tarea);
+        await _dbContext.Archivos.AddAsync(archivo, token);
 
         // Actualizamos la base de datos
         await _dbContext.SaveChangesAsync(token);
@@ -338,24 +340,22 @@ public class TareasController : ControllerBase
         return Ok(tarea);
     }
 
+    [HttpPut("removearchivototarea")]
     public async Task<IActionResult> RemoveArchivo(RemoveArchivoTareaRequestDTO request, CancellationToken token)
     {
+        var archivo = await _dbContext.Archivos.FirstOrDefaultAsync(a => a.Id == request.IdArchivo, token);
 
-        //Obtenemos el archivo de la base de datos.
-        var tarea = await _dbContext.Tareas.Include(t => t.Archivos).FirstOrDefaultAsync(t => t.Id == request.IdTarea, token);
-
-        // Si no existe la tarea, devolvemos NotFound
-        if (tarea is null)
+        // Si no existe el archivo, devolvemos NotFound
+        if(archivo is null)
             return NotFound();
 
-        // Retiramos el archivo de la base de datos
-        tarea.RemoveArchivo(request.IdArchivo);
-        _dbContext.Tareas.Update(tarea);
+
+        _dbContext.Remove(archivo);
 
         // Actualizamos la base de datos
-        await _dbContext.SaveChangesAsync(token);
+        await _dbContext.SaveChangesAsync(token).ConfigureAwait(false);
 
-        return Ok(tarea);
+        return Ok(archivo);
     }
 
     #endregion

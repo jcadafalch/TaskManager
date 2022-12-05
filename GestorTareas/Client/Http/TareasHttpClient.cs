@@ -1,7 +1,7 @@
 ﻿using GestorTareas.Shared;
 using System.Net.Http.Json;
 
-namespace GestorTareas.Client.Models;
+namespace GestorTareas.Client.Http;
 
 /// <summary>
 /// Gestiona las peticiones de tareas al servidor.
@@ -107,6 +107,14 @@ public class TareasHttpClient
     {
         var tokenSource = new CancellationTokenSource();
         var response = await _httpClient.PutAsJsonAsync("/api/tareas/removetiquettarea/", request, tokenSource.Token);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> AddArchivoToTareaAsync(AddArchivoTareaRequestDTO request)
+    {
+        var tokenSource = new CancellationTokenSource();
+        var response = await _httpClient.PutAsJsonAsync("/api/tareas/addarchivototarea", request, tokenSource.Token);
+
         return response.IsSuccessStatusCode;
     }
 }

@@ -2,7 +2,7 @@
     <DialogContent>
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Class="mb-4">
+                <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Class="mb-4">
                     <ButtonTemplate>
                         <MudButton HtmlTag="label"
                                    Variant="Variant.Filled"
