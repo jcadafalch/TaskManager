@@ -92,9 +92,10 @@ public partial class AddImage
 
         //using var content = new MultipartFormDataContent();
 
-        foreach (var file in e.GetMultipleFiles(MaxAllowdFiles))
+        foreach (var file in e.GetMultipleFiles(/*MaxAllowdFiles*/))
         {
-            using var fileContent = new StreamContent(file.OpenReadStream(MaxSizeFiles));
+            using var f = file.OpenReadStream(/*MaxSizeFiles*/);
+            using var fileContent = new StreamContent(f);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
             Files.Add(file);
