@@ -2,9 +2,8 @@
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
-using System.Net.Http.Headers;
 
 namespace GestorTareas.Client.Components.Dialogs;
 
@@ -35,7 +34,7 @@ public partial class AddImage
              Console.WriteLine(File.Exists(destPath + file.Name));
              Console.WriteLine(Path.Combine(file.Name));*/
 
-            using Stream s = file.OpenReadStream();
+            using Stream s = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 1024);
             using MemoryStream ms = new MemoryStream();
             await s.CopyToAsync(ms);
             byte[] fileBytes = ms.ToArray();
@@ -54,7 +53,7 @@ public partial class AddImage
             }
         }
 
-        if (notUploadFiles is not null)
+        if (notUploadFiles.Count > 0)
         {
             Snackbar.Configuration.SnackbarVariant = Variant.Filled;
             Snackbar.Add("Los siguientes ficheros no se han podido añadir:", Severity.Info);
@@ -83,29 +82,21 @@ public partial class AddImage
     private async Task OnInputFileChanged(InputFileChangeEventArgs e)
     {
         ClearDragClass();
-        /*var files = e.GetMultipleFiles();
-        foreach(var file in files)
+        foreach(var file in e.GetMultipleFiles())
         {
             Files.Add(file);
-            Console.WriteLine(Path.GetFullPath(file.Name));
-        }*/
+        }
 
         //using var content = new MultipartFormDataContent();
 
-        foreach (var file in e.GetMultipleFiles(/*MaxAllowdFiles*/))
+        /*foreach (var file in e.GetMultipleFiles(MaxAllowdFiles))
         {
-            using var f = file.OpenReadStream(/*MaxSizeFiles*/);
+            using var f = file.OpenReadStream();
             using var fileContent = new StreamContent(f);
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
             Files.Add(file);
-
-            /*content.Add(
-                  content: fileContent,
-                  name: "\"files\"",
-                  fileName: file.Name
-                );*/
-        }
+        }*/
     }
 
     private void SetDragClass()
