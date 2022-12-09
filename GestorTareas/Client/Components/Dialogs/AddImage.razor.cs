@@ -84,19 +84,43 @@ public partial class AddImage
         ClearDragClass();
         foreach(var file in e.GetMultipleFiles())
         {
-            Files.Add(file);
+            Console.WriteLine(file.Name + " " + file.Name.Split('.')[1]);
+            Console.WriteLine(file.Size);
+            //if (file.Name.Split('.')[1].Contains()
+
+           bool isAnImage = false;
+            switch (file.Name.Split('.')[1])
+            {
+                case "png":
+                case "jpg":
+                case "jpeg":
+                case "jfif":
+                case "pjpeg":
+                case "pjp":
+                case "svg":
+                case "webp":
+                case "avif":
+                    isAnImage= true;
+                    break;
+            }
+            if (isAnImage)
+            {
+                // Si la imagen es más pequeña o igual a 20MB
+                if(file.Size <= 20000000)
+                {
+                    Files.Add(file);
+                }
+                else
+                {
+                    Snackbar.Add($"El fichero ${file} és demasiado grande", Severity.Error);
+                }
+            }
+            else
+            {
+                Files.Add(file);
+            }
+
         }
-
-        //using var content = new MultipartFormDataContent();
-
-        /*foreach (var file in e.GetMultipleFiles(MaxAllowdFiles))
-        {
-            using var f = file.OpenReadStream();
-            using var fileContent = new StreamContent(f);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
-
-            Files.Add(file);
-        }*/
     }
 
     private void SetDragClass()

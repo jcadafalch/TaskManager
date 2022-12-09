@@ -2,25 +2,37 @@
     <DialogContent>
         <MudGrid>
             <MudItem xs="12" sm="6">
-                <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Class="mb-4">
+                <MudFileUpload T="IReadOnlyList<IBrowserFile>" Accept=".png, .jpg, .jpeg, .jfif, .pjpeg, .pjp, .svg, .webp, .avif" OnFilesChanged="OnInputFileChanged" Class="mb-4">
                     <ButtonTemplate>
                         <MudButton HtmlTag="label"
                                    Variant="Variant.Filled"
                                    Color="Color.Primary"
                                    StartIcon="@Icons.Filled.CloudUpload"
+                                   EndIcon="@Icons.Filled.Image"
                                    for="@context">
-                            Subir archivos
+                            Subir imagenes
                         </MudButton>
+                        <MudText Typo="Typo.caption"><br />Máximo 20MB (20.000.000 bytes)</MudText>
                     </ButtonTemplate>
                 </MudFileUpload>
 
-                <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0" @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass">
+                <MudFileUpload T="IReadOnlyList<IBrowserFile>" Accept=".mp4, .mkv" OnFilesChanged="OnInputFileChanged" Class="mb-4">
+                    <ButtonTemplate>
+                        <MudFab HtmlTag="label"
+                            Color="Color.Secondary"
+                            Icon="@Icons.Filled.VideoFile"
+                            Label="Subir Videos"
+                            for="@context"/>
+                    </ButtonTemplate>
+                </MudFileUpload>
+
+                <!--<MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnInputFileChanged" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0" @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass">
                     <ButtonTemplate>
                         <MudPaper Outlined="true" Class="@DragClass">
                             <MudText Typo="Typo.h6">Arrastre y suelte las imagnes aquí o haga clic</MudText>
                         </MudPaper>
                     </ButtonTemplate>
-                </MudFileUpload>
+                </MudFileUpload>-->
             </MudItem>
 
             <MudItem xs="12" sm="6">
