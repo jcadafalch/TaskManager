@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http.Json;
 
-namespace GestorTareas.Client.Http;
+namespace GestorTareas.Client.Services.Http;
 
 /// <summary>
 /// Gestiona las peticiones de tareas al servidor.

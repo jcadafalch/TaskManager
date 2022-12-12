@@ -1,5 +1,5 @@
 using GestorTareas.Client;
-using GestorTareas.Client.Http;
+using GestorTareas.Client.Services.Http;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;

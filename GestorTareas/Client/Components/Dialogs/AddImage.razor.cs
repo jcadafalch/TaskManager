@@ -1,4 +1,4 @@
-﻿using GestorTareas.Client.Http;
+﻿using GestorTareas.Client.Services.Http;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -25,28 +25,6 @@ public partial class AddImage
 
     private async void Upload()
     {
-        /*List<string>? notUploadFiles = new();
-        foreach (var file in Files)
-        {
-
-            using Stream s = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 1024);
-            using MemoryStream ms = new MemoryStream();
-            await s.CopyToAsync(ms);
-            byte[] fileBytes = ms.ToArray();
-
-            Console.WriteLine(fileBytes.ToString());
-            Console.WriteLine(fileBytes.Length);
-            Console.WriteLine(new FileInfo(file.Name).Extension);
-            string extn = new FileInfo(file.Name).Extension;
-
-            var addArchivoTarea = new AddArchivoTareaRequestDTO(Tarea.Id, file.Name, fileBytes, extn);
-            var successResponse = await HttpTareas.AddArchivoToTareaAsync(addArchivoTarea);
-
-            if (!successResponse)
-            {
-                notUploadFiles.Add(file.Name);
-            }
-        }*/
 
         List<string> notUploadFiles = await HttpTareas.AddArchivoToTareaAsync(Files, Tarea);
 
