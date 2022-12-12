@@ -25,14 +25,9 @@ public partial class AddImage
 
     private async void Upload()
     {
-        List<string>? notUploadFiles = new();
+        /*List<string>? notUploadFiles = new();
         foreach (var file in Files)
         {
-
-            /* var destPath = Path.GetTempPath();
-             Console.WriteLine(destPath);
-             Console.WriteLine(File.Exists(destPath + file.Name));
-             Console.WriteLine(Path.Combine(file.Name));*/
 
             using Stream s = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 1024);
             using MemoryStream ms = new MemoryStream();
@@ -51,7 +46,9 @@ public partial class AddImage
             {
                 notUploadFiles.Add(file.Name);
             }
-        }
+        }*/
+
+        List<string> notUploadFiles = await HttpTareas.AddArchivoToTareaAsync(Files, Tarea);
 
         if (notUploadFiles.Count > 0)
         {

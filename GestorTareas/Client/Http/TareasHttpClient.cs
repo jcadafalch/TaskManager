@@ -1,4 +1,5 @@
 ﻿using GestorTareas.Shared;
+using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http.Json;
 
 namespace GestorTareas.Client.Http;
@@ -110,11 +111,28 @@ public class TareasHttpClient
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<bool> AddArchivoToTareaAsync(AddArchivoTareaRequestDTO request)
+    public async Task<List<string>> AddArchivoToTareaAsync(/*AddArchivoTareaRequestDTO request, */IList<IBrowserFile> files, TareaDTO tarea)
     {
-        var tokenSource = new CancellationTokenSource();
-        var response = await _httpClient.PutAsJsonAsync("/api/tareas/addarchivototarea", request, tokenSource.Token);
+        List<string> notUploadedFiles = new();
+        foreach (var file in files)
+        {
+            using Stream s = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 1024);
+            using MemoryStream ms = new MemoryStream();
+            await s.CopyToAsync(ms);
+            byte[] fileBytes = ms.ToArray();
+            string extn = new FileInfo(file.Name).Extension;
 
-        return response.IsSuccessStatusCode;
+            var request = new AddArchivoTareaRequestDTO(tarea.Id, file.Name, fileBytes, extn);
+
+            var tokenSource = new CancellationTokenSource();
+            var response = await _httpClient.PutAsJsonAsync("/api/tareas/addarchivototarea", request, tokenSource.Token);
+
+
+            if (!response.IsSuccessStatusCode)
+                notUploadedFiles.Add(file.Name);
+
+        }
+
+        return notUploadedFiles;
     }
 }
