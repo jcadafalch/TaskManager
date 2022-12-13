@@ -1,4 +1,5 @@
-﻿using GestorTareas.Shared;
+﻿using GestorTareas.Client.Services.Utils;
+using GestorTareas.Shared;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http.Json;
 
@@ -122,14 +123,23 @@ public class TareasHttpClient
             byte[] fileBytes = ms.ToArray();
             string extn = new FileInfo(file.Name).Extension;
 
-            var request = new AddArchivoTareaRequestDTO(tarea.Id, file.Name, fileBytes, extn);
+            if(ImageValidator.IsImage(fileBytes))
+            {
+                var request = new AddArchivoTareaRequestDTO(tarea.Id, file.Name, fileBytes, extn);
 
-            var tokenSource = new CancellationTokenSource();
-            var response = await _httpClient.PutAsJsonAsync("/api/tareas/addarchivototarea", request, tokenSource.Token);
+                var tokenSource = new CancellationTokenSource();
+                var response = await _httpClient.PutAsJsonAsync("/api/tareas/addarchivototarea", request, tokenSource.Token);
 
 
-            if (!response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
+                    notUploadedFiles.Add(file.Name);
+            }
+            else
+            {
                 notUploadedFiles.Add(file.Name);
+            }
+
+            
 
         }
 

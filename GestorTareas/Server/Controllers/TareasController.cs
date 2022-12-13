@@ -1,4 +1,5 @@
-﻿using GestorTareas.Dominio;
+﻿using GestorTareas.Client.Services.Utils;
+using GestorTareas.Dominio;
 using GestorTareas.Server.Interfaces;
 using GestorTareas.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -321,7 +322,7 @@ public class TareasController : ControllerBase
         if (tarea is null)
             return NotFound();
 
-        if (request.File.IsNullOrEmpty() || request.Extension.IsNullOrEmpty())
+        if (request.File.IsNullOrEmpty() || request.Extension.IsNullOrEmpty() || !request.File.IsImage())
             return BadRequest("El archivo no es accesible");
 
         var archivo = new Archivo()

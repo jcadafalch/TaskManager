@@ -69,12 +69,8 @@ public partial class AddImage
                 case "png":
                 case "jpg":
                 case "jpeg":
-                case "jfif":
-                case "pjpeg":
-                case "pjp":
                 case "svg":
                 case "webp":
-                case "avif":
                     isAnImage= true;
                     break;
             }
